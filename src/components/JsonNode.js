@@ -14,6 +14,7 @@ import JsonArray from './JsonArray';
 import JsonFunctionValue from './JsonFunctionValue';
 import { getObjectType } from '../utils/objectTypes';
 import dataTypes from '../types/dataTypes';
+import { functionToString } from '../utils/parse';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -292,7 +293,7 @@ class JsonNode extends Component {
             case dataTypes.FUNCTION:
                 return (<JsonFunctionValue
                     name={name}
-                    value={data.toString()}
+                    value={functionToString(data)}
                     originalValue={data}
                     keyPath={keyPath}
                     deep={deep}

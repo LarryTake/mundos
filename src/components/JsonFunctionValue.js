@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 import { isComponentWillChange } from '../utils/objectTypes';
 import inputUsageTypes from '../types/inputUsageTypes';
+import { functionToString } from '../utils/parse';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -155,7 +156,7 @@ class JsonFunctionValue extends Component {
             });
             const textareaElementLayout = React.cloneElement(textareaElement, {
                 ref: this.refInput,
-                defaultValue: originalValue,
+                defaultValue: functionToString(originalValue),
             });
 
             result = (<span className="rejt-edit-form" style={style.editForm}>

@@ -136,7 +136,23 @@ function parse(string) {
     }
 }
 
+/**
+ * A different implementation of Function.prototype.toString which tries to get
+ * a function name using displayName when name is "anonymous".
+ * @param func {Function} function to transform into a string
+ * @returns {string} a string representing the function
+ */
+function functionToString(func) {
+    const pattern = /^function anonymous/;
+    const funcStr = func.toString();
+    if (pattern.test(funcStr) && func.displayName) {
+        return func.toString().replace(pattern, `function ${func.displayName}`);
+    }
+    return funcStr;
+}
+
 /* ************************************* */
 /* ********       EXPORTS       ******** */
 /* ************************************* */
 export default parse;
+export { functionToString };
