@@ -1,6 +1,12 @@
 ### Project
 /dist/
 
+## Yalc
+.yalc/
+# This file is high-churn (every time the parent lib is updated), so it's not
+# worth being committed
+yalc.lock
+
 ### NotepadPP template
 # Notepad++ backups #
 *.bak
