@@ -8,8 +8,8 @@
 /* ************************************* */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { HotKeys } from 'react-hotkeys';
 import inputUsageTypes from '../types/inputUsageTypes';
+import { handleHotkeys } from "../utils/hotkeys";
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -98,6 +98,12 @@ class JsonAddValue extends Component {
             keyPath,
             deep,
         } = this.props;
+
+        const hotkeys = {
+            Escape: handleCancel,
+            Enter: this.onSubmit,
+        };
+
         const addButtonElementLayout = React.cloneElement(addButtonElement, {
             onClick: this.onSubmit,
         });
@@ -108,6 +114,7 @@ class JsonAddValue extends Component {
         const inputElementValueLayout = React.cloneElement(inputElementValue, {
             placeholder: 'Value',
             ref: this.refInputValue,
+            onKeyUp: handleHotkeys(hotkeys),
         });
         let inputElementKeyLayout = null;
         let separatorElement = null;
@@ -117,19 +124,17 @@ class JsonAddValue extends Component {
             inputElementKeyLayout = React.cloneElement(inputElementKey, {
                 placeholder: 'Key',
                 ref: this.refInputKey,
+                onKeyUp: handleHotkeys(hotkeys),
             });
             separatorElement = ':';
         }
 
-        const handlers = {
-            esc: handleCancel,
-            enter: this.onSubmit,
-        };
-
-        return (<HotKeys className="rejt-add-value-node" component={'span'} handlers={handlers}>
-            {inputElementKeyLayout} {separatorElement} {inputElementValueLayout} {cancelButtonElementLayout}
-            {addButtonElementLayout}
-        </HotKeys>);
+        return (
+            <span className="rejt-add-value-node">
+                {inputElementKeyLayout} {separatorElement} {inputElementValueLayout} {cancelButtonElementLayout}
+                {addButtonElementLayout}
+            </span>
+        );
     }
 }
 

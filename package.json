@@ -1,13 +1,21 @@
 {
   "name": "react-editable-json-tree",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "React Editable Json Tree",
-  "main": "dist/JsonTree.js",
+  "source": "src/JsonTree.js",
+  "main": "dist/JsonTree.cjs.js",
+  "module": "dist/JsonTree.esm.js",
+  "types": "dist/JsonTree.d.ts",
+  "targets": {
+    "types": false
+  },
   "scripts": {
+    "build": "parcel build",
+    "prepublishOnly": "yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "gulp serve",
-    "release": "gulp release",
-    "start": "gulp serve"
+    "watch": "parcel watch",
+    "yalcInit": "yalc publish && cd ./dev_app && yalc add react-editable-json-tree",
+    "yalcPush": "yalc publish --push"
   },
   "keywords": [
     "React",
@@ -25,51 +33,25 @@
     "Phanabani"
   ],
   "license": "MIT",
-  "devDependencies": {
-    "autoprefixer": "^6.5.3",
-    "babel-core": "^6.18.2",
-    "babel-loader": "^6.2.8",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.13.2",
-    "babel-preset-react": "^6.11.1",
-    "babel-preset-react-hmre": "^1.1.1",
-    "babel-preset-stage-0": "^6.16.0",
-    "css-loader": "^0.26.0",
-    "del": "^2.2.2",
-    "eslint": "^3.10.2",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-loader": "^1.6.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.7.1",
-    "extract-text-webpack-plugin": "2.1.2",
-    "file-loader": "^0.9.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-bump": "^2.5.0",
-    "html-loader": "^0.4.4",
-    "html-webpack-plugin": "^2.24.1",
-    "lodash": "^4.17.2",
-    "node-sass": "^4.9.3",
-    "postcss-loader": "^1.1.1",
-    "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-hot-loader": "^3.1.2",
-    "run-sequence": "^1.2.2",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7",
-    "webpack": "^2.2.1",
-    "webpack-browser-plugin": "^1.0.12",
-    "webpack-dev-server": "^2.3.0"
-  },
-  "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "engines": {
+    "node": ">= 8"
   },
   "dependencies": {
-    "react-hotkeys": "^0.10.0",
     "prop-types": "^15.6.0"
+  },
+  "peerDependencies": {
+    "react": "^16 || ^17 || ^18",
+    "react-dom": "^16 || ^17 || ^18"
+  },
+  "devDependencies": {
+    "eslint": "^8.24.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "parcel": "^2.7.0",
+    "yalc": "^1.0.0-pre.53"
   }
 }

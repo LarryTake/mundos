@@ -1,3 +1,19 @@
+# 2.3.0
+## Feature
+- Support for React 17 and 18
+
+## Code
+- Use Parcel to build the library
+- Use create-react-app for the `/dev_app/` testing page
+    - This used to be located in `/dev/` and served with a complicated webpack setup
+- Use yalc to build and test our library in `/dev_app/`
+- Rewrite the testing page in typescript and with functional components
+- Remove unmaintained dependency `react-hotkeys`
+- Use GitHub Actions for CI (instead of Circle)
+
+## Fix
+- Rewrite a large portion of the README for clarity and fixing some mistakes
+
 # 2.2.2
 ## Fix
 - Add `allowFunctionEvaluation` prop to mitigate a security vulnerability

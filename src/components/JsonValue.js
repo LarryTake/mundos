@@ -8,9 +8,9 @@
 /* ************************************* */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { HotKeys } from 'react-hotkeys';
 import { isComponentWillChange } from '../utils/objectTypes';
 import inputUsageTypes from '../types/inputUsageTypes';
+import { handleHotkeys } from "../utils/hotkeys";
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -137,6 +137,11 @@ class JsonValue extends Component {
             keyPath: comeFromKeyPath,
             } = this.props;
 
+        const hotkeys = {
+            Escape: this.handleCancelEdit,
+            Enter: this.handleEdit,
+        };
+
         const style = getStyle(name, originalValue, keyPath, deep, dataType);
         let result = null;
         let minusElement = null;
@@ -155,6 +160,7 @@ class JsonValue extends Component {
             const inputElementLayout = React.cloneElement(inputElement, {
                 ref: this.refInput,
                 defaultValue: originalValue,
+                onKeyUp: handleHotkeys(hotkeys)
             });
 
             result = (<span className="rejt-edit-form" style={style.editForm}>
@@ -177,16 +183,11 @@ class JsonValue extends Component {
             minusElement = (readOnlyResult) ? null : minusMenuLayout;
         }
 
-        const handlers = {
-            esc: this.handleCancelEdit,
-            enter: this.handleEdit,
-        };
-
         return (
-            <HotKeys className="rejt-value-node" component={'li'} style={style.li} handlers={handlers}>
-                <span className="rejt-name" style={style.name}>{name} : </span>{result}
+            <li className="rejt-value-node" style={style.li}>
+                <span className="rejt-name" style={style.name}>{name}: </span>{result}
                 {minusElement}
-            </HotKeys>
+            </li>
         );
     }
 }
