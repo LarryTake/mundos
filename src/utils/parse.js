@@ -18,7 +18,8 @@ const basicFunctionPattern = new RegExp(
     + /^function/.source
     + / *([$_a-zA-Z][$\w]*)?/.source // name
     + / *\([ \n]*([$_a-zA-Z][$\w]*(?:[ \n]*,[ \n]*[$_a-zA-Z][$\w]*)*)*?,?[ \n]*\)/.source // params
-    + /[ \n]*{\n*(.*?\n?)[ \n]*}$/.source, // body
+    + /[ \n]*{\n*(.*)[ \n]*}$/.source, // body
+    's',
 );
 
 /* ************************************* */
@@ -81,6 +82,13 @@ function sanitizeFunction(functionString) {
      * // Should match (multi-line):
      * function myFunc(arg1, arg2, arg3) {
      *     console.log('something');
+     * }
+     *
+     * function myFunc() {
+     *     console.log('test');
+     *     if (true) {
+     *         console.log('test2');
+     *     }
      * }
      *
      * // Should not match (single-line):
