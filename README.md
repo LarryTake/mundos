@@ -92,93 +92,93 @@ There is a screenshot of the result :
 
 ## Props
 ### data
-|  Key |          Description        |      Type    | Required | Default  |
-|:----:|:---------------------------:|:------------:|:--------:|:--------:|
-| data | Data to be displayed/edited | Object/Array |   True   |   None   |
+| Key  |         Description         |     Type     | Required | Default |
+|:----:|:---------------------------:|:------------:|:--------:|:-------:|
+| data | Data to be displayed/edited | Object/Array |   True   |  None   |
 
 ### rootName
-|   Key    |         Description        |  Type  |  Required | Default  |
-|:--------:|:--------------------------:|:------:|:---------:|:--------:|
-| rootName | Root name for first object | String |   False   |   root   |
+|   Key    |        Description         |  Type  | Required | Default |
+|:--------:|:--------------------------:|:------:|:--------:|:-------:|
+| rootName | Root name for first object | String |  False   |  root   |
 
 ### isCollapsed
-|     Key     |                  Description                 |   Type   |  Required |               Default             |
-|:-----------:|:--------------------------------------------:|:--------:|:---------:|:---------------------------------:|
-| isCollapsed | Is node collapsed ? (For Array/Object/Error) | Function |   False   | `(keyPath, deep) => (deep !== 0)` |
+|     Key     |                 Description                  |   Type   | Required |              Default              |
+|:-----------:|:--------------------------------------------:|:--------:|:--------:|:---------------------------------:|
+| isCollapsed | Is node collapsed ? (For Array/Object/Error) | Function |  False   | `(keyPath, deep) => (deep !== 0)` |
 
 Function parameters :
 
-|     Key     |        Description       |  Type  |                            Example                              |
-|:-----------:|:------------------------:|:------:|:---------------------------------------------------------------:|
-|   keyPath   | Key path of current node | Array  |       ['object'] for data: { object: { string: 'test' } }       |
-|    deep     |   Deep of current node   | Number |   1 for data: { object: { string: 'test' } } on 'object' node   |
-|    data     |    data of current node/value   |   Any   |   { string: 'test' } for data: { object: { string: 'test' } }   |
+|   Key   |        Description         |  Type  |                           Example                           |
+|:-------:|:--------------------------:|:------:|:-----------------------------------------------------------:|
+| keyPath |  Key path of current node  | Array  |     ['object'] for data: { object: { string: 'test' } }     |
+|  deep   |    Deep of current node    | Number | 1 for data: { object: { string: 'test' } } on 'object' node |
+|  data   | data of current node/value |  Any   | { string: 'test' } for data: { object: { string: 'test' } } |
 
 ### onFullyUpdate
-|      Key      |                          Description                                  |   Type   |  Required |   Default  |
-|:-------------:|:---------------------------------------------------------------------:|:--------:|:---------:|:----------:|
-| onFullyUpdate | Function called each time an update is done and give the updated data | Function |   False   | `() => {}` |
+|      Key      |                              Description                              |   Type   | Required |  Default   |
+|:-------------:|:---------------------------------------------------------------------:|:--------:|:--------:|:----------:|
+| onFullyUpdate | Function called each time an update is done and give the updated data | Function |  False   | `() => {}` |
 
 Function parameters :
 
-|    Key   |  Description |               Type            |
-|:--------:|:------------:|:-----------------------------:|
-|   data   | Updated data | Object/Array (Same as entry)  |
+| Key  | Description  |             Type             |
+|:----:|:------------:|:----------------------------:|
+| data | Updated data | Object/Array (Same as entry) |
 
 ### onDeltaUpdate
-|      Key      |                         Description                               |   Type   |  Required |   Default  |
-|:-------------:|:-----------------------------------------------------------------:|:--------:|:---------:|:----------:|
-| onDeltaUpdate | Function called each time an update is done and give delta update | Function |   False   | `() => {}` |
+|      Key      |                            Description                            |   Type   | Required |  Default   |
+|:-------------:|:-----------------------------------------------------------------:|:--------:|:--------:|:----------:|
+| onDeltaUpdate | Function called each time an update is done and give delta update | Function |  False   | `() => {}` |
 
 Function parameters :
 
-|    Key   | Description |   Type  |
-|:--------:|:-----------:|:-------:|
-|   data   |  Delta data | Object  |
+| Key  | Description |  Type  |
+|:----:|:-----------:|:------:|
+| data | Delta data  | Object |
 
 Delta data structure :
 
-|    Key   |          Description           |   Type  |                            Example                             |
-|:--------:|:------------------------------:|:-------:|:--------------------------------------------------------------:|
-|   type   |  Delta type                    | String  | 'ADD_DELTA_TYPE' or 'REMOVE_DELTA_TYPE' or 'UPDATE_DELTA_TYPE' |
-|  keyPath |   key path                     |  Array  |       ['object'] for data: { object: { string: 'test' } }      |
-|    deep  |   Deep of current node         | Number  |   1 for data: { object: { string: 'test' } } on 'object' node  |
-|    key   | Modified/Created/Removed key   | String  |                               None                             |
-| newValue |           New Value            |   Any   |                               None                             |
-| oldValue |           Old Value            |   Any   |                               None                             |
+|   Key    |         Description          |  Type  |                            Example                             |
+|:--------:|:----------------------------:|:------:|:--------------------------------------------------------------:|
+|   type   |          Delta type          | String | 'ADD_DELTA_TYPE' or 'REMOVE_DELTA_TYPE' or 'UPDATE_DELTA_TYPE' |
+| keyPath  |           key path           | Array  |      ['object'] for data: { object: { string: 'test' } }       |
+|   deep   |     Deep of current node     | Number |  1 for data: { object: { string: 'test' } } on 'object' node   |
+|   key    | Modified/Created/Removed key | String |                              None                              |
+| newValue |          New Value           |  Any   |                              None                              |
+| oldValue |          Old Value           |  Any   |                              None                              |
 
 ### readOnly
-|   Key    |            Description           |   Type  |  Required |  Default  |
-|:--------:|:--------------------------------:|:-------:|:---------:|:---------:|
-| readOnly | Read only boolean for all object when a boolean is provided, read only for specific keys when function is provided | Boolean / Function |   False   |   `(keyName, data, keyPath, deep, dataType) => false`   |
+|   Key    |                                                    Description                                                     |        Type        | Required |                       Default                       |
+|:--------:|:------------------------------------------------------------------------------------------------------------------:|:------------------:|:--------:|:---------------------------------------------------:|
+| readOnly | Read only boolean for all object when a boolean is provided, read only for specific keys when function is provided | Boolean / Function |  False   | `(keyName, data, keyPath, deep, dataType) => false` |
 
 This function must return a boolean.
 
 Function parameters :
 
-|     Key     |           Description           |   Type  |                            Example                              |
-|:-----------:|:-------------------------------:|:-------:|:---------------------------------------------------------------:|
-|   keyName   | Key name of current node/value  | String  |        'object' for data: { object: { string: 'test' } }        |
-|    data     |    data of current node/value   |   Any   |   { string: 'test' } for data: { object: { string: 'test' } }   |
-|   keyPath   |   key path                      |  Array  |       ['object'] for data: { object: { string: 'test' } }       |
-|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node   |
-|  dataType   | data type of current node/value |  String |  'Object', 'Array', 'Null', 'Undefined', 'Error', 'Number', ... |
+|   Key    |           Description           |  Type  |                            Example                             |
+|:--------:|:-------------------------------:|:------:|:--------------------------------------------------------------:|
+| keyName  | Key name of current node/value  | String |       'object' for data: { object: { string: 'test' } }        |
+|   data   |   data of current node/value    |  Any   |  { string: 'test' } for data: { object: { string: 'test' } }   |
+| keyPath  |            key path             | Array  |      ['object'] for data: { object: { string: 'test' } }       |
+|   deep   |      Deep of current node       | Number |  1 for data: { object: { string: 'test' } } on 'object' node   |
+| dataType | data type of current node/value | String | 'Object', 'Array', 'Null', 'Undefined', 'Error', 'Number', ... |
 
 
 ### getStyle
-|     Key     |     Description      |   Type   |  Required |                       Default                       |
-|:-----------:|:--------------------:|:--------:|:---------:|:---------------------------------------------------:|
-|  getStyle   | Get style (CSS keys) | Function |   False   | `(keyName, data, keyPath, deep, dataType) => {...}` |
+|   Key    |     Description      |   Type   | Required |                       Default                       |
+|:--------:|:--------------------:|:--------:|:--------:|:---------------------------------------------------:|
+| getStyle | Get style (CSS keys) | Function |  False   | `(keyName, data, keyPath, deep, dataType) => {...}` |
 
 Function parameters :
 
-|     Key     |           Description           |   Type  |                            Example                              |
-|:-----------:|:-------------------------------:|:-------:|:---------------------------------------------------------------:|
-|   keyName   | Key name of current node/value  | String  |        'object' for data: { object: { string: 'test' } }        |
-|    data     |    data of current node/value   |   Any   |   { string: 'test' } for data: { object: { string: 'test' } }   |
-|   keyPath   |   key path                      |  Array  |       ['object'] for data: { object: { string: 'test' } }       |
-|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node   |
-|  dataType   | data type of current node/value |  String |  'Object', 'Array', 'Null', 'Undefined', 'Error', 'Number', ... |
+|   Key    |           Description           |  Type  |                            Example                             |
+|:--------:|:-------------------------------:|:------:|:--------------------------------------------------------------:|
+| keyName  | Key name of current node/value  | String |       'object' for data: { object: { string: 'test' } }        |
+|   data   |   data of current node/value    |  Any   |  { string: 'test' } for data: { object: { string: 'test' } }   |
+| keyPath  |            key path             | Array  |      ['object'] for data: { object: { string: 'test' } }       |
+|   deep   |      Deep of current node       | Number |  1 for data: { object: { string: 'test' } } on 'object' node   |
+| dataType | data type of current node/value | String | 'Object', 'Array', 'Null', 'Undefined', 'Error', 'Number', ... |
 
 An example of return :
 ```javascript
@@ -207,146 +207,146 @@ An example of return :
 You can see the actual used in `src/utils/styles.js`. 
 
 ### addButtonElement
-|       Key        |                  Description              |     Type    | Required |        Default        |
-|:----------------:|:-----------------------------------------:|:-----------:|:--------:|:---------------------:|
-| addButtonElement | Add button Element to replace library one |   Element   |   False  | `<button>+</button>`  |
+|       Key        |                Description                |  Type   | Required |       Default        |
+|:----------------:|:-----------------------------------------:|:-------:|:--------:|:--------------------:|
+| addButtonElement | Add button Element to replace library one | Element |  False   | `<button>+</button>` |
 
 The library will add a `onClick` props on element.
 
 ### cancelButtonElement
-|         Key         |                   Description                |     Type    | Required |        Default        |
-|:-------------------:|:--------------------------------------------:|:-----------:|:--------:|:---------------------:|
-| cancelButtonElement | Cancel button Element to replace library one |   Element   |   False  | `<button>c</button>`  |
+|         Key         |                 Description                  |  Type   | Required |       Default        |
+|:-------------------:|:--------------------------------------------:|:-------:|:--------:|:--------------------:|
+| cancelButtonElement | Cancel button Element to replace library one | Element |  False   | `<button>c</button>` |
 
 The library will add a `onClick` props on element.
 
 ### editButtonElement
-|        Key        |                 Description                |     Type    | Required |        Default        |
-|:-----------------:|:------------------------------------------:|:-----------:|:--------:|:---------------------:|
-| editButtonElement | Edit button Element to replace library one |   Element   |   False  | `<button>e</button>`  |
+|        Key        |                Description                 |  Type   | Required |       Default        |
+|:-----------------:|:------------------------------------------:|:-------:|:--------:|:--------------------:|
+| editButtonElement | Edit button Element to replace library one | Element |  False   | `<button>e</button>` |
 
 The library will add a `onClick` props on element.
 
 ### inputElement
-|      Key     |                Description                |     Type    | Required |   Default    |
-|:------------:|:-----------------------------------------:|:-----------:|:--------:|:------------:|
-| inputElement | Input Text Element to replace library one |   Element / Function   |   False  | `(usage, keyPath, deep, keyName, data, dataType) => <input />`  |
+|     Key      |                Description                |        Type        | Required |                            Default                             |
+|:------------:|:-----------------------------------------:|:------------------:|:--------:|:--------------------------------------------------------------:|
+| inputElement | Input Text Element to replace library one | Element / Function |  False   | `(usage, keyPath, deep, keyName, data, dataType) => <input />` |
 
 The library will add a `placeholder`, `ref`, `defaultValue` props on element.
 This item will be focus when possible.
 
 Function parameters:
 
-|     Key     |           Description           |   Type  |                            Example                                           |
-|:-----------:|:-------------------------------:|:-------:|:----------------------------------------------------------------------------:|
-|    usage    |    Usage of the generated input    | String  |        All values are listed in INPUT_USAGE_TYPES                    |
-|   keyPath   |   key path                      |  Array  |              [] for data: { object: { string: 'test' } }                     |
-|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
-|     key     |    Key of current node/value    | String  |        'object' for data: { object: { string: 'test' } }                     |
-|    value    |       Value of the key          |   Any   | { string: 'test' } for data: { object: { string: 'test' } } on 'object' node |
-|    dataType    |       Data type of the value          |   String   | All values are listed in DATA_TYPES |
+|   Key    |         Description          |  Type  |                                   Example                                    |
+|:--------:|:----------------------------:|:------:|:----------------------------------------------------------------------------:|
+|  usage   | Usage of the generated input | String |                  All values are listed in INPUT_USAGE_TYPES                  |
+| keyPath  |           key path           | Array  |                 [] for data: { object: { string: 'test' } }                  |
+|   deep   |     Deep of current node     | Number |         1 for data: { object: { string: 'test' } } on 'object' node          |
+|   key    |  Key of current node/value   | String |              'object' for data: { object: { string: 'test' } }               |
+|  value   |       Value of the key       |  Any   | { string: 'test' } for data: { object: { string: 'test' } } on 'object' node |
+| dataType |    Data type of the value    | String |                     All values are listed in DATA_TYPES                      |
 
 ### textareaElement
-|        Key      |                Description                |     Type    | Required |    Default     |
-|:---------------:|:-----------------------------------------:|:-----------:|:--------:|:--------------:|
-| textareaElement |  Textarea Element to replace library one  |   Element / Function   |   False  | `(usage, keyPath, deep, keyName, data, dataType) => <textarea />` |
+|       Key       |               Description               |        Type        | Required |                              Default                              |
+|:---------------:|:---------------------------------------:|:------------------:|:--------:|:-----------------------------------------------------------------:|
+| textareaElement | Textarea Element to replace library one | Element / Function |  False   | `(usage, keyPath, deep, keyName, data, dataType) => <textarea />` |
 
 The library will add a `ref`, `defaultValue` props on element.
 This item will be focus when possible.
 
 Function parameters:
 
-|     Key     |           Description           |   Type  |                            Example                                           |
-|:-----------:|:-------------------------------:|:-------:|:----------------------------------------------------------------------------:|
-|    usage    |    Usage of the generated input    | String  |        All values are listed in INPUT_USAGE_TYPES                    |
-|   keyPath   |   key path                      |  Array  |              [] for data: { object: { string: 'test' } }                     |
-|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
-|     key     |    Key of current node/value    | String  |        'object' for data: { object: { string: 'test' } }                     |
-|    value    |       Value of the key          |   Any   | { string: 'test' } for data: { object: { string: 'test' } } on 'object' node |
-|    dataType    |       Data type of the value          |   String   | All values are listed in DATA_TYPES |
+|   Key    |         Description          |  Type  |                                   Example                                    |
+|:--------:|:----------------------------:|:------:|:----------------------------------------------------------------------------:|
+|  usage   | Usage of the generated input | String |                  All values are listed in INPUT_USAGE_TYPES                  |
+| keyPath  |           key path           | Array  |                 [] for data: { object: { string: 'test' } }                  |
+|   deep   |     Deep of current node     | Number |         1 for data: { object: { string: 'test' } } on 'object' node          |
+|   key    |  Key of current node/value   | String |              'object' for data: { object: { string: 'test' } }               |
+|  value   |       Value of the key       |  Any   | { string: 'test' } for data: { object: { string: 'test' } } on 'object' node |
+| dataType |    Data type of the value    | String |                     All values are listed in DATA_TYPES                      |
 
 ### minusMenuElement
-|        Key       |                 Description               |     Type    | Required |       Default       |
-|:----------------:|:-----------------------------------------:|:-----------:|:--------:|:-------------------:|
-| minusMenuElement | Minus Menu Element to replace library one |   Element   |   False  | `<span> - </span>`  |
+|       Key        |                Description                |  Type   | Required |      Default       |
+|:----------------:|:-----------------------------------------:|:-------:|:--------:|:------------------:|
+| minusMenuElement | Minus Menu Element to replace library one | Element |  False   | `<span> - </span>` |
 
 The library will add a `onClick`, `className` and `style` props on element.
 
 ### plusMenuElement
-|       Key       |                Description               |     Type    | Required |       Default       |
-|:---------------:|:----------------------------------------:|:-----------:|:--------:|:-------------------:|
-| plusMenuElement | Plus Menu Element to replace library one |   Element   |   False  | `<span> + </span>`  |
+|       Key       |               Description                |  Type   | Required |      Default       |
+|:---------------:|:----------------------------------------:|:-------:|:--------:|:------------------:|
+| plusMenuElement | Plus Menu Element to replace library one | Element |  False   | `<span> + </span>` |
 
 The library will add a `onClick`, `className` and `style` props on element.
 
 ### beforeRemoveAction
-|         Key        |                      Description                             |   Type   |  Required |                                 Default                               |
-|:------------------:|:------------------------------------------------------------:|:--------:|:---------:|:---------------------------------------------------------------------:|
-| beforeRemoveAction | Function called before each remove action (with minus menu)  | Function |   False   | `(key, keyPath, deep, oldValue) => new Promise(resolve => resolve())` |
+|        Key         |                         Description                         |   Type   | Required |                                Default                                |
+|:------------------:|:-----------------------------------------------------------:|:--------:|:--------:|:---------------------------------------------------------------------:|
+| beforeRemoveAction | Function called before each remove action (with minus menu) | Function |  False   | `(key, keyPath, deep, oldValue) => new Promise(resolve => resolve())` |
 
 This function must return a `Promise`. In case of resolve of this one, the remove will be done. Otherwise, in reject, nothing will be done.
 
 Function parameters :
 
-|     Key     |           Description           |   Type  |                            Example                                           |
-|:-----------:|:-------------------------------:|:-------:|:----------------------------------------------------------------------------:|
-|     key     |    Key of current node/value    | String  |        'object' for data: { object: { string: 'test' } }                     |
-|   keyPath   |   key path                      |  Array  |              [] for data: { object: { string: 'test' } }                     |
-|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
-|   oldValue  |   Old value of the key          |   Any   | { string: 'test' } for data: { object: { string: 'test' } } on 'object' node |
+|   Key    |        Description        |  Type  |                                   Example                                    |
+|:--------:|:-------------------------:|:------:|:----------------------------------------------------------------------------:|
+|   key    | Key of current node/value | String |              'object' for data: { object: { string: 'test' } }               |
+| keyPath  |         key path          | Array  |                 [] for data: { object: { string: 'test' } }                  |
+|   deep   |   Deep of current node    | Number |         1 for data: { object: { string: 'test' } } on 'object' node          |
+| oldValue |   Old value of the key    |  Any   | { string: 'test' } for data: { object: { string: 'test' } } on 'object' node |
 
 ### beforeAddAction
-|       Key       |                    Description                           |   Type   |  Required |                                Default                                |
-|:---------------:|:--------------------------------------------------------:|:--------:|:---------:|:---------------------------------------------------------------------:|
-| beforeAddAction | Function called before each add action (with plus menu)  | Function |   False   | `(key, keyPath, deep, newValue) => new Promise(resolve => resolve())` |
+|       Key       |                       Description                       |   Type   | Required |                                Default                                |
+|:---------------:|:-------------------------------------------------------:|:--------:|:--------:|:---------------------------------------------------------------------:|
+| beforeAddAction | Function called before each add action (with plus menu) | Function |  False   | `(key, keyPath, deep, newValue) => new Promise(resolve => resolve())` |
 
 This function must return a `Promise`. In case of resolve of this one, the remove will be done. Otherwise, in reject, nothing will be done.
 
 Function parameters :
 
-|     Key     |           Description           |   Type  |                            Example                                           |
-|:-----------:|:-------------------------------:|:-------:|:----------------------------------------------------------------------------:|
-|     key     |    Key of current node/value    | String  |        'string' for data: { object: { string: 'test' } }                     |
-|   keyPath   |   key path                      |  Array  |           ['object'] for data: { object: { string: 'test' } }                |
-|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
-|   newValue  |   New value of the key          |   Any   |       'test' for data: { object: { string: 'test' } } on 'string' node       |
+|   Key    |        Description        |  Type  |                             Example                              |
+|:--------:|:-------------------------:|:------:|:----------------------------------------------------------------:|
+|   key    | Key of current node/value | String |        'string' for data: { object: { string: 'test' } }         |
+| keyPath  |         key path          | Array  |       ['object'] for data: { object: { string: 'test' } }        |
+|   deep   |   Deep of current node    | Number |   1 for data: { object: { string: 'test' } } on 'object' node    |
+| newValue |   New value of the key    |  Any   | 'test' for data: { object: { string: 'test' } } on 'string' node |
 
 ### beforeUpdateAction
-|         Key        |            Description                    |   Type   |  Required |                                     Default                                     |
-|:------------------:|:-----------------------------------------:|:--------:|:---------:|:-------------------------------------------------------------------------------:|
-| beforeUpdateAction | Function called before each update action | Function |   False   | `(key, keyPath, deep, oldValue, newValue) => new Promise(resolve => resolve())` |
+|        Key         |                Description                |   Type   | Required |                                     Default                                     |
+|:------------------:|:-----------------------------------------:|:--------:|:--------:|:-------------------------------------------------------------------------------:|
+| beforeUpdateAction | Function called before each update action | Function |  False   | `(key, keyPath, deep, oldValue, newValue) => new Promise(resolve => resolve())` |
 
 This function must return a `Promise`. In case of resolve of this one, the remove will be done. Otherwise, in reject, nothing will be done.
 
 Function parameters :
 
-|     Key     |           Description           |   Type  |                            Example                                           |
-|:-----------:|:-------------------------------:|:-------:|:----------------------------------------------------------------------------:|
-|     key     |    Key of current node/value    | String  |        'string' for data: { object: { string: 'test' } }                     |
-|   keyPath   |   key path                      |  Array  |           ['object'] for data: { object: { string: 'test' } }                |
-|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
-|   oldValue  |   Old value of the key          |   Any   |       'test' for data: { object: { string: 'test' } } on 'string' node       |
-|   newValue  |   New value of the key          |   Any   |     'update' for data: { object: { string: 'update' } } on 'string' node     |
+|   Key    |        Description        |  Type   |                               Example                                |
+|:--------:|:-------------------------:|:-------:|:--------------------------------------------------------------------:|
+|   key    | Key of current node/value | String  |          'string' for data: { object: { string: 'test' } }           |
+| keyPath  |         key path          |  Array  |         ['object'] for data: { object: { string: 'test' } }          |
+|   deep   |   Deep of current node    | Number  |     1 for data: { object: { string: 'test' } } on 'object' node      |
+| oldValue |   Old value of the key    |   Any   |   'test' for data: { object: { string: 'test' } } on 'string' node   |
+| newValue |   New value of the key    |   Any   | 'update' for data: { object: { string: 'update' } } on 'string' node |
 
 ### logger
-|   Key  |            Description                                           |   Type   |  Required |        Default        |
-|:------:|:----------------------------------------------------------------:|:--------:|:---------:|:---------------------:|
-| logger | Object used to log 'catch' from promise (using only 'error' key) |  Object  |   False   | `{ error: () => {} }` |
+|  Key   |                           Description                            |  Type  | Required |        Default        |
+|:------:|:----------------------------------------------------------------:|:------:|:--------:|:---------------------:|
+| logger | Object used to log 'catch' from promise (using only 'error' key) | Object |  False   | `{ error: () => {} }` |
 
 ### onSubmitValueParser
-|          Key        |                                                   Description                                                 |   Type   |  Required |                               Default                                  |
+|         Key         |                                                  Description                                                  |   Type   | Required  |                                Default                                 |
 |:-------------------:|:-------------------------------------------------------------------------------------------------------------:|:--------:|:---------:|:----------------------------------------------------------------------:|
 | onSubmitValueParser | Function called after each edit/update phase to parse raw data from inputElement or textareaElement component | Function |   False   | `(isEditMode, keyPath, deep, key, rawValue) => nativeParser(rawValue)` |
 
 Function parameters :
 
-|     Key     |           Description                                    |   Type  |                            Example                                           |
-|:-----------:|:--------------------------------------------------------:|:-------:|:----------------------------------------------------------------------------:|
-|  isEditMode | Is in edit mode or in add mode ?                         | String  |        'string' for data: { object: { string: 'test' } }                     |
-|   keyPath   |   key path                                               |  Array  |           ['object'] for data: { object: { string: 'test' } }                |
-|     deep    |   Deep of current node                                   | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
-|     key     |    Key of current node/value                             | String  |        'string' for data: { object: { string: 'test' } }                     |
-|   rawValue  | Raw value from inputElement or textareaElement component | String  |        'string' for data: { object: { string: 'test' } }                     |
+|    Key     |                       Description                        |  Type  |                           Example                           |
+|:----------:|:--------------------------------------------------------:|:------:|:-----------------------------------------------------------:|
+| isEditMode |             Is in edit mode or in add mode ?             | String |      'string' for data: { object: { string: 'test' } }      |
+|  keyPath   |                         key path                         | Array  |     ['object'] for data: { object: { string: 'test' } }     |
+|    deep    |                   Deep of current node                   | Number | 1 for data: { object: { string: 'test' } } on 'object' node |
+|    key     |                Key of current node/value                 | String |      'string' for data: { object: { string: 'test' } }      |
+|  rawValue  | Raw value from inputElement or textareaElement component | String |      'string' for data: { object: { string: 'test' } }      |
 
 ### allowFunctionEvaluation
 |           Key           |                                               Description                                               |  Type   | Required | Default |
