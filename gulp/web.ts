@@ -11,6 +11,8 @@ import WebpackDevServer, {
   Configuration as DevServerConfig,
 } from "webpack-dev-server";
 
+type CallbackType = (err?: Error) => void;
+
 const webpackToStringOptions = {
   colors: {
     level: 1,
@@ -28,7 +30,7 @@ const webpackToStringOptions = {
   exclude: ["node_modules"],
 };
 
-async function webBuildDev(cb: (err?: Error) => void) {
+async function webBuildDev(cb: CallbackType) {
   const { default: configDev } = await import("./config/webpack-dev.config");
   Webpack(configDev, (err, stats) => {
     if (err) {
@@ -41,7 +43,7 @@ async function webBuildDev(cb: (err?: Error) => void) {
   });
 }
 
-async function webBuildProd(cb: (err?: Error) => void) {
+async function webBuildProd(cb: CallbackType) {
   const { default: configProd } = await import("./config/webpack-prod.config");
   Webpack(configProd, (err, stats) => {
     if (err) {
@@ -54,7 +56,7 @@ async function webBuildProd(cb: (err?: Error) => void) {
   });
 }
 
-async function webServe(cb: (err?: Error) => void) {
+async function webServe(cb: CallbackType) {
   const { default: webpackDev } = await import("./config/webpack-serve.config");
   const compiler = Webpack(webpackDev);
   const devServerConfig: DevServerConfig = {
@@ -67,7 +69,7 @@ async function webServe(cb: (err?: Error) => void) {
   try {
     await server.start();
   } catch (err) {
-    cb(err);
+    cb(err as Error);
   }
 }
 
