@@ -423,13 +423,10 @@ Here is the list of classes by element and by deep and with basic element (on wh
 ### npm commands
 
 #### Build
+Build the library to `dist/` using parcel.
+
 ```bash
 npm run build
-```
-
-#### Release
-```bash
-npm run release
 ```
 
 ### Dev app
