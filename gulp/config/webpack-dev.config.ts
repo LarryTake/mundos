@@ -121,7 +121,7 @@ export default <Configuration>{
     ],
   },
   optimization: {
-    minimize: false,
+    runtimeChunk: "single",
   },
   plugins: [
     new webpack.DefinePlugin({
