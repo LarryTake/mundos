@@ -1,9 +1,0 @@
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: cimg/node:18.10
-    steps:
-      - checkout
-      - run: yarn install
-      - run: yarn run build
