@@ -54,13 +54,16 @@ function commaSplit(string) {
 }
 
 /**
- * Sanitize a string that might have a function definition.
- * Note that this is not a perfect solution, there are still
- * security flaws.
- * @param functionString {string} string to sanitize
- * @returns {Function | null}
+ * Try creating an anonymous function from a string, or return null if it's
+ * not a valid function definition.
+ * Note that this is not a completely safe, there are still security flaws,
+ * but it is safer than using `exec`.
+ * @param functionString {string} string to try to parse as a function
+ *   definition
+ * @returns {Function | null} an anonymous function if the string is a valid
+ *   function definition, else null
  */
-function sanitizeFunction(functionString) {
+function createFunction(functionString) {
     /* This is not an exhaustive check by any means
      * For instance, function names may have a wide variety of
      * unicode characters and still be valid... oh well!
@@ -123,7 +126,7 @@ function sanitizeFunction(functionString) {
  */
 function parse(string) {
     // Try parsing (and sanitizing) a function
-    const func = sanitizeFunction(string);
+    const func = createFunction(string);
     if (func !== null) return func;
 
     try {
