@@ -58,7 +58,13 @@ function sanitizeFunction(functionString) {
         params = match.groups.params.split(',').map((x) => x.trim())
     }
 
-    const func = Function(...params, match.groups.body || '');
+    // Here's the security flaw. We want this functionality for supporting
+    // JSONP, so we've opted for the best attempt at maintaining some amount
+    // of security. This should be a little better than eval because it
+    // shouldn't automatically execute code, just create a function which can
+    // be called later.
+    // eslint-disable-next-line no-new-func
+    const func = new Function(...params, match.groups.body || '');
     func.displayName = match.groups.name;
     return func;
 }
