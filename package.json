@@ -1,6 +1,6 @@
 {
   "name": "react-editable-json-tree",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "React Editable Json Tree",
   "main": "dist/JsonTree.js",
   "scripts": {
@@ -21,6 +21,9 @@
     "url": "git@github.com:oxyno-zeta/react-editable-json-tree.git"
   },
   "author": "Oxyno-zeta",
+  "contributors": [
+    "Phanabani"
+  ],
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.5.3",
