@@ -88,6 +88,7 @@ function sanitizeFunction(functionString) {
      * somethingBad()
      */
     const match = matchFunction(functionString, true);
+    if (!match) return null;
 
     // Here's the security flaw. We want this functionality for supporting
     // JSONP, so we've opted for the best attempt at maintaining some amount
