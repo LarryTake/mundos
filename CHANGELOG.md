@@ -9,6 +9,9 @@
 - Rewrite the testing page in typescript and with functional components
 - Remove unmaintained dependency `react-hotkeys`
 
+## Fix
+- Rewrite a large portion of the README for clarity and fixing some mistakes
+
 # 2.2.2
 ## Fix
 - Add `allowFunctionEvaluation` prop to mitigate a security vulnerability
