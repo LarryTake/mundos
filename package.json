@@ -38,8 +38,7 @@
     "node": ">= 8"
   },
   "dependencies": {
-    "prop-types": "^15.6.0",
-    "react-hotkeys": "^2.0.0"
+    "prop-types": "^15.6.0"
   },
   "peerDependencies": {
     "react": "^16 || ^17 || ^18",
