@@ -8,8 +8,8 @@
 /* ************************************* */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { HotKeys } from 'react-hotkeys';
 import inputUsageTypes from '../types/inputUsageTypes';
+import { handleHotkeys } from "../utils/hotkeys";
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -121,15 +121,17 @@ class JsonAddValue extends Component {
             separatorElement = ':';
         }
 
-        const handlers = {
-            esc: handleCancel,
-            enter: this.onSubmit,
+        const hotkeys = {
+            Escape: handleCancel,
+            Enter: this.onSubmit,
         };
 
-        return (<HotKeys className="rejt-add-value-node" component={'span'} handlers={handlers}>
-            {inputElementKeyLayout} {separatorElement} {inputElementValueLayout} {cancelButtonElementLayout}
-            {addButtonElementLayout}
-        </HotKeys>);
+        return (
+            <span className="rejt-add-value-node" onKeyUp={handleHotkeys(hotkeys)}>
+                {inputElementKeyLayout} {separatorElement} {inputElementValueLayout} {cancelButtonElementLayout}
+                {addButtonElementLayout}
+            </span>
+        );
     }
 }
 

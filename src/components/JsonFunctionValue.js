@@ -8,10 +8,10 @@
 /* ************************************* */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { HotKeys } from 'react-hotkeys';
 import { isComponentWillChange } from '../utils/objectTypes';
 import inputUsageTypes from '../types/inputUsageTypes';
 import { functionToString } from '../utils/parse';
+import { handleHotkeys } from "../utils/hotkeys";
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -181,16 +181,16 @@ class JsonFunctionValue extends Component {
             minusElement = (resultOnlyResult) ? null : minusMenuLayout;
         }
 
-        const handlers = {
-            esc: this.handleCancelEdit,
-            enter: this.handleEdit,
+        const hotkeys = {
+            Escape: this.handleCancelEdit,
+            Enter: this.handleEdit,
         };
 
         return (
-            <HotKeys component={'li'} className="rejt-function-value-node" style={style.li} handlers={handlers}>
+            <li className="rejt-function-value-node" style={style.li} onKeyUp={handleHotkeys(hotkeys)}>
                 <span className="rejt-name" style={style.name}>{name} : </span>{result}
                 {minusElement}
-            </HotKeys>
+            </li>
         );
     }
 }
