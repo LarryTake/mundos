@@ -2,14 +2,11 @@
 /.github/
 /dev_app/
 /docs/
-/gulp/
 /src/
-/.babelrc
 /.eslintrc.json
 /.gitignore
 /.travis.yml
 /circle.yml
-/gulpfile.ts
 /yarn.lock
 
 ### NotepadPP template
