@@ -99,9 +99,9 @@ Here is a screenshot of the result:
 
 ### data
 
-| Key  |         Description         |         Type          | Required | Default |
-| :--: | :-------------------------: | :-------------------: | :------: | :-----: |
-| data | Data to be displayed/edited | `Object &#124; Array` |   True   |  None   |
+| Key  |         Description         |              Type                | Required | Default |
+| :--: | :-------------------------: | :------------------------------: | :------: | :-----: |
+| data | Data to be displayed/edited | <code>Object &#124; Array</code> |   True   |  None   |
 
 ### rootName
 
@@ -131,9 +131,9 @@ Function parameters:
 
 Function parameters:
 
-| Key  | Description  |                         Type                         |
-| :--: | :----------: | :--------------------------------------------------: |
-| data | Updated data | `Object &#124; Array` (same type as the `data` prop) |
+| Key  | Description  |                              Type                               |
+| :--: | :----------: | :-------------------------------------------------------------: |
+| data | Updated data | <code>Object &#124; Array</code> (same type as the `data` prop) |
 
 ### onDeltaUpdate
 
@@ -160,9 +160,9 @@ Delta data structure:
 
 ### readOnly
 
-|   Key    |                                                                                    Description                                                                                    |           Type            | Required |                       Default                       |
-| :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------: | :------: | :-------------------------------------------------: |
-| readOnly | If a boolean, whether the entire structure should be read-only. If a function, whether the node/value supplied to the function should be read-only (called for all nodes/values). | `boolean &#124; Function` |  False   | `(keyName, data, keyPath, deep, dataType) => false` |
+|   Key    |                                                                                    Description                                                                                    |                Type                  | Required |                       Default                       |
+| :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------: | :------: | :-------------------------------------------------: |
+| readOnly | If a boolean, whether the entire structure should be read-only. If a function, whether the node/value supplied to the function should be read-only (called for all nodes/values). | <code>boolean &#124; Function</code> |  False   | `(keyName, data, keyPath, deep, dataType) => false` |
 
 This function must return a boolean.
 
@@ -246,9 +246,9 @@ The library will add an `onClick` handler to the element.
 
 ### inputElement
 
-|     Key      |                 Description                 |             Type              | Required |                            Default                             |
-| :----------: | :-----------------------------------------: | :---------------------------: | :------: | :------------------------------------------------------------: |
-| inputElement | Custom text input element (to edit a value) | `JSX.Element &#124; Function` |  False   | `(usage, keyPath, deep, keyName, data, dataType) => <input />` |
+|     Key      |                 Description                 |                  Type                    | Required |                            Default                             |
+| :----------: | :-----------------------------------------: | :--------------------------------------: | :------: | :------------------------------------------------------------: |
+| inputElement | Custom text input element (to edit a value) | <code>JSX.Element &#124; Function</code> |  False   | `(usage, keyPath, deep, keyName, data, dataType) => <input />` |
 
 The library will add a `placeholder`, `ref`, and `defaultValue` prop to the
 element. This element will be focused when possible.
@@ -266,9 +266,9 @@ Function parameters:
 
 ### textareaElement
 
-|       Key       |                          Description                           |             Type              | Required |                              Default                              |
-| :-------------: | :------------------------------------------------------------: | :---------------------------: | :------: | :---------------------------------------------------------------: |
-| textareaElement | Custom textarea element (to edit a long value, like functions) | `JSX.Element &#124; Function` |  False   | `(usage, keyPath, deep, keyName, data, dataType) => <textarea />` |
+|       Key       |                          Description                           |                  Type                    | Required |                              Default                              |
+| :-------------: | :------------------------------------------------------------: | :--------------------------------------: | :------: | :---------------------------------------------------------------: |
+| textareaElement | Custom textarea element (to edit a long value, like functions) | <code>JSX.Element &#124; Function</code> |  False   | `(usage, keyPath, deep, keyName, data, dataType) => <textarea />` |
 
 The library will add a `ref` and `defaultValue` prop to the element. This
 element will be focused when possible.
