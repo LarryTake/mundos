@@ -38,7 +38,8 @@
     "node": ">= 8"
   },
   "devDependencies": {
-    "parcel": "^2.7.0"
+    "parcel": "^2.7.0",
+    "prettier": "2.6.2"
   },
   "peerDependencies": {
     "react": "^18.0.0",
