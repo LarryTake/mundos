@@ -29,6 +29,10 @@
     "Phanabani"
   ],
   "license": "MIT",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "engines": {
+    "node": ">= 8"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
