@@ -91,18 +91,15 @@ function sanitizeFunction(functionString) {
  * @returns {*}
  */
 function parse(string) {
-    let result = string;
-
     // Try parsing (and sanitizing) a function
     const func = sanitizeFunction(string);
     if (func !== null) return func;
 
     try {
-        result = JSON.parse(string);
+        return JSON.parse(string);
     } catch (e) {
-        // Error
+        return string;
     }
-    return result;
 }
 
 /* ************************************* */
