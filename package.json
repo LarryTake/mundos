@@ -6,6 +6,9 @@
   "main": "dist/JsonTree.cjs.js",
   "module": "dist/JsonTree.esm.js",
   "types": "dist/JsonTree.d.ts",
+  "targets": {
+	"types": false
+  },
   "scripts": {
     "prepare": "parcel build",
     "build": "parcel build",
