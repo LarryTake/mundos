@@ -1,6 +1,7 @@
 {
     "esModuleInterop": true,
     "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
         // Type checking
         "alwaysStrict": true,
         "strictNullChecks": true,
