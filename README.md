@@ -323,6 +323,12 @@ Function parameters :
 |     key     |    Key of current node/value                             | String  |        'string' for data: { object: { string: 'test' } }                     |
 |   rawValue  | Raw value from inputElement or textareaElement component | String  |        'string' for data: { object: { string: 'test' } }                     |
 
+### allowFunctionEvaluation
+|           Key           |                                               Description                                               |  Type   | Required | Default |
+|:-----------------------:|:-------------------------------------------------------------------------------------------------------:|:-------:|:--------:|:-------:|
+| allowFunctionEvaluation | Allow strings that appear to be Javascript function definitions to be evaluated as Javascript functions | Boolean |  False   |  True   |
+
+
 ## Design
 The library provide CSS class on elements. All are prefixed by "rejt" to avoid conflict. 
 To avoid being linked with a CSS file, the library will use the inline style.
