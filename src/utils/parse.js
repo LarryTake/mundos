@@ -59,7 +59,6 @@ function sanitizeFunction(functionString) {
     }
 
     const func = Function(...params, match.groups.body || '');
-    func.name = match.groups.name;
     func.displayName = match.groups.name;
     return func;
 }
