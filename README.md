@@ -473,10 +473,10 @@ npm start
 * My wife BH to support me doing this
 
 ## Author
-* Oxyno-zeta (Havrileck Alexandre)
+* [Oxyno-zeta (Havrileck Alexandre)](https://github.com/oxyno-zeta)
 
 ### Contributors
-* Phanabani
+* [Phanabani](https://github.com/Phanabani)
 
 ## License
 MIT (see [License.md](https://github.com/oxyno-zeta/react-editable-json-tree/blob/master/LICENSE.md)).
