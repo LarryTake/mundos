@@ -445,10 +445,11 @@ initialize yalc:
 npm run yalcInit
 ```
 
-This will tell yalc to link `dev_app/` to the root REJT library (it's usually
-stored in `~/.yalc/installations.json` if you're curious). After initializing,
-you can run the following command in the root package every time you make
-changes to REJT to push the changes to the dev app:
+This will tell yalc to link `dev_app/` to the root REJT library (this link
+is usually stored in `~/.yalc/installations.json` if you're curious). After
+initializing, you can run the following command in the root package every
+time you make changes to REJT to push the changes to the dev app
+(with hot-loading!):
 
 ```sh
 npm run yalcPush
