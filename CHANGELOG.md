@@ -8,7 +8,7 @@
 - Use yalc to build and test our library in `/dev_app/`
 - Rewrite the testing page in typescript and with functional components
 - Remove unmaintained dependency `react-hotkeys`
-- Update CircleCI config
+- Use GitHub Actions for CI (instead of Circle)
 
 ## Fix
 - Rewrite a large portion of the README for clarity and fixing some mistakes
