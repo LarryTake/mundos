@@ -4,6 +4,7 @@
     - This used to be located in `/dev/` and served with a complicated webpack setup
 - Use yalc to build and test our library in `/dev_app/`
 - Rewrite the testing page in typescript and with functional components
+- Remove unmaintained dependency `react-hotkeys`
 
 # 2.2.2
 ## Fix
