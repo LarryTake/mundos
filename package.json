@@ -63,6 +63,7 @@
     "lodash": "^4.17.2",
     "mini-css-extract-plugin": "^2.6.0",
     "node-sass": "^7.0.1",
+    "parcel": "^2.7.0",
     "postcss-loader": "^7.0.0",
     "prettier": "2.6.2",
     "prop-types": "^15.6.0",
