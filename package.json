@@ -7,7 +7,7 @@
   "module": "dist/JsonTree.esm.js",
   "types": "dist/JsonTree.d.ts",
   "targets": {
-	"types": false
+    "types": false
   },
   "scripts": {
     "prepare": "yarn run build",
@@ -38,11 +38,6 @@
     "node": ">= 8"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/runtime-corejs2": "^7.18.3",
     "@tsconfig/create-react-app": "^1.0.2",
     "@types/lodash": "^4.14.182",
     "@types/node": "^17.0.35",
