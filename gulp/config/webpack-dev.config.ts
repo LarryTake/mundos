@@ -19,13 +19,13 @@ const ROOT_DIR = path.resolve(__dirname, "../..");
 export default <Configuration>{
   mode: "development",
   bail: true,
-  devtool: "source-map",
+  devtool: "inline-source-map",
   entry: {
-    app: [path.join(APP_DIR, "index.jsx"), path.join(APP_DIR, "index.html")],
+    app: [path.join(APP_DIR, "index.tsx"), path.join(APP_DIR, "index.html")],
     vendor: ["react", "react-hotkeys", "react-dom", "lodash"],
   },
   resolve: {
-    extensions: [".scss", ".sass", ".css", ".js", ".jsx", ".json"],
+    extensions: [".tsx", ".ts", ".jsx", ".js", "..."],
   },
   output: {
     path: BUILD_DIR,
@@ -35,7 +35,7 @@ export default <Configuration>{
   module: {
     rules: [
       {
-        test: /\.js(x|)$/,
+        test: /\.jsx?$/,
         loader: "eslint-loader",
         enforce: "pre",
         include: [SRC_DIR],
@@ -46,7 +46,7 @@ export default <Configuration>{
         },
       },
       {
-        test: /\.js(x|)?/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: "babel-loader",
       },
@@ -112,6 +112,11 @@ export default <Configuration>{
           limit: 10,
           name: "[name].[contenthash:7].[ext]",
         },
+      },
+      {
+        test: /\.tsx?$/,
+        loader: "ts-loader",
+        exclude: /node_modules/,
       },
     ],
   },
