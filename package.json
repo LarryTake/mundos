@@ -12,8 +12,6 @@
   "scripts": {
     "build": "parcel build",
     "prepublishOnly": "yarn run build",
-    "serve": "parcel serve",
-    "start": "yarn run serve",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "parcel watch",
     "yalcInit": "yalc publish && cd ./dev_app && yalc add react-editable-json-tree",
