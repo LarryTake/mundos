@@ -37,16 +37,16 @@
   "engines": {
     "node": ">= 8"
   },
-  "devDependencies": {
-    "parcel": "^2.7.0",
-    "prettier": "2.6.2"
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react-hotkeys": "^2.0.0"
   },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
-  "dependencies": {
-    "prop-types": "^15.6.0",
-    "react-hotkeys": "^2.0.0"
+  "devDependencies": {
+    "parcel": "^2.7.0",
+    "prettier": "2.6.2"
   }
 }
