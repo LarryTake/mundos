@@ -6,7 +6,8 @@
 
 import _ from "lodash";
 import React, { useCallback, useRef, useState } from "react";
-import { JsonTree } from "../../../src/JsonTree";
+// @ts-ignore
+import { JsonTree } from "react-editable-json-tree";
 import { trySetRefAttr } from "../utils/misc";
 
 const defaultJson = {
