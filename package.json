@@ -30,6 +30,7 @@
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/runtime-corejs2": "^7.18.3",
     "@tsconfig/create-react-app": "^1.0.2",
     "@types/gulp": "^4.0.9",
     "@types/gulp-babel": "^6.1.30",
