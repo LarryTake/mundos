@@ -432,6 +432,35 @@ npm run build
 npm run release
 ```
 
+### Dev app
+
+We have an app available in [`dev_app/`](./dev_app) to test this library in
+your browser during development. We use [yalc](https://github.com/wclr/yalc)
+to build and link the REJT library inside this subpackage.
+
+If you want to use this dev app, you must run the following command once to
+initialize yalc:
+
+```sh
+npm run yalcInit
+```
+
+This will tell yalc to link `dev_app/` to the root REJT library (it's usually
+stored in `~/.yalc/installations.json` if you're curious). After initializing,
+you can run the following command in the root package every time you make
+changes to REJT to push the changes to the dev app:
+
+```sh
+npm run yalcPush
+```
+
+You can run the dev app just like any old create-react-app application (make
+sure you're running this inside the `dev_app/` subpackage):
+
+```sh
+npm start
+```
+
 ## Inspired by
 - [alexkuz/react-json-tree](https://github.com/alexkuz/react-json-tree)
 - [krispo/json-tree](https://github.com/krispo/json-tree)
