@@ -4,6 +4,7 @@
         "alwaysStrict": true,
         "strictNullChecks": true,
         // Emit
+        "importsNotUsedAsValues": "error",
         "outDir": "dist",
         "sourceMap": true,
         // Language and environment
