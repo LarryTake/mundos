@@ -1,6 +1,6 @@
 {
   "name": "react-editable-json-tree",
-  "version": "3.0.0",
+  "version": "2.3.0",
   "description": "React Editable Json Tree",
   "source": "src/JsonTree.js",
   "main": "dist/JsonTree.cjs.js",
