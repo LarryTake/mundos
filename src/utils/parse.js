@@ -12,7 +12,14 @@
 /* ********      VARIABLES      ******** */
 /* ************************************* */
 
-const basicFunctionPattern = /^function *(?<name>[$_a-zA-Z][$\w]*)?\((?<params>[$_a-zA-Z][$\w]*(?:, *[$_a-zA-Z][$\w]*)*)*?\) *{(?<body>[^}]*)}$/;
+const basicFunctionPattern = new RegExp(
+    // eslint-disable-next-line prefer-template
+    ''
+    + /^function/.source
+    + / *([$_a-zA-Z][$\w]*)?/.source // name
+    + /\(([$_a-zA-Z][$\w]*(?:, *[$_a-zA-Z][$\w]*)*)*?\)/.source // params
+    + / *{([^}]*)}$/.source, // body
+);
 
 /* ************************************* */
 /* ********  PRIVATE FUNCTIONS  ******** */
@@ -52,10 +59,14 @@ function sanitizeFunction(functionString) {
      */
     const match = basicFunctionPattern.exec(functionString);
     if (match === null) return null;
+    const matchName = match[1];
+    const matchParams = match[2];
+    const matchBody = match[3];
+
     let params = [];
-    if (match.groups.params) {
+    if (matchParams) {
         // Create an array of parameter names with whitespace trimmed
-        params = match.groups.params.split(',').map((x) => x.trim())
+        params = matchParams.split(',').map(x => x.trim());
     }
 
     // Here's the security flaw. We want this functionality for supporting
@@ -64,8 +75,8 @@ function sanitizeFunction(functionString) {
     // shouldn't automatically execute code, just create a function which can
     // be called later.
     // eslint-disable-next-line no-new-func
-    const func = new Function(...params, match.groups.body || '');
-    func.displayName = match.groups.name;
+    const func = new Function(...params, matchBody || '');
+    func.displayName = matchName;
     return func;
 }
 
