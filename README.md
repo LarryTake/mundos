@@ -471,5 +471,8 @@ npm start
 ## Author
 * Oxyno-zeta (Havrileck Alexandre)
 
+### Contributors
+* Phanabani
+
 ## License
 MIT (See in License.md)
