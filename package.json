@@ -37,6 +37,9 @@
   "engines": {
     "node": ">= 8"
   },
+  "devDependencies": {
+    "parcel": "^2.7.0"
+  },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
