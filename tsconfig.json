@@ -1,26 +1,13 @@
 {
+    "extends": "@tsconfig/create-react-app/tsconfig.json",
     "compilerOptions": {
-        // Type checking
-        "alwaysStrict": true,
-        "strictNullChecks": true,
-        // Emit
         "importsNotUsedAsValues": "error",
         "outDir": "dist",
         "sourceMap": true,
-        // Language and environment
-        "target": "ES6",
-        // JavaScript support
-        "allowJs": true,
-        // Interop constraints
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-        // Modules
-        "module": "CommonJS",
-        "moduleResolution": "node"
     },
-    "ts-node": {
-        "compilerOptions": {
-            "module": "commonjs"
-        }
-    }
+    "include": [
+        "./gulpfile.ts",
+        "./src/**/*",
+        "./dev/**/*"
+    ]
 }
