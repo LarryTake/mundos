@@ -4,10 +4,12 @@
  * Licence: See Readme
  */
 
-/* eslint-disable global-require,no-console */
+/* eslint-disable no-console */
 
-import Webpack from 'webpack';
-import WebpackDevServer, { Configuration as DevServerConfig } from 'webpack-dev-server';
+import Webpack from "webpack";
+import WebpackDevServer, {
+  Configuration as DevServerConfig,
+} from "webpack-dev-server";
 
 const webpackToStringOptions = {
   colors: {
@@ -23,11 +25,12 @@ const webpackToStringOptions = {
   reasons: false,
   errorDetails: false,
   chunkOrigins: false,
-  exclude: ['node_modules'],
+  exclude: ["node_modules"],
 };
 
-const webBuildDev = (cb: (err?: Error) => void) => {
-  Webpack(require('./config/webpack-dev.config'), (err, stats) => {
+async function webBuildDev(cb: (err?: Error) => void) {
+  const { default: configDev } = await import("./config/webpack-dev.config");
+  Webpack(configDev, (err, stats) => {
     if (err) {
       cb(err);
       return;
@@ -36,10 +39,11 @@ const webBuildDev = (cb: (err?: Error) => void) => {
     console.log(stats?.toString(webpackToStringOptions));
     cb();
   });
-};
+}
 
-const webBuildProd = (cb: (err?: Error) => void) => {
-  Webpack(require('./config/webpack-prod.config'), (err, stats) => {
+async function webBuildProd(cb: (err?: Error) => void) {
+  const { default: configProd } = await import("./config/webpack-prod.config");
+  Webpack(configProd, (err, stats) => {
     if (err) {
       cb(err);
       return;
@@ -48,11 +52,10 @@ const webBuildProd = (cb: (err?: Error) => void) => {
     console.log(stats?.toString(webpackToStringOptions));
     cb();
   });
-};
+}
 
-const webServe = (cb: (err?: Error) => void) => {
-  // eslint-disable-next-line global-require
-  const webpackDev = require('./config/webpack-serve.config');
+async function webServe(cb: (err?: Error) => void) {
+  const { default: webpackDev } = await import("./config/webpack-serve.config");
   const compiler = Webpack(webpackDev);
   const devServerConfig: DevServerConfig = {
     hot: true,
@@ -60,20 +63,16 @@ const webServe = (cb: (err?: Error) => void) => {
   };
   const server = new WebpackDevServer(devServerConfig, compiler);
 
-  const run = async () => {
-    console.log('\n==> Webpack Listening on http://localhost:8080\n');
-    try {
-      await server.start();
-    } catch (err) {
-      cb(err);
-    }
-  };
+  console.log("\n==> Webpack Listening on http://localhost:8080\n");
+  try {
+    await server.start();
+  } catch (err) {
+    cb(err);
+  }
+}
 
-  run();
-};
-
-webBuildDev.displayName = 'web:build:dev';
-webBuildProd.displayName = 'web:build:prod';
-webServe.displayName = 'web:serve';
+webBuildDev.displayName = "web:build:dev";
+webBuildProd.displayName = "web:build:prod";
+webServe.displayName = "web:serve";
 
 export { webBuildDev, webBuildProd, webServe };
