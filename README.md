@@ -2,7 +2,7 @@ React Editable Json Tree
 ========================
 [![Build Status](https://travis-ci.org/oxyno-zeta/react-editable-json-tree.svg?branch=master)](https://travis-ci.org/oxyno-zeta/react-editable-json-tree)[![Build Status](https://circleci.com/gh/oxyno-zeta/react-editable-json-tree.png)](https://circleci.com/gh/oxyno-zeta/react-editable-json-tree)[![npm](https://img.shields.io/npm/v/react-editable-json-tree.svg)]()
 
-## Security advisory
+## ⚠ Security advisory
 
 This library was previously affected by an `eval` security vulnerability.
 We have taken steps to mitigate this issue with non-breaking changes in this
