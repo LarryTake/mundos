@@ -419,12 +419,15 @@ Here is the list of classes by element and by deep and with basic element (on wh
     * rejt-minus-menu (span)
 
 ## Development
-### Serve
+
+### npm commands
+
+#### Build
 ```bash
-npm run serve
+npm run build
 ```
 
-### Release
+#### Release
 ```bash
 npm run release
 ```
