@@ -26,6 +26,33 @@ const basicFunctionPattern = new RegExp(
 /* ************************************* */
 
 /**
+ * Try to regex match a string as a javascript function.
+ * @param functionString {string} string to match
+ * @param splitParams {boolean} whether to split parameters into an array
+ * @returns {{name: string, params: string | string[], body: string} | null}
+ */
+function matchFunction(functionString, splitParams = false) {
+    const match = basicFunctionPattern.exec(functionString);
+    if (match === null) return null;
+    return {
+        name: match[1],
+        params: splitParams ? commaSplit(match[2]) : match[2],
+        body: match[3],
+    };
+}
+
+/**
+ * Split comma separated strings and trim surrounding whitespace.
+ * @param string {string | undefined} a string of comma-separated strings
+ * @returns {string[]} an array of elements that were separated by commas with
+ *   surrounding whitespace trimmed. May be empty.
+ */
+function commaSplit(string) {
+    if (!string) return [];
+    return string.split(',').map(x => x.trim());
+}
+
+/**
  * Sanitize a string that might have a function definition.
  * Note that this is not a perfect solution, there are still
  * security flaws.
@@ -57,17 +84,7 @@ function sanitizeFunction(functionString) {
      * function myFunc(){}, somethingBad()
      * somethingBad()
      */
-    const match = basicFunctionPattern.exec(functionString);
-    if (match === null) return null;
-    const matchName = match[1];
-    const matchParams = match[2];
-    const matchBody = match[3];
-
-    let params = [];
-    if (matchParams) {
-        // Create an array of parameter names with whitespace trimmed
-        params = matchParams.split(',').map(x => x.trim());
-    }
+    const match = matchFunction(functionString, true);
 
     // Here's the security flaw. We want this functionality for supporting
     // JSONP, so we've opted for the best attempt at maintaining some amount
@@ -75,8 +92,8 @@ function sanitizeFunction(functionString) {
     // shouldn't automatically execute code, just create a function which can
     // be called later.
     // eslint-disable-next-line no-new-func
-    const func = new Function(...params, matchBody || '');
-    func.displayName = matchName;
+    const func = new Function(...match.params, match.body || '');
+    func.displayName = match.name;
     return func;
 }
 
