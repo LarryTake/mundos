@@ -3,6 +3,7 @@
 - Support for React 17 and 18
 
 ## Code
+- Use Parcel to build the library
 - Use create-react-app for the `/dev_app/` testing page
     - This used to be located in `/dev/` and served with a complicated webpack setup
 - Use yalc to build and test our library in `/dev_app/`
