@@ -2,6 +2,18 @@ React Editable Json Tree
 ========================
 [![Build Status](https://travis-ci.org/oxyno-zeta/react-editable-json-tree.svg?branch=master)](https://travis-ci.org/oxyno-zeta/react-editable-json-tree)[![Build Status](https://circleci.com/gh/oxyno-zeta/react-editable-json-tree.png)](https://circleci.com/gh/oxyno-zeta/react-editable-json-tree)[![npm](https://img.shields.io/npm/v/react-editable-json-tree.svg)]()
 
+## Security advisory
+
+This library was previously affected by an `eval` security vulnerability.
+We have taken steps to mitigate this issue with non-breaking changes in this
+patch, v2.2.2, but for more info, please read
+[our security advisory](https://github.com/oxyno-zeta/react-editable-json-tree/security/advisories/GHSA-j3rv-w43q-f9x2).
+
+If you do not have time to read and want to completely mitigate this issue,
+simply set the [allowFunctionEvaluation](#allowfunctionevaluation)
+prop to `false`. In the next major version, we will set this value to `false` by
+default.
+
 ## Demo
 Demo is available here : [Demo](https://oxyno-zeta.github.io/react-editable-json-tree/)
 
