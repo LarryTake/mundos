@@ -2,27 +2,28 @@
   "root": true,
   "extends": [
     "airbnb",
-    "airbnb-typescript",
     "prettier"
   ],
   "env": {
     "es6": true,
     "browser": true
   },
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json",
     "ecmaFeatures": {
       "jsx": true
     }
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "ecmaFeatures": {
+    "jsx": true
+  },
   "rules": {
     "import/extensions": [2],
+    "indent": [2, 4, {"SwitchCase": 1}],
     "jsx-a11y/no-static-element-interactions": [1],
+    "max-len": [2, 120],
     "no-use-before-define": [0],
-    "react/jsx-filename-extension": [0]
+    "react/jsx-filename-extension": [0],
+    "react/jsx-indent": [2, 4],
+    "react/jsx-indent-props": [2, 4]
   }
 }
