@@ -1,7 +1,5 @@
 {
-    "esModuleInterop": true,
     "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
         // Type checking
         "alwaysStrict": true,
         "strictNullChecks": true,
@@ -12,6 +10,9 @@
         "target": "ES6",
         // JavaScript support
         "allowJs": true,
+        // Interop constraints
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
         // Modules
         "module": "CommonJS",
         "moduleResolution": "node"
