@@ -6,6 +6,7 @@
 /.eslintrc.json
 /.gitignore
 /.travis.yml
+/.yalcignore
 /circle.yml
 /yarn.lock
 
