@@ -3,11 +3,17 @@
     "compilerOptions": {
         "importsNotUsedAsValues": "error",
         "outDir": "dist",
-        "sourceMap": true,
+        "sourceMap": true
     },
     "include": [
         "./gulpfile.ts",
-        "./src/**/*",
-        "./dev/**/*"
-    ]
+        "./dev/**/*",
+        "./gulp/**/*",
+        "./src/**/*"
+    ],
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
+    }
 }
