@@ -47,7 +47,9 @@ Demo is available here : [Demo](https://oxyno-zeta.github.io/react-editable-json
 ## How to use
 ### Install
 ```bash
-npm install --save react-editable-json-tree
+npm install react-editable-json-tree
+# or
+yarn add react-editable-json-tree
 ```
 
 ### Example Usage
