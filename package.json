@@ -15,7 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "parcel watch",
     "yalcInit": "yalc publish && cd ./dev_app && yalc add react-editable-json-tree",
-    "yalcPush": "yalc push"
+    "yalcPush": "yalc publish --push"
   },
   "keywords": [
     "React",
@@ -42,8 +42,8 @@
     "react-hotkeys": "^2.0.0"
   },
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^16 || ^17 || ^18",
+    "react-dom": "^16 || ^17 || ^18"
   },
   "devDependencies": {
     "parcel": "^2.7.0",
