@@ -60,9 +60,11 @@ export default <Configuration>{
           {
             loader: "css-loader",
             options: {
-              modules: true,
-              camelCase: true,
-              localIdentName: "[path][name]---[local]---[contenthash:base64:5]",
+              modules: {
+                camelCase: true,
+                localIdentName:
+                  "[path][name]---[local]---[contenthash:base64:5]",
+              },
             },
           },
           {
@@ -82,9 +84,11 @@ export default <Configuration>{
           {
             loader: "css-loader",
             options: {
-              modules: true,
-              camelCase: true,
-              localIdentName: "[path][name]---[local]---[contenthash:base64:5]",
+              modules: {
+                camelCase: true,
+                localIdentName:
+                  "[path][name]---[local]---[contenthash:base64:5]",
+              },
             },
           },
           {
@@ -110,6 +114,9 @@ export default <Configuration>{
         },
       },
     ],
+  },
+  optimization: {
+    minimize: false,
   },
   plugins: [
     new webpack.DefinePlugin({
