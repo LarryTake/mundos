@@ -17,8 +17,8 @@ const basicFunctionPattern = new RegExp(
     ''
     + /^function/.source
     + / *([$_a-zA-Z][$\w]*)?/.source // name
-    + /\([ \n]*([$_a-zA-Z][$\w]*(?:[ \n]*,[ \n]*[$_a-zA-Z][$\w]*)*)*?[ \n]*\)/.source // params
-    + /[ \n]*{\n*([^}]*?\n?)[ \n]*}$/.source, // body
+    + / *\([ \n]*([$_a-zA-Z][$\w]*(?:[ \n]*,[ \n]*[$_a-zA-Z][$\w]*)*)*?,?[ \n]*\)/.source // params
+    + /[ \n]*{\n*(.*?\n?)[ \n]*}$/.source, // body
 );
 
 /* ************************************* */
@@ -68,11 +68,15 @@ function sanitizeFunction(functionString) {
      *
      * // Should match (single-line):
      * function() {}
+     * function () {}
      * function myFunc(){}
      * function myFunc(arg1){}
      * function(arg1,arg2, arg3,  arg4) {}
      * function myFunc(arg1, arg2, arg3){}
      * function myFunc(arg1, arg2, arg3){console.log('something');}
+     * function myFunc(arg1,){}
+     * function myFunc(arg1, ){}
+     * function myFunc(arg1) {if (true) {var moreCurlyBraces = 1;}}
      *
      * // Should match (multi-line):
      * function myFunc(arg1, arg2, arg3) {
@@ -80,12 +84,10 @@ function sanitizeFunction(functionString) {
      * }
      *
      * // Should not match (single-line):
-     * function myFunc(arg1,){}
-     * function myFunc(arg1, ){}
-     * function myFunc(arg1) {if (true) {var thisWontWorkBcOfCurlyBraces}}
-     * function myFunc()); (somethingBad()
-     * function myFunc(){}, somethingBad()
-     * somethingBad()
+     * anotherFunction()
+     * function myFunc {}
+     * function myFunc()); (anotherFunction()
+     * function myFunc(){}, anotherFunction()
      */
     const match = matchFunction(functionString, true);
     if (!match) return null;
