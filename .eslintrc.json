@@ -23,7 +23,6 @@
   },
   "rules": {
     "import/extensions": [2],
-    "indent": [2, 4, {"SwitchCase": 1}],
     "jsx-a11y/no-static-element-interactions": [1],
     "max-len": [2, 120],
     "no-use-before-define": [0],
