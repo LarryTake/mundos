@@ -10,7 +10,6 @@
     "types": false
   },
   "scripts": {
-    "prepare": "yarn run build",
     "build": "parcel build",
     "watch": "parcel watch",
     "start": "echo \"Not implemented yet\" && exit 1",
