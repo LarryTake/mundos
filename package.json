@@ -69,7 +69,6 @@
     "typescript": "^4.7.2",
     "url-loader": "^4.1.1",
     "webpack": "^5.72.1",
-    "webpack-browser-plugin": "^1.0.12",
     "webpack-dev-server": "^4.9.0"
   },
   "peerDependencies": {
