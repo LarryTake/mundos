@@ -1,6 +1,6 @@
 React Editable Json Tree
 ========================
-[![Build Status](https://travis-ci.org/oxyno-zeta/react-editable-json-tree.svg?branch=master)](https://travis-ci.org/oxyno-zeta/react-editable-json-tree)[![Build Status](https://circleci.com/gh/oxyno-zeta/react-editable-json-tree.png)](https://circleci.com/gh/oxyno-zeta/react-editable-json-tree)[![npm](https://img.shields.io/npm/v/react-editable-json-tree.svg)]()
+[![Build Status](https://travis-ci.org/oxyno-zeta/react-editable-json-tree.svg?branch=master)](https://travis-ci.org/oxyno-zeta/react-editable-json-tree) [![Build Status](https://circleci.com/gh/oxyno-zeta/react-editable-json-tree.png)](https://circleci.com/gh/oxyno-zeta/react-editable-json-tree) [![npm](https://img.shields.io/npm/v/react-editable-json-tree.svg)]() [![React version](https://img.shields.io/npm/dependency-version/react-editable-json-tree/peer/react)](https://reactjs.org/)
 
 ## ⚠ Security advisory
 
