@@ -17,8 +17,8 @@ const basicFunctionPattern = new RegExp(
     ''
     + /^function/.source
     + / *([$_a-zA-Z][$\w]*)?/.source // name
-    + /\(([$_a-zA-Z][$\w]*(?:, *[$_a-zA-Z][$\w]*)*)*?\)/.source // params
-    + / *{([^}]*)}$/.source, // body
+    + /\([ \n]*([$_a-zA-Z][$\w]*(?:[ \n]*,[ \n]*[$_a-zA-Z][$\w]*)*)*?[ \n]*\)/.source // params
+    + /[ \n]*{\n*([^}]*?\n?)[ \n]*}$/.source, // body
 );
 
 /* ************************************* */
@@ -66,8 +66,7 @@ function sanitizeFunction(functionString) {
      *
      * TEST CASES:
      *
-     * Should match:
-     *
+     * // Should match (single-line):
      * function() {}
      * function myFunc(){}
      * function myFunc(arg1){}
@@ -75,8 +74,12 @@ function sanitizeFunction(functionString) {
      * function myFunc(arg1, arg2, arg3){}
      * function myFunc(arg1, arg2, arg3){console.log('something');}
      *
-     * Should not match:
+     * // Should match (multi-line):
+     * function myFunc(arg1, arg2, arg3) {
+     *     console.log('something');
+     * }
      *
+     * // Should not match (single-line):
      * function myFunc(arg1,){}
      * function myFunc(arg1, ){}
      * function myFunc(arg1) {if (true) {var thisWontWorkBcOfCurlyBraces}}
