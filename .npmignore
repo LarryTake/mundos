@@ -1,7 +1,6 @@
 ### Project
 /.github/
-/dev/
-/dev_build/
+/dev_app/
 /docs/
 /gulp/
 /src/
