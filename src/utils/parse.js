@@ -18,7 +18,7 @@ const basicFunctionPattern = new RegExp(
     + /^function/.source
     + / *([$_a-zA-Z][$\w]*)?/.source // name
     + / *\([ \n]*([$_a-zA-Z][$\w]*(?:[ \n]*,[ \n]*[$_a-zA-Z][$\w]*)*)*?,?[ \n]*\)/.source // params
-    + /[ \n]*{\n*(.*)[ \n]*}$/.source, // body
+    + /[ \n]*{\n*(.*?)\n? *}$/.source, // body
     's',
 );
 
