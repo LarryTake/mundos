@@ -7,7 +7,6 @@
 /.babelrc
 /.eslintrc.json
 /.gitignore
-/.travis.yml
 /circle.yml
 /gulpfile.ts
 /yarn.lock
