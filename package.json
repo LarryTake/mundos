@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "parcel build",
+    "prepack": "yarn run build",
     "prepublishOnly": "yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "parcel watch",
