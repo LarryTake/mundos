@@ -435,6 +435,13 @@ Build the library to `dist/` using parcel.
 npm run build
 ```
 
+#### Publish
+Publishes the library to npm. This runs a parcel build.
+
+```bash
+npm publish
+```
+
 ### Dev app
 
 We have an app available in [`dev_app/`](./dev_app) to test this library in
