@@ -1,3 +1,7 @@
+# 2.2.2
+## Fix
+- Add `allowFunctionEvaluation` prop to mitigate a security vulnerability
+- Use [`Function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function) instead of [`eval`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) for function evaluation
 
 # 2.2.0
 ## Feature
