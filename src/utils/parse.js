@@ -12,10 +12,57 @@
 /* ********      VARIABLES      ******** */
 /* ************************************* */
 
+const basicFunctionPattern = /^function *(?<name>[$_a-zA-Z][$\w]*)?\((?<params>[$_a-zA-Z][$\w]*(?:, *[$_a-zA-Z][$\w]*)*)*?\) *{(?<body>[^}]*)}$/;
 
 /* ************************************* */
 /* ********  PRIVATE FUNCTIONS  ******** */
 /* ************************************* */
+
+/**
+ * Sanitize a string that might have a function definition.
+ * Note that this is not a perfect solution, there are still
+ * security flaws.
+ * @param functionString {String} string to sanitize
+ * @returns {Function | null}
+ */
+function sanitizeFunction(functionString) {
+    /* This is not an exhaustive check by any means
+     * For instance, function names may have a wide variety of
+     * unicode characters and still be valid... oh well!
+     *
+     * TEST CASES:
+     *
+     * Should match:
+     *
+     * function() {}
+     * function myFunc(){}
+     * function myFunc(arg1){}
+     * function(arg1,arg2, arg3,  arg4) {}
+     * function myFunc(arg1, arg2, arg3){}
+     * function myFunc(arg1, arg2, arg3){console.log('something');}
+     *
+     * Should not match:
+     *
+     * function myFunc(arg1,){}
+     * function myFunc(arg1, ){}
+     * function myFunc(arg1) {if (true) {var thisWontWorkBcOfCurlyBraces}}
+     * function myFunc()); (somethingBad()
+     * function myFunc(){}, somethingBad()
+     * somethingBad()
+     */
+    const match = basicFunctionPattern.exec(functionString);
+    if (match === null) return null;
+    let params = [];
+    if (match.groups.params) {
+        // Create an array of parameter names with whitespace trimmed
+        params = match.groups.params.split(',').map((x) => x.trim())
+    }
+
+    const func = Function(...params, match.groups.body || '');
+    func.name = match.groups.name;
+    func.displayName = match.groups.name;
+    return func;
+}
 
 
 /* ************************************* */
@@ -30,10 +77,9 @@
 function parse(string) {
     let result = string;
 
-    // Check if string contains 'function' and start with it to eval it
-    if (result.indexOf('function') === 0) {
-        return eval(`(${result})`); // eslint-disable-line no-eval
-    }
+    // Try parsing (and sanitizing) a function
+    const func = sanitizeFunction(string);
+    if (func !== null) return func;
 
     try {
         result = JSON.parse(string);
