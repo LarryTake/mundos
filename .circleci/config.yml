@@ -5,4 +5,5 @@ jobs:
       - image: cimg/node:18.10
     steps:
       - checkout
+      - install: yarn install
       - run: yarn run build
