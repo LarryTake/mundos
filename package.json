@@ -2,12 +2,16 @@
   "name": "react-editable-json-tree",
   "version": "3.0.0",
   "description": "React Editable Json Tree",
-  "main": "dist/JsonTree.js",
+  "source": "src/JsonTree.js",
+  "main": "dist/JsonTree.cjs.js",
+  "module": "dist/JsonTree.esm.js",
+  "types": "dist/JsonTree.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "gulp serve",
-    "release": "gulp release",
-    "start": "gulp serve"
+    "build": "parcel build",
+    "watch": "parcel watch",
+    "start": "echo \"Not implemented yet\" && exit 1",
+    "serve": "echo \"Not implemented yet\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "React",
