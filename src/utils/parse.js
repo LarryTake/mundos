@@ -56,7 +56,7 @@ function commaSplit(string) {
  * Sanitize a string that might have a function definition.
  * Note that this is not a perfect solution, there are still
  * security flaws.
- * @param functionString {String} string to sanitize
+ * @param functionString {string} string to sanitize
  * @returns {Function | null}
  */
 function sanitizeFunction(functionString) {
@@ -106,9 +106,9 @@ function sanitizeFunction(functionString) {
 /* ************************************* */
 
 /**
- * Parse.
- * @param string {String} string to parse
- * @returns {*}
+ * Parse a string into either a function or a JSON element.
+ * @param string {string} string to parse
+ * @returns {Function | Object | Array | null | boolean | number | string}
  */
 function parse(string) {
     // Try parsing (and sanitizing) a function
