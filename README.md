@@ -14,6 +14,19 @@ simply set the [allowFunctionEvaluation](#allowfunctionevaluation)
 prop to `false`. In the next major version, we will set this value to `false` by
 default.
 
+## Table of Contents
+
+- [Demo](#demo)
+- [Features](#features)
+- [How to use](#how-to-use)
+- [Props](#props)
+- [Design](#design)
+- [Development](#development)
+- [Inspired by](#inspired-by)
+- [Thanks](#thanks)
+- [Author](#author)
+- [License](#license)
+
 ## Demo
 Demo is available here : [Demo](https://oxyno-zeta.github.io/react-editable-json-tree/)
 
