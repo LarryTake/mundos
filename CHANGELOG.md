@@ -1,4 +1,7 @@
 # 2.3.0
+## Feature
+- Support for React 17 and 18
+
 ## Code
 - Use create-react-app for the `/dev_app/` testing page
     - This used to be located in `/dev/` and served with a complicated webpack setup
