@@ -9,11 +9,11 @@
         "outDir": "dist",
         "sourceMap": true,
         // Language and environment
-        "target": "es2021",
+        "target": "ES6",
         // JavaScript support
         "allowJs": true,
         // Modules
-        "module": "ES2020",
+        "module": "CommonJS",
         "moduleResolution": "node"
     },
     "ts-node": {
