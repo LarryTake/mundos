@@ -7,6 +7,7 @@
   "module": "dist/JsonTree.esm.js",
   "types": "dist/JsonTree.d.ts",
   "scripts": {
+    "prepare": "parcel build",
     "build": "parcel build",
     "watch": "parcel watch",
     "start": "echo \"Not implemented yet\" && exit 1",
