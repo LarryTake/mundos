@@ -122,12 +122,16 @@ function createFunction(functionString) {
 /**
  * Parse a string into either a function or a JSON element.
  * @param string {string} string to parse
+ * @param allowFunctionEvaluation {boolean} whether to parse strings that
+ *   are function definitions as Javascript
  * @returns {Function | Object | Array | null | boolean | number | string}
  */
-function parse(string) {
+function parse(string, allowFunctionEvaluation) {
     // Try parsing (and sanitizing) a function
-    const func = createFunction(string);
-    if (func !== null) return func;
+    if (allowFunctionEvaluation) {
+        const func = createFunction(string);
+        if (func !== null) return func;
+    }
 
     try {
         return JSON.parse(string);
