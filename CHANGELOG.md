@@ -1,3 +1,10 @@
+# 2.3.0
+## Code
+- Use create-react-app for the `/dev_app/` testing page
+    - This used to be located in `/dev/` and served with a complicated webpack setup
+- Use yalc to build and test our library in `/dev_app/`
+- Rewrite the testing page in typescript and with functional components
+
 # 2.2.2
 ## Fix
 - Add `allowFunctionEvaluation` prop to mitigate a security vulnerability
