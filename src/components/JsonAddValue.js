@@ -98,6 +98,12 @@ class JsonAddValue extends Component {
             keyPath,
             deep,
         } = this.props;
+
+        const hotkeys = {
+            Escape: handleCancel,
+            Enter: this.onSubmit,
+        };
+
         const addButtonElementLayout = React.cloneElement(addButtonElement, {
             onClick: this.onSubmit,
         });
@@ -108,6 +114,7 @@ class JsonAddValue extends Component {
         const inputElementValueLayout = React.cloneElement(inputElementValue, {
             placeholder: 'Value',
             ref: this.refInputValue,
+            onKeyUp: handleHotkeys(hotkeys),
         });
         let inputElementKeyLayout = null;
         let separatorElement = null;
@@ -117,17 +124,13 @@ class JsonAddValue extends Component {
             inputElementKeyLayout = React.cloneElement(inputElementKey, {
                 placeholder: 'Key',
                 ref: this.refInputKey,
+                onKeyUp: handleHotkeys(hotkeys),
             });
             separatorElement = ':';
         }
 
-        const hotkeys = {
-            Escape: handleCancel,
-            Enter: this.onSubmit,
-        };
-
         return (
-            <span className="rejt-add-value-node" onKeyUp={handleHotkeys(hotkeys)}>
+            <span className="rejt-add-value-node">
                 {inputElementKeyLayout} {separatorElement} {inputElementValueLayout} {cancelButtonElementLayout}
                 {addButtonElementLayout}
             </span>

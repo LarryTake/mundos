@@ -137,6 +137,11 @@ class JsonValue extends Component {
             keyPath: comeFromKeyPath,
             } = this.props;
 
+        const hotkeys = {
+            Escape: this.handleCancelEdit,
+            Enter: this.handleEdit,
+        };
+
         const style = getStyle(name, originalValue, keyPath, deep, dataType);
         let result = null;
         let minusElement = null;
@@ -155,6 +160,7 @@ class JsonValue extends Component {
             const inputElementLayout = React.cloneElement(inputElement, {
                 ref: this.refInput,
                 defaultValue: originalValue,
+                onKeyUp: handleHotkeys(hotkeys)
             });
 
             result = (<span className="rejt-edit-form" style={style.editForm}>
@@ -177,13 +183,8 @@ class JsonValue extends Component {
             minusElement = (readOnlyResult) ? null : minusMenuLayout;
         }
 
-        const hotkeys = {
-            Escape: this.handleCancelEdit,
-            Enter: this.handleEdit,
-        };
-
         return (
-            <li className="rejt-value-node" style={style.li} onKeyUp={handleHotkeys(hotkeys)}>
+            <li className="rejt-value-node" style={style.li}>
                 <span className="rejt-name" style={style.name}>{name}: </span>{result}
                 {minusElement}
             </li>
