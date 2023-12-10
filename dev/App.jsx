@@ -29,7 +29,6 @@ class App extends Component {
                 func: () => {
                     console.log('test');
                 },
-                'merder-a-merde': 'azdzad',
                 text: 'text',
                 int: 100,
                 boolean: true,
