@@ -9,6 +9,7 @@
 import React, { Component, PropTypes } from 'react';
 import JsonNode from './components/JsonNode.jsx';
 import { value, object, array } from './utils/styles.jsx';
+import deltaTypes from './utils/deltaTypes.jsx';
 import objectTypes from './utils/objectTypes.jsx';
 
 const { getObjectType } = objectTypes;
@@ -28,7 +29,6 @@ const propTypes = {
 };
 // Default props
 const defaultProps = {
-    data: {},
     rootName: 'root',
     isCollapsed: (keyPath, deep) => (deep !== 0),
     onFullyUpdate: () => {
@@ -114,4 +114,5 @@ JsonTree.defaultProps = defaultProps;
 /* ************************************* */
 /* ********       EXPORTS       ******** */
 /* ************************************* */
-export default JsonTree;
+export { JsonTree };
+export { deltaTypes };

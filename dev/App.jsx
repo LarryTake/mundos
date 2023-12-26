@@ -7,7 +7,7 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component } from 'react';
-import JsonTree from '../src/JsonTree.jsx';
+import { JsonTree } from '../src/JsonTree.jsx';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
