@@ -2,7 +2,25 @@ React Editable Json Tree
 ========================
 [![Build Status](https://travis-ci.org/oxyno-zeta/react-editable-json-tree.svg?branch=master)](https://travis-ci.org/oxyno-zeta/react-editable-json-tree)[![npm](https://img.shields.io/npm/v/react-editable-json-tree.svg)]()
 
-## Example Usage
+## Features
+
+- Json Viewer
+- Collapse node possibility via function
+- Add new node value
+- Remove node value
+- Update node value
+- Implicit convert of new value ({} for object, [] for array, true for boolean, ...)
+- Style via function
+- Read only possibility
+- Call for global update and delta update
+
+## How to use
+### Install
+```bash
+npm install react-editable-json-tree
+```
+
+### Example Usage
 ```jsx
 // Import
 import { JsonTree, deltaTypes } from 'react-editable-json-tree'
@@ -134,6 +152,12 @@ An example of return :
     },
     addForm: {},
 }
+```
+
+## Development
+### Serve
+```bash
+npm run serve
 ```
 
 ## Inspired by
