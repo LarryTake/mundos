@@ -6,6 +6,7 @@
 /* ************************************* */
 /* ********       IMPORTS       ******** */
 /* ************************************* */
+import ReactDom from 'react-dom';
 import React, { Component, PropTypes } from 'react';
 import parse from '../utils/parse.jsx';
 
@@ -37,6 +38,19 @@ class JsonAddValue extends Component {
         this.refInputValue = this.refInputValue.bind(this);
         this.refInputKey = this.refInputKey.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        const { inputRefKey, inputRefValue } = this.state;
+        const { onlyValue } = this.props;
+
+        if (inputRefKey) {
+            ReactDom.findDOMNode(inputRefKey).focus();
+        }
+
+        if (onlyValue && inputRefValue){
+            ReactDom.findDOMNode(inputRefValue).focus();
+        }
     }
 
     onSubmit() {
