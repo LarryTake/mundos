@@ -48,7 +48,7 @@ class JsonAddValue extends Component {
             ReactDom.findDOMNode(inputRefKey).focus();
         }
 
-        if (onlyValue && inputRefValue){
+        if (onlyValue && inputRefValue) {
             ReactDom.findDOMNode(inputRefValue).focus();
         }
     }
