@@ -6,7 +6,6 @@
 /* ************************************* */
 /* ********       IMPORTS       ******** */
 /* ************************************* */
-import ReactDom from 'react-dom';
 import React, { Component, PropTypes } from 'react';
 import parse from '../utils/parse.jsx';
 
@@ -45,11 +44,11 @@ class JsonAddValue extends Component {
         const { onlyValue } = this.props;
 
         if (inputRefKey) {
-            ReactDom.findDOMNode(inputRefKey).focus();
+            inputRefKey.focus();
         }
 
         if (onlyValue && inputRefValue) {
-            ReactDom.findDOMNode(inputRefValue).focus();
+            inputRefValue.focus();
         }
     }
 
