@@ -7,7 +7,6 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
-import { minusStyle } from '../utils/styles.jsx';
 import parse from '../utils/parse.jsx';
 
 /* ************************************* */
@@ -64,6 +63,13 @@ class JsonValue extends Component {
         this.setState({
             value: nextProps.value,
         });
+    }
+
+    componentDidUpdate() {
+        const { editEnabled, inputRef } = this.state;
+        if (editEnabled) {
+            inputRef.focus();
+        }
     }
 
     handleEdit() {
