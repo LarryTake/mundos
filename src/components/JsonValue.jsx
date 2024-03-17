@@ -7,6 +7,7 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
+import { HotKeys } from 'react-hotkeys';
 import parse from '../utils/parse.jsx';
 
 /* ************************************* */
@@ -124,11 +125,19 @@ class JsonValue extends Component {
             result = <span style={style.value} onClick={this.handleEditMode}>{value}</span>;
             minusElement = (readOnly) ? null : <span onClick={handleRemove} style={style.minus}> - </span>;
         }
+
+        const handlers = {
+            esc: this.handleCancelEdit,
+            enter: this.handleEdit,
+        };
+
         return (
-            <li style={style.li}>
-                <span style={style.name}>{name} : </span>{result}
-                {minusElement}
-            </li>
+            <HotKeys handlers={handlers}>
+                <li style={style.li}>
+                    <span style={style.name}>{name} : </span>{result}
+                    {minusElement}
+                </li>
+            </HotKeys>
         );
     }
 }

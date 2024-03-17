@@ -7,6 +7,7 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
+import { HotKeys } from 'react-hotkeys';
 import parse from '../utils/parse.jsx';
 
 /* ************************************* */
@@ -82,6 +83,11 @@ class JsonAddValue extends Component {
     render() {
         const { handleCancel, onlyValue } = this.props;
 
+        const handlers = {
+            esc: handleCancel,
+            enter: this.onSubmit,
+        };
+
         let result = null;
         if (onlyValue) {
             result = (<span> <input placeholder="Value"
@@ -91,15 +97,19 @@ class JsonAddValue extends Component {
         } else {
             result = (<span> <input
                 placeholder="Key"
-                ref={this.refInputKey} />: <input
+                ref={this.refInputKey}
+            />: <input
                 placeholder="Value"
-                ref={this.refInputValue} /> <button
-                onClick={handleCancel}>c
-            </button><button onClick={this.onSubmit}>+</button>
+                ref={this.refInputValue}
+            /> <button onClick={handleCancel}>c</button>
+                <button onClick={this.onSubmit}>+</button>
             </span>);
         }
 
-        return result;
+        return (
+            <HotKeys component={'span'} handlers={handlers}>
+                {result}
+            </HotKeys>);
     }
 }
 
