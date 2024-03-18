@@ -90,8 +90,10 @@ class JsonAddValue extends Component {
 
         let result = null;
         if (onlyValue) {
-            result = (<span> <input placeholder="Value"
-                                    ref={this.refInputValue} /> <button onClick={handleCancel}>c</button>
+            result = (<span> <input
+                placeholder="Value"
+                ref={this.refInputValue}
+            /> <button onClick={handleCancel}>c</button>
                 <button onClick={this.onSubmit}>+</button>
             </span>);
         } else {
@@ -106,10 +108,9 @@ class JsonAddValue extends Component {
             </span>);
         }
 
-        return (
-            <HotKeys component={'span'} handlers={handlers}>
-                {result}
-            </HotKeys>);
+        return (<HotKeys component={'span'} handlers={handlers}>
+            {result}
+        </HotKeys>);
     }
 }
 
