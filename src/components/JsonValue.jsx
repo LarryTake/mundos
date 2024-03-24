@@ -131,8 +131,12 @@ class JsonValue extends Component {
             enter: this.handleEdit,
         };
 
+        const noSpanFocus = {
+            outline: '0px',
+        };
+
         return (
-            <HotKeys handlers={handlers}>
+            <HotKeys component={'span'} style={noSpanFocus} handlers={handlers}>
                 <li style={style.li}>
                     <span style={style.name}>{name} : </span>{result}
                     {minusElement}
