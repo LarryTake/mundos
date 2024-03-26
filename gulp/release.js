@@ -19,7 +19,12 @@ const runSequence = require('run-sequence');
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-gulp.task('release', done => runSequence('env:prod', 'clean:release:dist', 'babel', done));
+gulp.task('release',
+    done => runSequence('env:prod',
+        ['clean:release:dist', 'clean:release:docs'],
+        ['web:build:docs', 'babel'],
+        done)
+);
 
 gulp.task('babel', () => {
     gulp.src('src/**/*')

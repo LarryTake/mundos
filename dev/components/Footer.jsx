@@ -1,47 +1,33 @@
 /*
  * Author: Alexandre Havrileck (Oxyno-zeta)
- * Date: 18/10/16
+ * Date: 30/10/16
  * Licence: See Readme
  */
 /* ************************************* */
 /* ********       IMPORTS       ******** */
 /* ************************************* */
-import React, { Component } from 'react';
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
-import Body from './components/Body.jsx';
+import React from 'react';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
 /* ************************************* */
-// Prop types
-const propTypes = {};
-// Default props
-const defaultProps = {};
 
 /* ************************************* */
 /* ********      COMPONENT      ******** */
 /* ************************************* */
-class App extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (<div>
-            <Header />
-            <Body />
-            <Footer />
-        </div>);
-    }
+function Footer() {
+    const style = {
+        fontSize: '15px',
+        color: 'black',
+        lineHeight: '54px',
+        fontWeight: 300,
+        paddingLeft: '24px',
+        marginBottom: '8px',
+    };
+    return (<div style={style}>Made by Oxyno-zeta</div>);
 }
-
-// Add prop types
-App.propTypes = propTypes;
-// Add default props
-App.defaultProps = defaultProps;
 
 /* ************************************* */
 /* ********       EXPORTS       ******** */
 /* ************************************* */
-export default App;
+export default Footer;

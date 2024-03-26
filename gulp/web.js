@@ -22,9 +22,15 @@ const WebpackDevServer = require('webpack-dev-server');
 /* ************************************* */
 
 gulp.task('web:build:dev', () => {
-    gulp.src('src/webDev/index.js')
+    gulp.src('src/dev/index.jsx')
         .pipe(webpackStream(require('./config/webpack-dev.config')))
         .pipe(gulp.dest('dev_build/'));
+});
+
+gulp.task('web:build:docs', () => {
+    gulp.src('src/dev/index.jsx')
+        .pipe(webpackStream(require('./config/webpack-prod.config')))
+        .pipe(gulp.dest('docs/'));
 });
 
 gulp.task('web:serve', (done) => {

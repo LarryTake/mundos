@@ -20,3 +20,5 @@ const del = require('del');
 /* ************************************* */
 
 gulp.task('clean:release:dist', () => del('dist'));
+
+gulp.task('clean:release:docs', () => del('docs'));

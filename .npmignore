@@ -194,3 +194,5 @@ src/
 gulp/
 dev/
 dev_build/
+docs/
+.github/

@@ -160,6 +160,11 @@ An example of return :
 npm run serve
 ```
 
+### Release
+```bash
+npm run release
+```
+
 ## Inspired by
 - [alexkuz/react-json-tree](https://github.com/alexkuz/react-json-tree)
 - [krispo/json-tree](https://github.com/krispo/json-tree)
