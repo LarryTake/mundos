@@ -2,6 +2,9 @@ React Editable Json Tree
 ========================
 [![Build Status](https://travis-ci.org/oxyno-zeta/react-editable-json-tree.svg?branch=master)](https://travis-ci.org/oxyno-zeta/react-editable-json-tree)[![npm](https://img.shields.io/npm/v/react-editable-json-tree.svg)]()
 
+## Demo
+Demo is available here : [Demo](https://oxyno-zeta.github.io/react-editable-json-tree/)
+
 ## Features
 
 - Json Viewer
