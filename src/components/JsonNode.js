@@ -7,10 +7,10 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
-import JsonValue from './JsonValue.jsx';
-import JsonObject from './JsonObject.jsx';
-import JsonArray from './JsonArray.jsx';
-import objectTypes from '../utils/objectTypes.jsx';
+import JsonValue from './JsonValue.js';
+import JsonObject from './JsonObject.js';
+import JsonArray from './JsonArray.js';
+import objectTypes from '../utils/objectTypes.js';
 
 const { getObjectType } = objectTypes;
 

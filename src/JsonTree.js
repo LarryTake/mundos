@@ -7,10 +7,10 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
-import JsonNode from './components/JsonNode.jsx';
-import { value, object, array } from './utils/styles.jsx';
-import deltaTypes from './utils/deltaTypes.jsx';
-import objectTypes from './utils/objectTypes.jsx';
+import JsonNode from './components/JsonNode.js';
+import { value, object, array } from './utils/styles';
+import deltaTypes from './utils/deltaTypes';
+import objectTypes from './utils/objectTypes';
 
 const { getObjectType } = objectTypes;
 

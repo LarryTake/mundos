@@ -8,7 +8,7 @@
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
 import { HotKeys } from 'react-hotkeys';
-import parse from '../utils/parse.jsx';
+import parse from '../utils/parse.js';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */

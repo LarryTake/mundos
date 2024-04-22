@@ -7,10 +7,10 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
-import JsonNode from './JsonNode.jsx';
-import JsonAddValue from './JsonAddValue.jsx';
-import objectTypes from '../utils/objectTypes.jsx';
-import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from '../utils/deltaTypes.jsx';
+import JsonNode from './JsonNode.js';
+import JsonAddValue from './JsonAddValue.js';
+import objectTypes from '../utils/objectTypes.js';
+import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from '../utils/deltaTypes.js';
 
 const { getObjectType } = objectTypes;
 
