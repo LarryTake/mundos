@@ -196,3 +196,9 @@ dev/
 dev_build/
 docs/
 .github/
+gulpfile.js
+.travis.yml
+.gitignore
+.babelrc
+.eslintrc.json
+yarn.lock
