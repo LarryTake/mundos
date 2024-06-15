@@ -8,7 +8,7 @@
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
 import { HotKeys } from 'react-hotkeys';
-import parse from '../utils/parse.js';
+import parse from '../utils/parse';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -18,10 +18,16 @@ const propTypes = {
     handleAdd: PropTypes.func.isRequired,
     handleCancel: PropTypes.func.isRequired,
     onlyValue: PropTypes.bool,
+    addButtonElement: PropTypes.element,
+    cancelButtonElement: PropTypes.element,
+    inputElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
     onlyValue: false,
+    addButtonElement: <button>+</button>,
+    cancelButtonElement: <button>c</button>,
+    inputElement: <input />,
 };
 
 /* ************************************* */
@@ -81,32 +87,40 @@ class JsonAddValue extends Component {
     }
 
     render() {
-        const { handleCancel, onlyValue } = this.props;
+        const { handleCancel, onlyValue, addButtonElement, cancelButtonElement, inputElement } = this.props;
+
+        const addButtonElementLayout = React.cloneElement(addButtonElement, {
+            onClick: this.onSubmit,
+        });
+        const cancelButtonElementLayout = React.cloneElement(cancelButtonElement, {
+            onClick: handleCancel,
+        });
+        let result = null;
+        if (onlyValue) {
+            const inputElementValueLayout = React.cloneElement(inputElement, {
+                placeholder: 'Value',
+                ref: this.refInputValue,
+            });
+            result = (<span> {inputElementValueLayout} {cancelButtonElementLayout}{addButtonElementLayout}
+            </span>);
+        } else {
+            const inputElementValueLayout = React.cloneElement(inputElement, {
+                placeholder: 'Value',
+                ref: this.refInputValue,
+            });
+            const inputElementKeyLayout = React.cloneElement(inputElement, {
+                placeholder: 'Key',
+                ref: this.refInputKey,
+            });
+            result = (<span> {inputElementKeyLayout}: {inputElementValueLayout} {cancelButtonElementLayout}
+                {addButtonElementLayout}
+            </span>);
+        }
 
         const handlers = {
             esc: handleCancel,
             enter: this.onSubmit,
         };
-
-        let result = null;
-        if (onlyValue) {
-            result = (<span> <input
-                placeholder="Value"
-                ref={this.refInputValue}
-            /> <button onClick={handleCancel}>c</button>
-                <button onClick={this.onSubmit}>+</button>
-            </span>);
-        } else {
-            result = (<span> <input
-                placeholder="Key"
-                ref={this.refInputKey}
-            />: <input
-                placeholder="Value"
-                ref={this.refInputValue}
-            /> <button onClick={handleCancel}>c</button>
-                <button onClick={this.onSubmit}>+</button>
-            </span>);
-        }
 
         return (<HotKeys component={'span'} handlers={handlers}>
             {result}

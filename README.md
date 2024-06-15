@@ -157,6 +157,35 @@ An example of return :
 }
 ```
 
+### addButtonElement
+|       Key        |                  Description              |     Type    | Required |        Default        |
+|:----------------:|:-----------------------------------------:|:-----------:|:--------:|:---------------------:|
+| addButtonElement | Add button Element to replace library one |   Element   |   False  |  <button>+</button>   |
+
+The library will add a `onClick` props on element.
+
+### cancelButtonElement
+|         Key         |                   Description                |     Type    | Required |        Default        |
+|:-------------------:|:--------------------------------------------:|:-----------:|:--------:|:---------------------:|
+| cancelButtonElement | Cancel button Element to replace library one |   Element   |   False  |  <button>c</button>   |
+
+The library will add a `onClick` props on element.
+
+### editButtonElement
+|        Key        |                 Description                |     Type    | Required |        Default        |
+|:-----------------:|:------------------------------------------:|:-----------:|:--------:|:---------------------:|
+| editButtonElement | Edit button Element to replace library one |   Element   |   False  |  <button>e</button>   |
+
+The library will add a `onClick` props on element.
+
+### inputElement
+|      Key     |                Description                |     Type    | Required |   Default    |
+|:------------:|:-----------------------------------------:|:-----------:|:--------:|:------------:|
+| inputElement | Input Text Element to replace library one |   Element   |   False  |  <input />   |
+
+The library will add a `placeholder`, `ref`, `defaultValue` props on element.
+
+
 ## Development
 ### Serve
 ```bash

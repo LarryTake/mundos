@@ -7,10 +7,10 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
-import JsonNode from './JsonNode.js';
-import JsonAddValue from './JsonAddValue.js';
-import objectTypes from '../utils/objectTypes.js';
-import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from '../utils/deltaTypes.js';
+import JsonNode from './JsonNode';
+import JsonAddValue from './JsonAddValue';
+import objectTypes from '../utils/objectTypes';
+import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from '../utils/deltaTypes';
 
 const { getObjectType } = objectTypes;
 
@@ -30,12 +30,13 @@ const propTypes = {
     readOnly: PropTypes.bool.isRequired,
     dataType: PropTypes.string,
     getStyle: PropTypes.func.isRequired,
+    addButtonElement: PropTypes.element,
+    cancelButtonElement: PropTypes.element,
+    editButtonElement: PropTypes.element,
+    inputElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
-    collapsed: true,
-    name: 'root',
-    data: [],
     keyPath: [],
     deep: 0,
 };
@@ -219,7 +220,18 @@ class JsonArray extends Component {
 
     renderNotCollapsed() {
         const { name, data, keyPath, deep, addFormVisible } = this.state;
-        const { isCollapsed, handleRemove, onDeltaUpdate, readOnly, getStyle, dataType } = this.props;
+        const {
+            isCollapsed,
+            handleRemove,
+            onDeltaUpdate,
+            readOnly,
+            getStyle,
+            dataType,
+            addButtonElement,
+            cancelButtonElement,
+            editButtonElement,
+            inputElement,
+            } = this.props;
         const { minus, plus, delimiter, ul, addForm } = getStyle(name, data, keyPath, deep, dataType);
 
         let minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
@@ -242,6 +254,10 @@ class JsonArray extends Component {
                 onDeltaUpdate={onDeltaUpdate}
                 readOnly={readOnly}
                 getStyle={getStyle}
+                addButtonElement={addButtonElement}
+                cancelButtonElement={cancelButtonElement}
+                editButtonElement={editButtonElement}
+                inputElement={inputElement}
             />);
 
         const onlyValue = true;
@@ -250,6 +266,9 @@ class JsonArray extends Component {
                 handleAdd={this.handleAddValueAdd}
                 handleCancel={this.handleAddValueCancel}
                 onlyValue={onlyValue}
+                addButtonElement={addButtonElement}
+                cancelButtonElement={cancelButtonElement}
+                inputElement={inputElement}
             /></span>) :
             (<span><span onClick={this.handleAddMode} style={plus}> + </span> {minusElement}</span>);
         // Check if readOnly is activated

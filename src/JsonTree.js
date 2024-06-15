@@ -7,7 +7,7 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
-import JsonNode from './components/JsonNode.js';
+import JsonNode from './components/JsonNode';
 import { value, object, array } from './utils/styles';
 import deltaTypes from './utils/deltaTypes';
 import objectTypes from './utils/objectTypes';
@@ -26,6 +26,10 @@ const propTypes = {
     onDeltaUpdate: PropTypes.func,
     readOnly: PropTypes.bool,
     getStyle: PropTypes.func,
+    addButtonElement: PropTypes.element,
+    cancelButtonElement: PropTypes.element,
+    editButtonElement: PropTypes.element,
+    inputElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -81,7 +85,16 @@ class JsonTree extends Component {
 
     render() {
         const { data, rootName } = this.state;
-        const { isCollapsed, onDeltaUpdate, readOnly, getStyle } = this.props;
+        const {
+            isCollapsed,
+            onDeltaUpdate,
+            readOnly,
+            getStyle,
+            addButtonElement,
+            cancelButtonElement,
+            editButtonElement,
+            inputElement,
+            } = this.props;
 
         // Node type
         const dataType = getObjectType(data);
@@ -97,6 +110,10 @@ class JsonTree extends Component {
                 onDeltaUpdate={onDeltaUpdate}
                 readOnly={readOnly}
                 getStyle={getStyle}
+                addButtonElement={addButtonElement}
+                cancelButtonElement={cancelButtonElement}
+                editButtonElement={editButtonElement}
+                inputElement={inputElement}
             />);
         } else {
             node = 'Data must be an Array or Object';
