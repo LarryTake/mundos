@@ -7,10 +7,10 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
-import JsonValue from './JsonValue.js';
-import JsonObject from './JsonObject.js';
-import JsonArray from './JsonArray.js';
-import objectTypes from '../utils/objectTypes.js';
+import JsonValue from './JsonValue';
+import JsonObject from './JsonObject';
+import JsonArray from './JsonArray';
+import objectTypes from '../utils/objectTypes';
 
 const { getObjectType } = objectTypes;
 
@@ -30,13 +30,15 @@ const propTypes = {
     onDeltaUpdate: PropTypes.func.isRequired,
     readOnly: PropTypes.bool.isRequired,
     getStyle: PropTypes.func.isRequired,
+    addButtonElement: PropTypes.element,
+    cancelButtonElement: PropTypes.element,
+    editButtonElement: PropTypes.element,
+    inputElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
     keyPath: [],
     deep: 0,
-    handleUpdateValue: () => {
-    },
 };
 
 /* ************************************* */
@@ -69,6 +71,10 @@ class JsonNode extends Component {
             onDeltaUpdate,
             readOnly,
             getStyle,
+            addButtonElement,
+            cancelButtonElement,
+            editButtonElement,
+            inputElement,
             } = this.props;
         const readOnlyTrue = true;
 
@@ -87,6 +93,10 @@ class JsonNode extends Component {
                     readOnly={readOnlyTrue}
                     dataType={dataType}
                     getStyle={getStyle}
+                    addButtonElement={addButtonElement}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    inputElement={inputElement}
                 />);
             case 'Object':
                 return (<JsonObject
@@ -101,6 +111,10 @@ class JsonNode extends Component {
                     readOnly={readOnly}
                     dataType={dataType}
                     getStyle={getStyle}
+                    addButtonElement={addButtonElement}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    inputElement={inputElement}
                 />);
             case 'Array':
                 return (<JsonArray
@@ -115,6 +129,10 @@ class JsonNode extends Component {
                     readOnly={readOnly}
                     dataType={dataType}
                     getStyle={getStyle}
+                    addButtonElement={addButtonElement}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    inputElement={inputElement}
                 />);
             case 'String':
                 return (<JsonValue
@@ -128,6 +146,9 @@ class JsonNode extends Component {
                     readOnly={readOnly}
                     dataType={dataType}
                     getStyle={getStyle}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    inputElement={inputElement}
                 />);
             case 'Number':
                 return (<JsonValue
@@ -141,6 +162,9 @@ class JsonNode extends Component {
                     readOnly={readOnly}
                     dataType={dataType}
                     getStyle={getStyle}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    inputElement={inputElement}
                 />);
             case 'Boolean':
                 return (<JsonValue
@@ -154,6 +178,9 @@ class JsonNode extends Component {
                     readOnly={readOnly}
                     dataType={dataType}
                     getStyle={getStyle}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    inputElement={inputElement}
                 />);
             case 'Date':
                 return (<JsonValue
@@ -167,6 +194,9 @@ class JsonNode extends Component {
                     readOnly={readOnlyTrue}
                     dataType={dataType}
                     getStyle={getStyle}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    inputElement={inputElement}
                 />);
             case 'Null':
                 return (<JsonValue
@@ -180,6 +210,9 @@ class JsonNode extends Component {
                     readOnly={readOnly}
                     dataType={dataType}
                     getStyle={getStyle}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    inputElement={inputElement}
                 />);
             case 'Undefined':
                 return (<JsonValue
@@ -193,6 +226,9 @@ class JsonNode extends Component {
                     readOnly={readOnly}
                     dataType={dataType}
                     getStyle={getStyle}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    inputElement={inputElement}
                 />);
             case 'Function':
             case 'Symbol':
@@ -207,6 +243,9 @@ class JsonNode extends Component {
                     readOnly={readOnlyTrue}
                     dataType={dataType}
                     getStyle={getStyle}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    inputElement={inputElement}
                 />);
             default:
                 return null;

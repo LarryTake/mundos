@@ -8,7 +8,7 @@
 /* ************************************* */
 import React, { Component, PropTypes } from 'react';
 import { HotKeys } from 'react-hotkeys';
-import parse from '../utils/parse.js';
+import parse from '../utils/parse';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -25,6 +25,9 @@ const propTypes = {
     readOnly: PropTypes.bool.isRequired,
     dataType: PropTypes.string,
     getStyle: PropTypes.func.isRequired,
+    editButtonElement: PropTypes.element,
+    cancelButtonElement: PropTypes.element,
+    inputElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -32,6 +35,9 @@ const defaultProps = {
     deep: 0,
     handleUpdateValue: () => {
     },
+    editButtonElement: <button>e</button>,
+    cancelButtonElement: <button>c</button>,
+    inputElement: <input />,
 };
 
 /* ************************************* */
@@ -106,19 +112,34 @@ class JsonValue extends Component {
 
     render() {
         const { name, value, editEnabled, keyPath, deep } = this.state;
-        const { handleRemove, originalValue, readOnly, dataType, getStyle } = this.props;
+        const {
+            handleRemove,
+            originalValue,
+            readOnly,
+            dataType,
+            getStyle,
+            editButtonElement,
+            cancelButtonElement,
+            inputElement} = this.props;
 
         const style = getStyle(name, value, keyPath, deep, dataType);
         let result = null;
         let minusElement = null;
+
+        const editButtonElementLayout = React.cloneElement(editButtonElement, {
+            onClick: this.handleEdit,
+        });
+        const cancelButtonElementLayout = React.cloneElement(cancelButtonElement, {
+            onClick: this.handleCancelEdit,
+        });
+
         if (editEnabled && !readOnly) {
+            const inputElementLayout = React.cloneElement(inputElement, {
+                ref: this.refInput,
+                defaultValue: originalValue,
+            });
             result = (<span style={style.editForm}>
-                <input
-                    type="text"
-                    ref={this.refInput}
-                    defaultValue={originalValue}
-                /> <button onClick={this.handleCancelEdit}>c</button>
-                <button onClick={this.handleEdit}>e</button>
+                {inputElementLayout} {cancelButtonElementLayout}{editButtonElementLayout}
             </span>);
             minusElement = null;
         } else {

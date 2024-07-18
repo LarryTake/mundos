@@ -7,6 +7,7 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { JsonTree } from '../../src/JsonTree.js';
 
 /* ************************************* */
@@ -49,7 +50,7 @@ class Body extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            json: defaultJson,
+            json: _.cloneDeep(defaultJson),
             deltaUpdateString: '{}',
             globalUpdateString: '{}',
             textareaRef: null,
@@ -106,7 +107,7 @@ class Body extends Component {
 
     handleResetToDefault() {
         this.setState({
-            json: defaultJson,
+            json: _.cloneDeep(defaultJson),
         });
     }
 
