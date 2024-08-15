@@ -22,8 +22,7 @@ const runSequence = require('run-sequence');
 gulp.task('release',
     done => runSequence('env:prod',
         ['clean:release:dist', 'clean:release:docs'],
-        ['web:build:docs', 'babel'],
-        done)
+        'web:build:docs', 'babel', done)
 );
 
 gulp.task('babel', () => {
