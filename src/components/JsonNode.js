@@ -10,6 +10,7 @@ import React, { Component, PropTypes } from 'react';
 import JsonValue from './JsonValue';
 import JsonObject from './JsonObject';
 import JsonArray from './JsonArray';
+import JsonFunctionValue from './JsonFunctionValue';
 import objectTypes from '../utils/objectTypes';
 
 const { getObjectType } = objectTypes;
@@ -34,6 +35,7 @@ const propTypes = {
     cancelButtonElement: PropTypes.element,
     editButtonElement: PropTypes.element,
     inputElement: PropTypes.element,
+    textareaElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -75,6 +77,7 @@ class JsonNode extends Component {
             cancelButtonElement,
             editButtonElement,
             inputElement,
+            textareaElement,
             } = this.props;
         const readOnlyTrue = true;
 
@@ -97,6 +100,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
+                    textareaElement={textareaElement}
                 />);
             case 'Object':
                 return (<JsonObject
@@ -115,6 +119,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
+                    textareaElement={textareaElement}
                 />);
             case 'Array':
                 return (<JsonArray
@@ -133,6 +138,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
+                    textareaElement={textareaElement}
                 />);
             case 'String':
                 return (<JsonValue
@@ -231,6 +237,21 @@ class JsonNode extends Component {
                     inputElement={inputElement}
                 />);
             case 'Function':
+                return (<JsonFunctionValue
+                    name={name}
+                    value={data.toString()}
+                    originalValue={data}
+                    keyPath={keyPath}
+                    deep={deep}
+                    handleRemove={handleRemove}
+                    handleUpdateValue={handleUpdateValue}
+                    readOnly={readOnly}
+                    dataType={dataType}
+                    getStyle={getStyle}
+                    cancelButtonElement={cancelButtonElement}
+                    editButtonElement={editButtonElement}
+                    textareaElement={textareaElement}
+                />);
             case 'Symbol':
                 return (<JsonValue
                     name={name}

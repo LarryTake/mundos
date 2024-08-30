@@ -30,6 +30,7 @@ const propTypes = {
     cancelButtonElement: PropTypes.element,
     editButtonElement: PropTypes.element,
     inputElement: PropTypes.element,
+    textareaElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -94,6 +95,7 @@ class JsonTree extends Component {
             cancelButtonElement,
             editButtonElement,
             inputElement,
+            textareaElement,
             } = this.props;
 
         // Node type
@@ -114,6 +116,7 @@ class JsonTree extends Component {
                 cancelButtonElement={cancelButtonElement}
                 editButtonElement={editButtonElement}
                 inputElement={inputElement}
+                textareaElement={textareaElement}
             />);
         } else {
             node = 'Data must be an Array or Object';

@@ -1,6 +1,6 @@
 /*
  * Author: Alexandre Havrileck (Oxyno-zeta)
- * Date: 18/10/16
+ * Date: 13/11/16
  * Licence: See Readme
  */
 /* ************************************* */
@@ -27,7 +27,7 @@ const propTypes = {
     getStyle: PropTypes.func.isRequired,
     editButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
-    inputElement: PropTypes.element,
+    textareaElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -37,7 +37,7 @@ const defaultProps = {
     },
     editButtonElement: <button>e</button>,
     cancelButtonElement: <button>c</button>,
-    inputElement: <input />,
+    textareaElement: <textarea />,
 };
 
 /* ************************************* */
@@ -82,8 +82,11 @@ class JsonValue extends Component {
     handleEdit() {
         const { handleUpdateValue } = this.props;
         const { inputRef, name } = this.state;
+
+        const value = parse(inputRef.value);
+
         const result = {
-            value: parse(inputRef.value),
+            value,
             key: name,
         };
 
@@ -120,7 +123,7 @@ class JsonValue extends Component {
             getStyle,
             editButtonElement,
             cancelButtonElement,
-            inputElement,
+            textareaElement,
             } = this.props;
 
         const style = getStyle(name, value, keyPath, deep, dataType);
@@ -135,7 +138,7 @@ class JsonValue extends Component {
         });
 
         if (editEnabled && !readOnly) {
-            const inputElementLayout = React.cloneElement(inputElement, {
+            const inputElementLayout = React.cloneElement(textareaElement, {
                 ref: this.refInput,
                 defaultValue: originalValue,
             });

@@ -34,6 +34,7 @@ const propTypes = {
     cancelButtonElement: PropTypes.element,
     editButtonElement: PropTypes.element,
     inputElement: PropTypes.element,
+    textareaElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -231,6 +232,7 @@ class JsonArray extends Component {
             cancelButtonElement,
             editButtonElement,
             inputElement,
+            textareaElement,
             } = this.props;
         const { minus, plus, delimiter, ul, addForm } = getStyle(name, data, keyPath, deep, dataType);
 
@@ -258,6 +260,7 @@ class JsonArray extends Component {
                 cancelButtonElement={cancelButtonElement}
                 editButtonElement={editButtonElement}
                 inputElement={inputElement}
+                textareaElement={textareaElement}
             />);
 
         const onlyValue = true;

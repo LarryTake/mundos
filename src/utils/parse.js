@@ -29,6 +29,12 @@
  */
 function parse(string) {
     let result = string;
+
+    // Check if string contains 'function' to eval it
+    if (result.indexOf('function') !== -1) {
+        return eval(`(${result})`);
+    }
+
     try {
         result = JSON.parse(string);
     } catch (e) {

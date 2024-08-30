@@ -34,6 +34,7 @@ const propTypes = {
     cancelButtonElement: PropTypes.element,
     editButtonElement: PropTypes.element,
     inputElement: PropTypes.element,
+    textareaElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -228,6 +229,7 @@ class JsonObject extends Component {
             cancelButtonElement,
             editButtonElement,
             inputElement,
+            textareaElement,
             } = this.props;
 
         const { minus, plus, addForm, ul, delimiter } = getStyle(name, data, keyPath, deep, dataType);
@@ -256,6 +258,7 @@ class JsonObject extends Component {
                 cancelButtonElement={cancelButtonElement}
                 editButtonElement={editButtonElement}
                 inputElement={inputElement}
+                textareaElement={textareaElement}
             />);
 
         const startObject = '{';
