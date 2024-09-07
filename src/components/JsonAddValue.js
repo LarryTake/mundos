@@ -101,8 +101,8 @@ class JsonAddValue extends Component {
                 placeholder: 'Value',
                 ref: this.refInputValue,
             });
-            result = (<span> {inputElementValueLayout} {cancelButtonElementLayout}{addButtonElementLayout}
-            </span>);
+
+            result = (<span> {inputElementValueLayout} {cancelButtonElementLayout}{addButtonElementLayout}</span>);
         } else {
             const inputElementValueLayout = React.cloneElement(inputElement, {
                 placeholder: 'Value',
@@ -112,6 +112,7 @@ class JsonAddValue extends Component {
                 placeholder: 'Key',
                 ref: this.refInputKey,
             });
+
             result = (<span> {inputElementKeyLayout}: {inputElementValueLayout} {cancelButtonElementLayout}
                 {addButtonElementLayout}
             </span>);

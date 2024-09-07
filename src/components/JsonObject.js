@@ -202,10 +202,10 @@ class JsonObject extends Component {
         const collapseValue = ' {...}';
         const numberOfItems = keyList.length;
         const itemName = (numberOfItems > 1) ? 'keys' : 'key';
-        let minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
+        let minusElement = null;
         // Check if readOnly is activated
-        if (readOnly) {
-            minusElement = null;
+        if (!readOnly) {
+            minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
         }
 
         return (<span>
@@ -234,10 +234,10 @@ class JsonObject extends Component {
 
         const { minus, plus, addForm, ul, delimiter } = getStyle(name, data, keyPath, deep, dataType);
         const keyList = Object.getOwnPropertyNames(data);
-        let minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
+        let minusElement = null;
         // Check if readOnly is activated
-        if (readOnly) {
-            minusElement = null;
+        if (!readOnly) {
+            minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
         }
 
         const list = keyList

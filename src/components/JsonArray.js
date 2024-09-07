@@ -203,10 +203,10 @@ class JsonArray extends Component {
         const { minus, collapsed } = getStyle(name, data, keyPath, deep, dataType);
         const collapseValue = ' [...]';
         const numberOfItems = data.length;
-        let minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
+        let minusElement = null;
         // Check if readOnly is activated
-        if (readOnly) {
-            minusElement = null;
+        if (!readOnly) {
+            minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
         }
 
         const itemName = (numberOfItems > 1) ? 'items' : 'item';
@@ -236,10 +236,10 @@ class JsonArray extends Component {
             } = this.props;
         const { minus, plus, delimiter, ul, addForm } = getStyle(name, data, keyPath, deep, dataType);
 
-        let minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
+        let minusElement = null;
         // Check if readOnly is activated
-        if (readOnly) {
-            minusElement = null;
+        if (!readOnly) {
+            minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null
         }
 
         const list = data
@@ -264,19 +264,19 @@ class JsonArray extends Component {
             />);
 
         const onlyValue = true;
-        let menu = addFormVisible ?
-            (<span style={addForm}><JsonAddValue
-                handleAdd={this.handleAddValueAdd}
-                handleCancel={this.handleAddValueCancel}
-                onlyValue={onlyValue}
-                addButtonElement={addButtonElement}
-                cancelButtonElement={cancelButtonElement}
-                inputElement={inputElement}
-            /></span>) :
-            (<span><span onClick={this.handleAddMode} style={plus}> + </span> {minusElement}</span>);
+        let menu = null;
         // Check if readOnly is activated
-        if (readOnly) {
-            menu = null;
+        if (!readOnly) {
+            menu = addFormVisible ?
+                (<span style={addForm}><JsonAddValue
+                    handleAdd={this.handleAddValueAdd}
+                    handleCancel={this.handleAddValueCancel}
+                    onlyValue={onlyValue}
+                    addButtonElement={addButtonElement}
+                    cancelButtonElement={cancelButtonElement}
+                    inputElement={inputElement}
+                /></span>) :
+                (<span><span onClick={this.handleAddMode} style={plus}> + </span> {minusElement}</span>);
         }
 
         const startObject = '[';

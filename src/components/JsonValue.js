@@ -129,24 +129,24 @@ class JsonValue extends Component {
         let result = null;
         let minusElement = null;
 
-        const editButtonElementLayout = React.cloneElement(editButtonElement, {
-            onClick: this.handleEdit,
-        });
-        const cancelButtonElementLayout = React.cloneElement(cancelButtonElement, {
-            onClick: this.handleCancelEdit,
-        });
-
         if (editEnabled && !readOnly) {
+            const editButtonElementLayout = React.cloneElement(editButtonElement, {
+                onClick: this.handleEdit,
+            });
+            const cancelButtonElementLayout = React.cloneElement(cancelButtonElement, {
+                onClick: this.handleCancelEdit,
+            });
             const inputElementLayout = React.cloneElement(inputElement, {
                 ref: this.refInput,
                 defaultValue: originalValue,
             });
+
             result = (<span style={style.editForm}>
                 {inputElementLayout} {cancelButtonElementLayout}{editButtonElementLayout}
             </span>);
             minusElement = null;
         } else {
-            result = <span style={style.value} onClick={this.handleEditMode}>{value}</span>;
+            result = <span style={style.value} onClick={readOnly ? null : this.handleEditMode}>{value}</span>;
             minusElement = (readOnly) ? null : <span onClick={handleRemove} style={style.minus}> - </span>;
         }
 
