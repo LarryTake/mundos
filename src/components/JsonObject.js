@@ -264,18 +264,18 @@ class JsonObject extends Component {
         const startObject = '{';
         const endObject = '}';
 
-        let menu = addFormVisible ?
-            (<span style={addForm}><JsonAddValue
-                handleAdd={this.handleAddValueAdd}
-                handleCancel={this.handleAddValueCancel}
-                addButtonElement={addButtonElement}
-                cancelButtonElement={cancelButtonElement}
-                inputElement={inputElement}
-            /></span>) :
-            (<span><span onClick={this.handleAddMode} style={plus}> + </span> {minusElement}</span>);
+        let menu = null;
         // Check if readOnly is activated
-        if (readOnly) {
-            menu = null;
+        if (!readOnly) {
+            menu = addFormVisible ?
+                (<span style={addForm}><JsonAddValue
+                    handleAdd={this.handleAddValueAdd}
+                    handleCancel={this.handleAddValueCancel}
+                    addButtonElement={addButtonElement}
+                    cancelButtonElement={cancelButtonElement}
+                    inputElement={inputElement}
+                /></span>) :
+                (<span><span onClick={this.handleAddMode} style={plus}> + </span> {minusElement}</span>);
         }
 
         return (<span>
