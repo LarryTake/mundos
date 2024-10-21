@@ -21,7 +21,7 @@ Demo is available here : [Demo](https://oxyno-zeta.github.io/react-editable-json
 ## How to use
 ### Install
 ```bash
-npm install react-editable-json-tree
+npm install --save react-editable-json-tree
 ```
 
 ### Example Usage
@@ -186,6 +186,12 @@ The library will add a `onClick` props on element.
 
 The library will add a `placeholder`, `ref`, `defaultValue` props on element.
 
+### textareaElement
+|        Key      |                Description                |     Type    | Required |   Default    |
+|:---------------:|:-----------------------------------------:|:-----------:|:--------:|:------------:|
+| textareaElement |  Textarea Element to replace library one  |   Element   |   False  | <textarea /> |
+
+The library will add a `ref`, `defaultValue` props on element.
 
 ## Development
 ### Serve
