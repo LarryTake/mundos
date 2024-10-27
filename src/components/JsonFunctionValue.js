@@ -144,13 +144,19 @@ class JsonValue extends Component {
                 defaultValue: originalValue,
             });
 
-            result = (<span style={style.editForm}>
+            result = (<span className="rejt-edit-form" style={style.editForm}>
                 {inputElementLayout} {cancelButtonElementLayout}{editButtonElementLayout}
             </span>);
             minusElement = null;
         } else {
-            result = <span style={style.value} onClick={readOnly ? null : this.handleEditMode}>{value}</span>;
-            minusElement = (readOnly) ? null : <span onClick={handleRemove} style={style.minus}> - </span>;
+            result = (<span className="rejt-value" style={style.value} onClick={readOnly ? null : this.handleEditMode}>
+                {value}
+            </span>);
+            minusElement = (readOnly) ? null : (<span
+                className="rejt-minus-menu"
+                onClick={handleRemove}
+                style={style.minus}
+            > - </span>);
         }
 
         const handlers = {
@@ -158,16 +164,10 @@ class JsonValue extends Component {
             enter: this.handleEdit,
         };
 
-        const noSpanFocus = {
-            outline: '0px',
-        };
-
         return (
-            <HotKeys component={'span'} style={noSpanFocus} handlers={handlers}>
-                <li style={style.li}>
-                    <span style={style.name}>{name} : </span>{result}
-                    {minusElement}
-                </li>
+            <HotKeys component={'li'} className="rejt-function-value-node" style={style.li} handlers={handlers}>
+                <span className="rejt-name" style={style.name}>{name} : </span>{result}
+                {minusElement}
             </HotKeys>
         );
     }

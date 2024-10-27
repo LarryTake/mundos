@@ -122,7 +122,7 @@ class JsonTree extends Component {
             node = 'Data must be an Array or Object';
         }
 
-        return (<div>{node}</div>);
+        return (<div className="rejt-tree">{node}</div>);
     }
 }
 

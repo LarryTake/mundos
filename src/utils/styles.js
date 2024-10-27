@@ -65,6 +65,7 @@ const value = {
     li: {
         minHeight: '22px',
         lineHeight: '22px',
+        outline: '0px',
     },
     name: {
         color: '#2287CD',

@@ -206,13 +206,14 @@ class JsonArray extends Component {
         let minusElement = null;
         // Check if readOnly is activated
         if (!readOnly) {
-            minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
+            minusElement = (deep !== 0) ?
+                (<span className="rejt-minus-menu" onClick={handleRemove} style={minus}> - </span>) : null;
         }
 
         const itemName = (numberOfItems > 1) ? 'items' : 'item';
 
-        return (<span>
-            <span style={collapsed} onClick={this.handleCollapseMode}>
+        return (<span className="rejt-collapsed">
+            <span className="rejt-collapsed-text" style={collapsed} onClick={this.handleCollapseMode}>
                 {collapseValue} {numberOfItems} {itemName}
             </span>
             {minusElement}
@@ -239,7 +240,8 @@ class JsonArray extends Component {
         let minusElement = null;
         // Check if readOnly is activated
         if (!readOnly) {
-            minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null
+            minusElement = (deep !== 0) ?
+                (<span className="rejt-minus-menu" onClick={handleRemove} style={minus}> - </span>) : null;
         }
 
         const list = data
@@ -268,7 +270,7 @@ class JsonArray extends Component {
         // Check if readOnly is activated
         if (!readOnly) {
             menu = addFormVisible ?
-                (<span style={addForm}><JsonAddValue
+                (<span className="rejt-add-form" style={addForm}><JsonAddValue
                     handleAdd={this.handleAddValueAdd}
                     handleCancel={this.handleAddValueCancel}
                     onlyValue={onlyValue}
@@ -276,17 +278,19 @@ class JsonArray extends Component {
                     cancelButtonElement={cancelButtonElement}
                     inputElement={inputElement}
                 /></span>) :
-                (<span><span onClick={this.handleAddMode} style={plus}> + </span> {minusElement}</span>);
+                (<span>
+                    <span className="rejt-plus-menu" onClick={this.handleAddMode} style={plus}> + </span> {minusElement}
+                </span>);
         }
 
         const startObject = '[';
         const endObject = ']';
-        return (<span>
-            <span style={delimiter}>{startObject}</span>
-            <ul style={ul}>
+        return (<span className="rejt-not-collapsed">
+            <span className="rejt-not-collapsed-delimiter" style={delimiter}>{startObject}</span>
+            <ul className="rejt-not-collapsed-list" style={ul}>
                 {list}
             </ul>
-            <span style={delimiter}>{endObject}</span>
+            <span className="rejt-not-collapsed-delimiter" style={delimiter}>{endObject}</span>
             {menu}
         </span>);
     }
@@ -298,9 +302,9 @@ class JsonArray extends Component {
         const style = getStyle(name, data, keyPath, deep, dataType);
 
         return (
-            <div>
+            <div className="rejt-array-node">
                 <label onClick={this.handleCollapseMode}>
-                    <span style={style.name}>{name} : </span>
+                    <span className="rejt-name" style={style.name}>{name} : </span>
                 </label>
                 {value}
             </div>

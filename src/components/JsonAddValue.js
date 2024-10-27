@@ -95,27 +95,19 @@ class JsonAddValue extends Component {
         const cancelButtonElementLayout = React.cloneElement(cancelButtonElement, {
             onClick: handleCancel,
         });
-        let result = null;
-        if (onlyValue) {
-            const inputElementValueLayout = React.cloneElement(inputElement, {
-                placeholder: 'Value',
-                ref: this.refInputValue,
-            });
+        const inputElementValueLayout = React.cloneElement(inputElement, {
+            placeholder: 'Value',
+            ref: this.refInputValue,
+        });
+        let inputElementKeyLayout = null;
+        let separatorElement = null;
 
-            result = (<span> {inputElementValueLayout} {cancelButtonElementLayout}{addButtonElementLayout}</span>);
-        } else {
-            const inputElementValueLayout = React.cloneElement(inputElement, {
-                placeholder: 'Value',
-                ref: this.refInputValue,
-            });
-            const inputElementKeyLayout = React.cloneElement(inputElement, {
+        if (!onlyValue) {
+            inputElementKeyLayout = React.cloneElement(inputElement, {
                 placeholder: 'Key',
                 ref: this.refInputKey,
             });
-
-            result = (<span> {inputElementKeyLayout}: {inputElementValueLayout} {cancelButtonElementLayout}
-                {addButtonElementLayout}
-            </span>);
+            separatorElement = ':';
         }
 
         const handlers = {
@@ -123,8 +115,9 @@ class JsonAddValue extends Component {
             enter: this.onSubmit,
         };
 
-        return (<HotKeys component={'span'} handlers={handlers}>
-            {result}
+        return (<HotKeys className="rejt-add-value-node" component={'span'} handlers={handlers}>
+            {inputElementKeyLayout} {separatorElement} {inputElementValueLayout} {cancelButtonElementLayout}
+            {addButtonElementLayout}
         </HotKeys>);
     }
 }
