@@ -30,8 +30,8 @@
 function parse(string) {
     let result = string;
 
-    // Check if string contains 'function' to eval it
-    if (result.indexOf('function') !== -1) {
+    // Check if string contains 'function' and start with it to eval it
+    if (result.indexOf('function') === 0) {
         return eval(`(${result})`);
     }
 
