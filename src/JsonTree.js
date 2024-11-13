@@ -9,10 +9,8 @@
 import React, { Component, PropTypes } from 'react';
 import JsonNode from './components/JsonNode';
 import { value, object, array } from './utils/styles';
-import deltaTypes from './utils/deltaTypes';
-import objectTypes from './utils/objectTypes';
-
-const { getObjectType } = objectTypes;
+import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from './utils/deltaTypes';
+import { getObjectType } from './utils/objectTypes';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -135,4 +133,6 @@ JsonTree.defaultProps = defaultProps;
 /* ********       EXPORTS       ******** */
 /* ************************************* */
 export { JsonTree };
-export { deltaTypes };
+export { ADD_DELTA_TYPE };
+export { REMOVE_DELTA_TYPE };
+export { UPDATE_DELTA_TYPE };

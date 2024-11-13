@@ -9,6 +9,7 @@
 import React, { Component, PropTypes } from 'react';
 import { HotKeys } from 'react-hotkeys';
 import parse from '../utils/parse';
+import { isComponentWillChange } from '../utils/objectTypes';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -82,18 +83,23 @@ class JsonValue extends Component {
     }
 
     handleEdit() {
-        const { handleUpdateValue } = this.props;
+        const { handleUpdateValue, originalValue } = this.props;
         const { inputRef, name } = this.state;
+
+        const newValue = parse(inputRef.value);
+
         const result = {
-            value: parse(inputRef.value),
+            value: newValue,
             key: name,
         };
 
         // Run update
         handleUpdateValue(result);
 
-        // Cancel edit mode
-        this.handleCancelEdit();
+        // Cancel edit mode if necessary
+        if (!isComponentWillChange(originalValue, newValue)) {
+            this.handleCancelEdit();
+        }
     }
 
     handleEditMode() {

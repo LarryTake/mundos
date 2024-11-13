@@ -31,9 +31,20 @@ function getObjectType(obj) {
     return Object.prototype.toString.call(obj).slice(8, -1);
 }
 
+/**
+ * Is Component will change ?
+ * @param oldValue {*} old value
+ * @param newValue {*} new value
+ * @returns {boolean} result
+ */
+function isComponentWillChange(oldValue, newValue) {
+    const oldType = getObjectType(oldValue);
+    const newType = getObjectType(newValue);
+    return ((oldType === 'Function' || newType === 'Function') && newType !== oldType);
+}
+
 /* ************************************* */
 /* ********       EXPORTS       ******** */
 /* ************************************* */
-export default {
-    getObjectType,
-};
+export { getObjectType };
+export { isComponentWillChange };

@@ -11,9 +11,7 @@ import JsonValue from './JsonValue';
 import JsonObject from './JsonObject';
 import JsonArray from './JsonArray';
 import JsonFunctionValue from './JsonFunctionValue';
-import objectTypes from '../utils/objectTypes';
-
-const { getObjectType } = objectTypes;
+import { getObjectType } from '../utils/objectTypes';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */

@@ -9,10 +9,8 @@
 import React, { Component, PropTypes } from 'react';
 import JsonNode from './JsonNode';
 import JsonAddValue from './JsonAddValue';
-import objectTypes from '../utils/objectTypes';
+import { getObjectType } from '../utils/objectTypes';
 import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from '../utils/deltaTypes';
-
-const { getObjectType } = objectTypes;
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
