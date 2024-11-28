@@ -1,4 +1,16 @@
 
+# 1.2.0
+## Feature
+- Add possibility to edit 'function'
+- Add CircleCI build
+- Add Node 7 in TravisCI
+- Add CSS class on components
+- Add 'clear' button on demo for updates
+
+## Fix
+- Fix render performance
+- Fix focus error on readOnly mode
+
 # 1.1.0
 ## Bug
 - Fix reset to default in demo
