@@ -9,10 +9,8 @@
 import React, { Component, PropTypes } from 'react';
 import JsonNode from './JsonNode';
 import JsonAddValue from './JsonAddValue';
-import objectTypes from '../utils/objectTypes';
+import { getObjectType } from '../utils/objectTypes';
 import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from '../utils/deltaTypes';
-
-const { getObjectType } = objectTypes;
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -34,6 +32,7 @@ const propTypes = {
     cancelButtonElement: PropTypes.element,
     editButtonElement: PropTypes.element,
     inputElement: PropTypes.element,
+    textareaElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -201,14 +200,15 @@ class JsonObject extends Component {
         const collapseValue = ' {...}';
         const numberOfItems = keyList.length;
         const itemName = (numberOfItems > 1) ? 'keys' : 'key';
-        let minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
+        let minusElement = null;
         // Check if readOnly is activated
-        if (readOnly) {
-            minusElement = null;
+        if (!readOnly) {
+            minusElement = (deep !== 0) ?
+                (<span className="rejt-minus-menu" onClick={handleRemove} style={minus}> - </span>) : null;
         }
 
-        return (<span>
-            <span style={collapsed} onClick={this.handleCollapseMode}>
+        return (<span className="rejt-collapsed">
+            <span className="rejt-collapsed-text" style={collapsed} onClick={this.handleCollapseMode}>
                 {collapseValue} {numberOfItems} {itemName}
             </span>
             {minusElement}
@@ -228,14 +228,16 @@ class JsonObject extends Component {
             cancelButtonElement,
             editButtonElement,
             inputElement,
+            textareaElement,
             } = this.props;
 
         const { minus, plus, addForm, ul, delimiter } = getStyle(name, data, keyPath, deep, dataType);
         const keyList = Object.getOwnPropertyNames(data);
-        let minusElement = (deep !== 0) ? (<span onClick={handleRemove} style={minus}> - </span>) : null;
+        let minusElement = null;
         // Check if readOnly is activated
-        if (readOnly) {
-            minusElement = null;
+        if (!readOnly) {
+            minusElement = (deep !== 0) ?
+                (<span className="rejt-minus-menu" onClick={handleRemove} style={minus}> - </span>) : null;
         }
 
         const list = keyList
@@ -256,31 +258,34 @@ class JsonObject extends Component {
                 cancelButtonElement={cancelButtonElement}
                 editButtonElement={editButtonElement}
                 inputElement={inputElement}
+                textareaElement={textareaElement}
             />);
 
         const startObject = '{';
         const endObject = '}';
 
-        let menu = addFormVisible ?
-            (<span style={addForm}><JsonAddValue
-                handleAdd={this.handleAddValueAdd}
-                handleCancel={this.handleAddValueCancel}
-                addButtonElement={addButtonElement}
-                cancelButtonElement={cancelButtonElement}
-                inputElement={inputElement}
-            /></span>) :
-            (<span><span onClick={this.handleAddMode} style={plus}> + </span> {minusElement}</span>);
+        let menu = null;
         // Check if readOnly is activated
-        if (readOnly) {
-            menu = null;
+        if (!readOnly) {
+            menu = addFormVisible ?
+                (<span className="rejt-add-form" style={addForm}><JsonAddValue
+                    handleAdd={this.handleAddValueAdd}
+                    handleCancel={this.handleAddValueCancel}
+                    addButtonElement={addButtonElement}
+                    cancelButtonElement={cancelButtonElement}
+                    inputElement={inputElement}
+                /></span>) :
+                (<span>
+                    <span className="rejt-plus-menu" onClick={this.handleAddMode} style={plus}> + </span> {minusElement}
+                </span>);
         }
 
-        return (<span>
-            <span style={delimiter}>{startObject}</span>
-            <ul style={ul}>
+        return (<span className="rejt-not-collapsed">
+            <span className="rejt-not-collapsed-delimiter" style={delimiter}>{startObject}</span>
+            <ul className="rejt-not-collapsed-list" style={ul}>
                 {list}
             </ul>
-            <span style={delimiter}>{endObject}</span>
+            <span className="rejt-not-collapsed-delimiter" style={delimiter}>{endObject}</span>
             {menu}
         </span>);
     }
@@ -292,9 +297,9 @@ class JsonObject extends Component {
         const style = getStyle(name, data, keyPath, deep, dataType);
 
         return (
-            <div>
+            <div className="rejt-object-node">
                 <span onClick={this.handleCollapseMode}>
-                    <span style={style.name}>{name} : </span>
+                    <span className="rejt-name" style={style.name}>{name} : </span>
                 </span>
                 {value}
             </div>

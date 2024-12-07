@@ -1,6 +1,6 @@
 /*
  * Author: Alexandre Havrileck (Oxyno-zeta)
- * Date: 18/10/16
+ * Date: 13/11/16
  * Licence: See Readme
  */
 /* ************************************* */
@@ -28,7 +28,7 @@ const propTypes = {
     getStyle: PropTypes.func.isRequired,
     editButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
-    inputElement: PropTypes.element,
+    textareaElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -38,7 +38,7 @@ const defaultProps = {
     },
     editButtonElement: <button>e</button>,
     cancelButtonElement: <button>c</button>,
-    inputElement: <input />,
+    textareaElement: <textarea />,
 };
 
 /* ************************************* */
@@ -128,7 +128,7 @@ class JsonValue extends Component {
             getStyle,
             editButtonElement,
             cancelButtonElement,
-            inputElement,
+            textareaElement,
             } = this.props;
 
         const style = getStyle(name, value, keyPath, deep, dataType);
@@ -142,7 +142,7 @@ class JsonValue extends Component {
             const cancelButtonElementLayout = React.cloneElement(cancelButtonElement, {
                 onClick: this.handleCancelEdit,
             });
-            const inputElementLayout = React.cloneElement(inputElement, {
+            const inputElementLayout = React.cloneElement(textareaElement, {
                 ref: this.refInput,
                 defaultValue: originalValue,
             });
@@ -168,7 +168,7 @@ class JsonValue extends Component {
         };
 
         return (
-            <HotKeys className="rejt-value-node" component={'li'} style={style.li} handlers={handlers}>
+            <HotKeys component={'li'} className="rejt-function-value-node" style={style.li} handlers={handlers}>
                 <span className="rejt-name" style={style.name}>{name} : </span>{result}
                 {minusElement}
             </HotKeys>

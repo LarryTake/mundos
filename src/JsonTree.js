@@ -9,10 +9,8 @@
 import React, { Component, PropTypes } from 'react';
 import JsonNode from './components/JsonNode';
 import { value, object, array } from './utils/styles';
-import deltaTypes from './utils/deltaTypes';
-import objectTypes from './utils/objectTypes';
-
-const { getObjectType } = objectTypes;
+import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from './utils/deltaTypes';
+import { getObjectType } from './utils/objectTypes';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -30,6 +28,7 @@ const propTypes = {
     cancelButtonElement: PropTypes.element,
     editButtonElement: PropTypes.element,
     inputElement: PropTypes.element,
+    textareaElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -94,6 +93,7 @@ class JsonTree extends Component {
             cancelButtonElement,
             editButtonElement,
             inputElement,
+            textareaElement,
             } = this.props;
 
         // Node type
@@ -114,12 +114,13 @@ class JsonTree extends Component {
                 cancelButtonElement={cancelButtonElement}
                 editButtonElement={editButtonElement}
                 inputElement={inputElement}
+                textareaElement={textareaElement}
             />);
         } else {
             node = 'Data must be an Array or Object';
         }
 
-        return (<div>{node}</div>);
+        return (<div className="rejt-tree">{node}</div>);
     }
 }
 
@@ -132,4 +133,6 @@ JsonTree.defaultProps = defaultProps;
 /* ********       EXPORTS       ******** */
 /* ************************************* */
 export { JsonTree };
-export { deltaTypes };
+export { ADD_DELTA_TYPE };
+export { REMOVE_DELTA_TYPE };
+export { UPDATE_DELTA_TYPE };

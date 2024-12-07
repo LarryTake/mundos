@@ -65,6 +65,8 @@ class Body extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleResetToDefault = this.handleResetToDefault.bind(this);
         this.handleChangeReadOnly = this.handleChangeReadOnly.bind(this);
+        this.handleClearGlobalUpdateString = this.handleClearGlobalUpdateString.bind(this);
+        this.handleClearDeltaUpdateString = this.handleClearDeltaUpdateString.bind(this);
     }
 
     onFullyUpdate(newJson) {
@@ -119,6 +121,18 @@ class Body extends Component {
         });
     }
 
+    handleClearGlobalUpdateString() {
+        this.setState({
+            globalUpdateString: '{}',
+        });
+    }
+
+    handleClearDeltaUpdateString() {
+        this.setState({
+            deltaUpdateString: '{}',
+        });
+    }
+
     render() {
         const { json, deltaUpdateString, globalUpdateString, readOnly } = this.state;
 
@@ -148,10 +162,22 @@ class Body extends Component {
                 <table style={style1}>
                     <thead>
                         <tr>
-                            <th>Result</th>
-                            <th>Global Update</th>
-                            <th>Delta Update</th>
-                            <th>Put Your Json</th>
+                            <th>
+                                <span>Result</span>
+                            </th>
+                            <th>
+                                <span>
+                                    Global Update <button onClick={this.handleClearGlobalUpdateString}>Clear</button>
+                                </span>
+                            </th>
+                            <th>
+                                <span>
+                                    Delta Update <button onClick={this.handleClearDeltaUpdateString}>Clear</button>
+                                </span>
+                            </th>
+                            <th>
+                                <span>Put Your Json</span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>

@@ -1,6 +1,6 @@
 React Editable Json Tree
 ========================
-[![Build Status](https://travis-ci.org/oxyno-zeta/react-editable-json-tree.svg?branch=master)](https://travis-ci.org/oxyno-zeta/react-editable-json-tree)[![npm](https://img.shields.io/npm/v/react-editable-json-tree.svg)]()
+[![Build Status](https://travis-ci.org/oxyno-zeta/react-editable-json-tree.svg?branch=master)](https://travis-ci.org/oxyno-zeta/react-editable-json-tree)[![Build Status](https://circleci.com/gh/oxyno-zeta/react-editable-json-tree.png)](https://circleci.com/gh/oxyno-zeta/react-editable-json-tree)[![npm](https://img.shields.io/npm/v/react-editable-json-tree.svg)]()
 
 ## Demo
 Demo is available here : [Demo](https://oxyno-zeta.github.io/react-editable-json-tree/)
@@ -16,11 +16,12 @@ Demo is available here : [Demo](https://oxyno-zeta.github.io/react-editable-json
 - Style via function
 - Read only possibility
 - Call for global update and delta update
+- Possibility to give buttons, inputs, ... in parameters
 
 ## How to use
 ### Install
 ```bash
-npm install react-editable-json-tree
+npm install --save react-editable-json-tree
 ```
 
 ### Example Usage
@@ -156,6 +157,7 @@ An example of return :
     addForm: {},
 }
 ```
+You can see the actual used in `src/utils/styles.js`. 
 
 ### addButtonElement
 |       Key        |                  Description              |     Type    | Required |        Default        |
@@ -185,6 +187,76 @@ The library will add a `onClick` props on element.
 
 The library will add a `placeholder`, `ref`, `defaultValue` props on element.
 
+### textareaElement
+|        Key      |                Description                |     Type    | Required |   Default    |
+|:---------------:|:-----------------------------------------:|:-----------:|:--------:|:------------:|
+| textareaElement |  Textarea Element to replace library one  |   Element   |   False  | <textarea /> |
+
+The library will add a `ref`, `defaultValue` props on element.
+
+## Design
+The library provide CSS class on elements. All are prefixed by "rejt" to avoid conflict. 
+To avoid being linked with a CSS file, the library will use the inline style.
+
+Here is the list of classes by element and by deep and with basic element (on which it's applied).
+
+### JsonTree
+* rejt-tree (div)
+
+### JsonObject
+#### Collapsed
+* rejt-object-node (div)
+    * rejt-name (span)
+    * rejt-collapsed (span)
+        * rejt-collapsed-text (span)
+        * rejt-minus-menu (span)
+
+#### Not Collapsed
+* rejt-object-node (div)
+    * rejt-name (span)
+    * rejt-not-collapsed (span)
+        * rejt-not-collapsed-delimiter (span)
+        * rejt-not-collapsed-list (ul)
+        * rejt-not-collapsed-delimiter (span)
+        * rejt-add-form (span)
+        * rejt-plus-menu (span)
+        * rejt-minus-menu (span)
+        
+### JsonArray
+#### Collapsed
+* rejt-array-node (div)
+    * rejt-name (span)
+    * rejt-collapsed (span)
+        * rejt-collapsed-text (span)
+        * rejt-minus-menu (span)
+
+#### Not Collapsed
+* rejt-array-node (div)
+    * rejt-name (span)
+    * rejt-not-collapsed (span)
+        * rejt-not-collapsed-delimiter (span)
+        * rejt-not-collapsed-list (ul)
+        * rejt-not-collapsed-delimiter (span)
+        * rejt-add-form (span)
+        * rejt-plus-menu (span)
+        * rejt-minus-menu (span)
+
+### JsonAddValue
+* rejt-add-value-node (span)
+
+### JsonFunctionValue
+* rejt-function-value-node (li)
+    * rejt-name (span)
+    * rejt-edit-form (span)
+    * rejt-value (span)
+    * rejt-minus-menu (span)
+
+### JsonValue
+* rejt-value-node (li)
+    * rejt-name (span)
+    * rejt-edit-form (span)
+    * rejt-value (span)
+    * rejt-minus-menu (span)
 
 ## Development
 ### Serve
