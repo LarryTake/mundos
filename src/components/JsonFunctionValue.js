@@ -77,7 +77,7 @@ class JsonValue extends Component {
         const { editEnabled, inputRef } = this.state;
         const { readOnly } = this.props;
 
-        if (editEnabled && !readOnly) {
+        if (editEnabled && !readOnly && (typeof inputRef.focus === 'function')) {
             inputRef.focus();
         }
     }
@@ -142,13 +142,13 @@ class JsonValue extends Component {
             const cancelButtonElementLayout = React.cloneElement(cancelButtonElement, {
                 onClick: this.handleCancelEdit,
             });
-            const inputElementLayout = React.cloneElement(textareaElement, {
+            const textareaElementLayout = React.cloneElement(textareaElement, {
                 ref: this.refInput,
                 defaultValue: originalValue,
             });
 
             result = (<span className="rejt-edit-form" style={style.editForm}>
-                {inputElementLayout} {cancelButtonElementLayout}{editButtonElementLayout}
+                {textareaElementLayout} {cancelButtonElementLayout}{editButtonElementLayout}
             </span>);
             minusElement = null;
         } else {

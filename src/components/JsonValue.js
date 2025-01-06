@@ -77,7 +77,7 @@ class JsonValue extends Component {
         const { editEnabled, inputRef } = this.state;
         const { readOnly } = this.props;
 
-        if (editEnabled && !readOnly) {
+        if (editEnabled && !readOnly && (typeof inputRef.focus === 'function')) {
             inputRef.focus();
         }
     }
