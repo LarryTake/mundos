@@ -34,6 +34,8 @@ const propTypes = {
     editButtonElement: PropTypes.element,
     inputElement: PropTypes.element,
     textareaElement: PropTypes.element,
+    minusMenuElement: PropTypes.element,
+    plusMenuElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -76,6 +78,8 @@ class JsonNode extends Component {
             editButtonElement,
             inputElement,
             textareaElement,
+            minusMenuElement,
+            plusMenuElement,
             } = this.props;
         const readOnlyTrue = true;
 
@@ -99,6 +103,8 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
                     textareaElement={textareaElement}
+                    minusMenuElement={minusMenuElement}
+                    plusMenuElement={plusMenuElement}
                 />);
             case 'Object':
                 return (<JsonObject
@@ -118,6 +124,8 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
                     textareaElement={textareaElement}
+                    minusMenuElement={minusMenuElement}
+                    plusMenuElement={plusMenuElement}
                 />);
             case 'Array':
                 return (<JsonArray
@@ -137,6 +145,8 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
                     textareaElement={textareaElement}
+                    minusMenuElement={minusMenuElement}
+                    plusMenuElement={plusMenuElement}
                 />);
             case 'String':
                 return (<JsonValue
@@ -153,6 +163,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
+                    minusMenuElement={minusMenuElement}
                 />);
             case 'Number':
                 return (<JsonValue
@@ -169,6 +180,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
+                    minusMenuElement={minusMenuElement}
                 />);
             case 'Boolean':
                 return (<JsonValue
@@ -185,6 +197,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
+                    minusMenuElement={minusMenuElement}
                 />);
             case 'Date':
                 return (<JsonValue
@@ -201,6 +214,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
+                    minusMenuElement={minusMenuElement}
                 />);
             case 'Null':
                 return (<JsonValue
@@ -217,6 +231,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
+                    minusMenuElement={minusMenuElement}
                 />);
             case 'Undefined':
                 return (<JsonValue
@@ -233,6 +248,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
+                    minusMenuElement={minusMenuElement}
                 />);
             case 'Function':
                 return (<JsonFunctionValue
@@ -249,6 +265,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     textareaElement={textareaElement}
+                    minusMenuElement={minusMenuElement}
                 />);
             case 'Symbol':
                 return (<JsonValue
@@ -265,6 +282,7 @@ class JsonNode extends Component {
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
+                    minusMenuElement={minusMenuElement}
                 />);
             default:
                 return null;

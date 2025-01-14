@@ -194,6 +194,20 @@ The library will add a `placeholder`, `ref`, `defaultValue` props on element.
 
 The library will add a `ref`, `defaultValue` props on element.
 
+### minusMenuElement
+|        Key       |                 Description               |     Type    | Required |       Default       |
+|:----------------:|:-----------------------------------------:|:-----------:|:--------:|:-------------------:|
+| minusMenuElement | Minus Menu Element to replace library one |   Element   |   False  |  <span> - </span>   |
+
+The library will add a `onClick`, `className` and `style` props on element.
+
+### plusMenuElement
+|       Key       |                Description               |     Type    | Required |       Default       |
+|:---------------:|:----------------------------------------:|:-----------:|:--------:|:-------------------:|
+| plusMenuElement | Plus Menu Element to replace library one |   Element   |   False  |  <span> + </span>   |
+
+The library will add a `onClick`, `className` and `style` props on element.
+
 ## Design
 The library provide CSS class on elements. All are prefixed by "rejt" to avoid conflict. 
 To avoid being linked with a CSS file, the library will use the inline style.
