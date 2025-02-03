@@ -56,6 +56,10 @@ class Body extends Component {
             textareaRef: null,
             readOnlyRef: null,
             readOnly: false,
+            customInputRef: null,
+            customInput: false,
+            minusMenuRef: null,
+            minusMenu: false,
         };
         // Bind
         this.onFullyUpdate = this.onFullyUpdate.bind(this);
@@ -67,6 +71,10 @@ class Body extends Component {
         this.handleChangeReadOnly = this.handleChangeReadOnly.bind(this);
         this.handleClearGlobalUpdateString = this.handleClearGlobalUpdateString.bind(this);
         this.handleClearDeltaUpdateString = this.handleClearDeltaUpdateString.bind(this);
+        this.refCustomInputCheckbox = this.refCustomInputCheckbox.bind(this);
+        this.handleChangeCustomInput = this.handleChangeCustomInput.bind(this);
+        this.refMinusMenuCheckbox = this.refMinusMenuCheckbox.bind(this);
+        this.handleChangeMinusMenu = this.handleChangeMinusMenu.bind(this);
     }
 
     onFullyUpdate(newJson) {
@@ -87,6 +95,30 @@ class Body extends Component {
 
     refReadOnlyCheckbox(node) {
         this.state.readOnlyRef = node;
+    }
+
+    refMinusMenuCheckbox(node) {
+        this.state.minusMenuRef = node;
+    }
+
+    handleChangeMinusMenu() {
+        const { minusMenuRef } = this.state;
+
+        this.setState({
+            minusMenu: minusMenuRef.checked,
+        });
+    }
+
+    refCustomInputCheckbox(node) {
+        this.state.customInputRef = node;
+    }
+
+    handleChangeCustomInput() {
+        const { customInputRef } = this.state;
+
+        this.setState({
+            customInput: customInputRef.checked,
+        });
     }
 
     handleSubmit() {
@@ -134,7 +166,7 @@ class Body extends Component {
     }
 
     render() {
-        const { json, deltaUpdateString, globalUpdateString, readOnly } = this.state;
+        const { json, deltaUpdateString, globalUpdateString, readOnly, customInput, minusMenu } = this.state;
 
         const style1 = {
             width: '100%',
@@ -150,14 +182,38 @@ class Body extends Component {
             margin: '0 15px',
             minWidth: '200px',
         };
+        const style5 = {
+            backgroundColor: 'black',
+            color: 'yellow',
+            border: '1px solid green',
+        };
+        const customInputElement = customInput ? <input style={style5} /> : undefined;
+        const minusMenuElement = minusMenu ? <button>Remove</button> : undefined;
+
         return (
             <div>
                 <div style={style4}>
-                    <input
-                        type="checkbox"
-                        ref={this.refReadOnlyCheckbox}
-                        onChange={this.handleChangeReadOnly}
-                    />Read Only
+                    <span>
+                        <input
+                            type="checkbox"
+                            ref={this.refReadOnlyCheckbox}
+                            onChange={this.handleChangeReadOnly}
+                        />Read Only
+                    </span>
+                    <span>
+                        <input
+                            type="checkbox"
+                            ref={this.refCustomInputCheckbox}
+                            onChange={this.handleChangeCustomInput}
+                        />Custom input
+                    </span>
+                    <span>
+                        <input
+                            type="checkbox"
+                            ref={this.refMinusMenuCheckbox}
+                            onChange={this.handleChangeMinusMenu}
+                        />Custom minus menu
+                    </span>
                 </div>
                 <table style={style1}>
                     <thead>
@@ -189,6 +245,8 @@ class Body extends Component {
                                         onFullyUpdate={this.onFullyUpdate}
                                         onDeltaUpdate={this.onDeltaUpdate}
                                         readOnly={readOnly}
+                                        inputElement={customInputElement}
+                                        minusMenuElement={minusMenuElement}
                                     />
                                 </div>
                             </td>
