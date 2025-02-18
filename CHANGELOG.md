@@ -1,4 +1,13 @@
 
+# 1.3.0
+## Feature
+- Add way to pass plus and minus menu element
+- Update Demo website to add custom inputs, ...
+
+## Fix
+- Test if focus exists before using it on inputs
+- Add keywords on package.json
+
 # 1.2.0
 ## Feature
 - Add possibility to edit 'function'
