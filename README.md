@@ -186,6 +186,7 @@ The library will add a `onClick` props on element.
 | inputElement | Input Text Element to replace library one |   Element   |   False  |  <input />   |
 
 The library will add a `placeholder`, `ref`, `defaultValue` props on element.
+This item will be focus when possible.
 
 ### textareaElement
 |        Key      |                Description                |     Type    | Required |   Default    |
@@ -193,6 +194,21 @@ The library will add a `placeholder`, `ref`, `defaultValue` props on element.
 | textareaElement |  Textarea Element to replace library one  |   Element   |   False  | <textarea /> |
 
 The library will add a `ref`, `defaultValue` props on element.
+This item will be focus when possible.
+
+### minusMenuElement
+|        Key       |                 Description               |     Type    | Required |       Default       |
+|:----------------:|:-----------------------------------------:|:-----------:|:--------:|:-------------------:|
+| minusMenuElement | Minus Menu Element to replace library one |   Element   |   False  |  <span> - </span>   |
+
+The library will add a `onClick`, `className` and `style` props on element.
+
+### plusMenuElement
+|       Key       |                Description               |     Type    | Required |       Default       |
+|:---------------:|:----------------------------------------:|:-----------:|:--------:|:-------------------:|
+| plusMenuElement | Plus Menu Element to replace library one |   Element   |   False  |  <span> + </span>   |
+
+The library will add a `onClick`, `className` and `style` props on element.
 
 ## Design
 The library provide CSS class on elements. All are prefixed by "rejt" to avoid conflict. 

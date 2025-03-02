@@ -50,11 +50,11 @@ class JsonAddValue extends Component {
         const { inputRefKey, inputRefValue } = this.state;
         const { onlyValue } = this.props;
 
-        if (inputRefKey) {
+        if (inputRefKey && (typeof inputRefKey.focus === 'function')) {
             inputRefKey.focus();
         }
 
-        if (onlyValue && inputRefValue) {
+        if (onlyValue && inputRefValue && (typeof inputRefValue.focus === 'function')) {
             inputRefValue.focus();
         }
     }

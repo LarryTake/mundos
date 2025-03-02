@@ -29,6 +29,7 @@ const propTypes = {
     editButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
     inputElement: PropTypes.element,
+    minusMenuElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
@@ -39,6 +40,7 @@ const defaultProps = {
     editButtonElement: <button>e</button>,
     cancelButtonElement: <button>c</button>,
     inputElement: <input />,
+    minusMenuElement: <span> - </span>,
 };
 
 /* ************************************* */
@@ -77,7 +79,7 @@ class JsonValue extends Component {
         const { editEnabled, inputRef } = this.state;
         const { readOnly } = this.props;
 
-        if (editEnabled && !readOnly) {
+        if (editEnabled && !readOnly && (typeof inputRef.focus === 'function')) {
             inputRef.focus();
         }
     }
@@ -129,6 +131,7 @@ class JsonValue extends Component {
             editButtonElement,
             cancelButtonElement,
             inputElement,
+            minusMenuElement,
             } = this.props;
 
         const style = getStyle(name, value, keyPath, deep, dataType);
@@ -155,11 +158,12 @@ class JsonValue extends Component {
             result = (<span className="rejt-value" style={style.value} onClick={readOnly ? null : this.handleEditMode}>
                 {value}
             </span>);
-            minusElement = (readOnly) ? null : (<span
-                className="rejt-minus-menu"
-                onClick={handleRemove}
-                style={style.minus}
-            > - </span>);
+            const minusMenuLayout = React.cloneElement(minusMenuElement, {
+                onClick: handleRemove,
+                className: 'rejt-minus-menu',
+                style: style.minus,
+            });
+            minusElement = (readOnly) ? null : minusMenuLayout;
         }
 
         const handlers = {

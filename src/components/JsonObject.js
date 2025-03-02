@@ -33,11 +33,15 @@ const propTypes = {
     editButtonElement: PropTypes.element,
     inputElement: PropTypes.element,
     textareaElement: PropTypes.element,
+    minusMenuElement: PropTypes.element,
+    plusMenuElement: PropTypes.element,
 };
 // Default props
 const defaultProps = {
     keyPath: [],
     deep: 0,
+    minusMenuElement: <span> - </span>,
+    plusMenuElement: <span> + </span>,
 };
 
 /* ************************************* */
@@ -193,7 +197,7 @@ class JsonObject extends Component {
 
     renderCollapsed() {
         const { name, keyPath, deep, data } = this.state;
-        const { handleRemove, readOnly, dataType, getStyle } = this.props;
+        const { handleRemove, readOnly, dataType, getStyle, minusMenuElement } = this.props;
 
         const { minus, collapsed } = getStyle(name, data, keyPath, deep, dataType);
         const keyList = Object.getOwnPropertyNames(data);
@@ -203,8 +207,12 @@ class JsonObject extends Component {
         let minusElement = null;
         // Check if readOnly is activated
         if (!readOnly) {
-            minusElement = (deep !== 0) ?
-                (<span className="rejt-minus-menu" onClick={handleRemove} style={minus}> - </span>) : null;
+            const minusMenuLayout = React.cloneElement(minusMenuElement, {
+                onClick: handleRemove,
+                className: 'rejt-minus-menu',
+                style: minus,
+            });
+            minusElement = (deep !== 0) ? minusMenuLayout : null;
         }
 
         return (<span className="rejt-collapsed">
@@ -229,6 +237,8 @@ class JsonObject extends Component {
             editButtonElement,
             inputElement,
             textareaElement,
+            minusMenuElement,
+            plusMenuElement,
             } = this.props;
 
         const { minus, plus, addForm, ul, delimiter } = getStyle(name, data, keyPath, deep, dataType);
@@ -236,8 +246,12 @@ class JsonObject extends Component {
         let minusElement = null;
         // Check if readOnly is activated
         if (!readOnly) {
-            minusElement = (deep !== 0) ?
-                (<span className="rejt-minus-menu" onClick={handleRemove} style={minus}> - </span>) : null;
+            const minusMenuLayout = React.cloneElement(minusMenuElement, {
+                onClick: handleRemove,
+                className: 'rejt-minus-menu',
+                style: minus,
+            });
+            minusElement = (deep !== 0) ? minusMenuLayout : null;
         }
 
         const list = keyList
@@ -259,6 +273,8 @@ class JsonObject extends Component {
                 editButtonElement={editButtonElement}
                 inputElement={inputElement}
                 textareaElement={textareaElement}
+                minusMenuElement={minusMenuElement}
+                plusMenuElement={plusMenuElement}
             />);
 
         const startObject = '{';
@@ -267,6 +283,11 @@ class JsonObject extends Component {
         let menu = null;
         // Check if readOnly is activated
         if (!readOnly) {
+            const plusMenuLayout = React.cloneElement(plusMenuElement, {
+                onClick: this.handleAddMode,
+                className: 'rejt-plus-menu',
+                style: plus,
+            });
             menu = addFormVisible ?
                 (<span className="rejt-add-form" style={addForm}><JsonAddValue
                     handleAdd={this.handleAddValueAdd}
@@ -276,7 +297,7 @@ class JsonObject extends Component {
                     inputElement={inputElement}
                 /></span>) :
                 (<span>
-                    <span className="rejt-plus-menu" onClick={this.handleAddMode} style={plus}> + </span> {minusElement}
+                    {plusMenuLayout} {minusElement}
                 </span>);
         }
 
