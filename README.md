@@ -69,9 +69,9 @@ There is a screenshot of the result :
 | rootName | Root name for first object | String |   False   |   root   |
 
 ### isCollapsed
-|     Key     |                  Description                 |   Type   |  Required |              Default            |
-|:-----------:|:--------------------------------------------:|:--------:|:---------:|:-------------------------------:|
-| isCollapsed | Is node collapsed ? (For Array/Object/Error) | Function |   False   | (keyPath, deep) => (deep !== 0) |
+|     Key     |                  Description                 |   Type   |  Required |               Default             |
+|:-----------:|:--------------------------------------------:|:--------:|:---------:|:---------------------------------:|
+| isCollapsed | Is node collapsed ? (For Array/Object/Error) | Function |   False   | `(keyPath, deep) => (deep !== 0)` |
 
 Function parameters :
 
@@ -81,9 +81,9 @@ Function parameters :
 |    deep     |   Deep of current node   | Number |   1 for data: { object: { string: 'test' } } on 'object' node   |
 
 ### onFullyUpdate
-|      Key      |                          Description                                  |   Type   |  Required | Default  |
-|:-------------:|:---------------------------------------------------------------------:|:--------:|:---------:|:--------:|
-| onFullyUpdate | Function called each time an update is done and give the updated data | Function |   False   | () => {} |
+|      Key      |                          Description                                  |   Type   |  Required |   Default  |
+|:-------------:|:---------------------------------------------------------------------:|:--------:|:---------:|:----------:|
+| onFullyUpdate | Function called each time an update is done and give the updated data | Function |   False   | `() => {}` |
 
 Function parameters :
 
@@ -92,9 +92,9 @@ Function parameters :
 |   data   | Updated data | Object/Array (Same as entry)  |
 
 ### onDeltaUpdate
-|      Key      |                         Description                               |   Type   |  Required | Default  |
-|:-------------:|:-----------------------------------------------------------------:|:--------:|:---------:|:--------:|
-| onDeltaUpdate | Function called each time an update is done and give delta update | Function |   False   | () => {} |
+|      Key      |                         Description                               |   Type   |  Required |   Default  |
+|:-------------:|:-----------------------------------------------------------------:|:--------:|:---------:|:----------:|
+| onDeltaUpdate | Function called each time an update is done and give delta update | Function |   False   | `() => {}` |
 
 Function parameters :
 
@@ -119,9 +119,9 @@ Delta data structure :
 | readOnly | Read only boolean for all object | Boolean |   False   |   false   |
 
 ### getStyle
-|     Key     |     Description      |   Type   |  Required |                      Default                      |
-|:-----------:|:--------------------:|:--------:|:---------:|:-------------------------------------------------:|
-|  getStyle   | Get style (CSS keys) | Function |   False   | (keyName, data, keyPath, deep, dataType) => {...} |
+|     Key     |     Description      |   Type   |  Required |                       Default                       |
+|:-----------:|:--------------------:|:--------:|:---------:|:---------------------------------------------------:|
+|  getStyle   | Get style (CSS keys) | Function |   False   | `(keyName, data, keyPath, deep, dataType) => {...}` |
 
 Function parameters :
 
@@ -162,36 +162,36 @@ You can see the actual used in `src/utils/styles.js`.
 ### addButtonElement
 |       Key        |                  Description              |     Type    | Required |        Default        |
 |:----------------:|:-----------------------------------------:|:-----------:|:--------:|:---------------------:|
-| addButtonElement | Add button Element to replace library one |   Element   |   False  |  <button>+</button>   |
+| addButtonElement | Add button Element to replace library one |   Element   |   False  | `<button>+</button>`  |
 
 The library will add a `onClick` props on element.
 
 ### cancelButtonElement
 |         Key         |                   Description                |     Type    | Required |        Default        |
 |:-------------------:|:--------------------------------------------:|:-----------:|:--------:|:---------------------:|
-| cancelButtonElement | Cancel button Element to replace library one |   Element   |   False  |  <button>c</button>   |
+| cancelButtonElement | Cancel button Element to replace library one |   Element   |   False  | `<button>c</button>`  |
 
 The library will add a `onClick` props on element.
 
 ### editButtonElement
 |        Key        |                 Description                |     Type    | Required |        Default        |
 |:-----------------:|:------------------------------------------:|:-----------:|:--------:|:---------------------:|
-| editButtonElement | Edit button Element to replace library one |   Element   |   False  |  <button>e</button>   |
+| editButtonElement | Edit button Element to replace library one |   Element   |   False  | `<button>e</button>`  |
 
 The library will add a `onClick` props on element.
 
 ### inputElement
 |      Key     |                Description                |     Type    | Required |   Default    |
 |:------------:|:-----------------------------------------:|:-----------:|:--------:|:------------:|
-| inputElement | Input Text Element to replace library one |   Element   |   False  |  <input />   |
+| inputElement | Input Text Element to replace library one |   Element   |   False  | `<input />`  |
 
 The library will add a `placeholder`, `ref`, `defaultValue` props on element.
 This item will be focus when possible.
 
 ### textareaElement
-|        Key      |                Description                |     Type    | Required |   Default    |
-|:---------------:|:-----------------------------------------:|:-----------:|:--------:|:------------:|
-| textareaElement |  Textarea Element to replace library one  |   Element   |   False  | <textarea /> |
+|        Key      |                Description                |     Type    | Required |    Default     |
+|:---------------:|:-----------------------------------------:|:-----------:|:--------:|:--------------:|
+| textareaElement |  Textarea Element to replace library one  |   Element   |   False  | `<textarea />` |
 
 The library will add a `ref`, `defaultValue` props on element.
 This item will be focus when possible.
@@ -199,14 +199,14 @@ This item will be focus when possible.
 ### minusMenuElement
 |        Key       |                 Description               |     Type    | Required |       Default       |
 |:----------------:|:-----------------------------------------:|:-----------:|:--------:|:-------------------:|
-| minusMenuElement | Minus Menu Element to replace library one |   Element   |   False  |  <span> - </span>   |
+| minusMenuElement | Minus Menu Element to replace library one |   Element   |   False  | `<span> - </span>`  |
 
 The library will add a `onClick`, `className` and `style` props on element.
 
 ### plusMenuElement
 |       Key       |                Description               |     Type    | Required |       Default       |
 |:---------------:|:----------------------------------------:|:-----------:|:--------:|:-------------------:|
-| plusMenuElement | Plus Menu Element to replace library one |   Element   |   False  |  <span> + </span>   |
+| plusMenuElement | Plus Menu Element to replace library one |   Element   |   False  | `<span> + </span>`  |
 
 The library will add a `onClick`, `className` and `style` props on element.
 

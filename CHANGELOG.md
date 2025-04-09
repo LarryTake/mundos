@@ -1,4 +1,11 @@
 
+# 1.3.1
+## Fix
+- Fix README for Github
+
+## Code
+- Fix Dependencies
+
 # 1.3.0
 ## Feature
 - Add way to pass plus and minus menu element
