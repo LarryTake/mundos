@@ -202,3 +202,4 @@ gulpfile.js
 .babelrc
 .eslintrc.json
 yarn.lock
+circle.yml
