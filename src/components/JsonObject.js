@@ -108,10 +108,10 @@ class JsonObject extends Component {
         });
     }
 
-    handleAddValueAdd({ key, value }) {
+    handleAddValueAdd({ key, newValue }) {
         const { data, keyPath, deep } = this.state;
         // Update data
-        data[key] = value;
+        data[key] = newValue;
         this.setState({
             data,
         });
@@ -126,7 +126,7 @@ class JsonObject extends Component {
             keyPath,
             deep,
             key,
-            value,
+            newValue,
         });
     }
 

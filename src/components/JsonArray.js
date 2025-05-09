@@ -144,12 +144,12 @@ class JsonArray extends Component {
         };
     }
 
-    handleAddValueAdd({ value }) {
+    handleAddValueAdd({ newValue }) {
         const { data, keyPath, deep } = this.state;
         // Update data
         const newData = [
             ...data,
-            value,
+            newValue,
         ];
         this.setState({
             data: newData,
@@ -165,7 +165,7 @@ class JsonArray extends Component {
             keyPath,
             deep,
             key: newData.length - 1,
-            newValue: value,
+            newValue,
         });
     }
 

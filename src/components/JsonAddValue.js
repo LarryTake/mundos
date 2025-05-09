@@ -63,7 +63,7 @@ class JsonAddValue extends Component {
         const { handleAdd, onlyValue } = this.props;
         const { inputRefKey, inputRefValue } = this.state;
         const result = {
-            value: parse(inputRefValue.value),
+            newValue: parse(inputRefValue.value),
         };
         // Check if we have the key
         if (!onlyValue) {
