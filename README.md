@@ -27,7 +27,7 @@ npm install --save react-editable-json-tree
 ### Example Usage
 ```jsx
 // Import
-import { JsonTree, deltaTypes } from 'react-editable-json-tree'
+import { JsonTree, ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from 'react-editable-json-tree'
 
 // Data
 const data = {
