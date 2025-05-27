@@ -31,6 +31,7 @@ const propTypes = {
     textareaElement: PropTypes.element,
     minusMenuElement: PropTypes.element,
     plusMenuElement: PropTypes.element,
+    beforeRemoveAction: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -52,6 +53,7 @@ const defaultProps = {
                 return value;
         }
     },
+    beforeRemoveAction: (key, keyPath, deep) => new Promise(resolve => resolve()),
 };
 
 /* ************************************* */
@@ -98,6 +100,7 @@ class JsonTree extends Component {
             textareaElement,
             minusMenuElement,
             plusMenuElement,
+            beforeRemoveAction,
             } = this.props;
 
         // Node type
@@ -121,6 +124,7 @@ class JsonTree extends Component {
                 textareaElement={textareaElement}
                 minusMenuElement={minusMenuElement}
                 plusMenuElement={plusMenuElement}
+                beforeRemoveAction={beforeRemoveAction}
             />);
         } else {
             node = 'Data must be an Array or Object';

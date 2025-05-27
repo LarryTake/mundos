@@ -35,6 +35,7 @@ const propTypes = {
     textareaElement: PropTypes.element,
     minusMenuElement: PropTypes.element,
     plusMenuElement: PropTypes.element,
+    beforeRemoveAction: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -131,38 +132,43 @@ class JsonObject extends Component {
     }
 
     handleRemoveValue(key) {
-        const { data, keyPath, deep } = this.state;
         return () => {
-            const objType = getObjectType(data[key]);
-            let deltaUpdateResult = null;
-            if (objType === 'Object' || objType === 'Array') {
-                deltaUpdateResult = {
-                    type: UPDATE_DELTA_TYPE,
-                    keyPath,
-                    deep,
-                    key,
-                    oldValue: data[key],
-                    newValue: null,
-                };
-                data[key] = null;
-            } else {
-                deltaUpdateResult = {
-                    type: REMOVE_DELTA_TYPE,
-                    keyPath,
-                    deep,
-                    key,
-                    oldValue: data[key],
-                };
-                delete data[key];
-            }
-            this.setState({
-                data,
+            const { beforeRemoveAction } = this.props;
+            const { data, keyPath, deep } = this.state;
+            // Before Remove Action
+            beforeRemoveAction(key, keyPath, deep).then(() => {
+                const objType = getObjectType(data[key]);
+                let deltaUpdateResult = null;
+                if (objType === 'Object' || objType === 'Array') {
+                    deltaUpdateResult = {
+                        type: UPDATE_DELTA_TYPE,
+                        keyPath,
+                        deep,
+                        key,
+                        oldValue: data[key],
+                        newValue: null,
+                    };
+                    data[key] = null;
+                } else {
+                    deltaUpdateResult = {
+                        type: REMOVE_DELTA_TYPE,
+                        keyPath,
+                        deep,
+                        key,
+                        oldValue: data[key],
+                    };
+                    delete data[key];
+                }
+                this.setState({
+                    data,
+                });
+                // Spread new update
+                const { onUpdate, onDeltaUpdate } = this.props;
+                onUpdate(keyPath[keyPath.length - 1], data);
+                // Spread delta update
+                onDeltaUpdate(deltaUpdateResult);
+            }).catch(() => {
             });
-            // Spread new update
-            const { onUpdate, onDeltaUpdate } = this.props;
-            onUpdate(keyPath[keyPath.length - 1], data);
-            // Spread delta update
-            onDeltaUpdate(deltaUpdateResult);
         };
     }
 
@@ -239,6 +245,7 @@ class JsonObject extends Component {
             textareaElement,
             minusMenuElement,
             plusMenuElement,
+            beforeRemoveAction,
             } = this.props;
 
         const { minus, plus, addForm, ul, delimiter } = getStyle(name, data, keyPath, deep, dataType);
@@ -275,6 +282,7 @@ class JsonObject extends Component {
                 textareaElement={textareaElement}
                 minusMenuElement={minusMenuElement}
                 plusMenuElement={plusMenuElement}
+                beforeRemoveAction={beforeRemoveAction}
             />);
 
         const startObject = '{';

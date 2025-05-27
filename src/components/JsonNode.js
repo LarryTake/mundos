@@ -36,6 +36,7 @@ const propTypes = {
     textareaElement: PropTypes.element,
     minusMenuElement: PropTypes.element,
     plusMenuElement: PropTypes.element,
+    beforeRemoveAction: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -80,6 +81,7 @@ class JsonNode extends Component {
             textareaElement,
             minusMenuElement,
             plusMenuElement,
+            beforeRemoveAction,
             } = this.props;
         const readOnlyTrue = true;
 
@@ -105,6 +107,7 @@ class JsonNode extends Component {
                     textareaElement={textareaElement}
                     minusMenuElement={minusMenuElement}
                     plusMenuElement={plusMenuElement}
+                    beforeRemoveAction={beforeRemoveAction}
                 />);
             case 'Object':
                 return (<JsonObject
@@ -126,6 +129,7 @@ class JsonNode extends Component {
                     textareaElement={textareaElement}
                     minusMenuElement={minusMenuElement}
                     plusMenuElement={plusMenuElement}
+                    beforeRemoveAction={beforeRemoveAction}
                 />);
             case 'Array':
                 return (<JsonArray
@@ -147,6 +151,7 @@ class JsonNode extends Component {
                     textareaElement={textareaElement}
                     minusMenuElement={minusMenuElement}
                     plusMenuElement={plusMenuElement}
+                    beforeRemoveAction={beforeRemoveAction}
                 />);
             case 'String':
                 return (<JsonValue
