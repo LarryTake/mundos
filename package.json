@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "gulp serve",
-    "release": "gulp release"
+    "release": "gulp release",
+    "start": "gulp serve"
   },
   "keywords": [
     "React",
