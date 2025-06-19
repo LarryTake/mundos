@@ -35,6 +35,7 @@ const propTypes = {
     textareaElement: PropTypes.element,
     minusMenuElement: PropTypes.element,
     plusMenuElement: PropTypes.element,
+    beforeRemoveAction: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -110,46 +111,51 @@ class JsonArray extends Component {
 
     handleRemoveItem(index) {
         return () => {
+            const { beforeRemoveAction } = this.props;
             const { data, keyPath, deep } = this.state;
-            const objType = getObjectType(data[index]);
-            let deltaUpdateResult = null;
-            if (objType === 'Object' || objType === 'Array') {
-                deltaUpdateResult = {
-                    type: UPDATE_DELTA_TYPE,
-                    keyPath,
-                    deep,
-                    key: index,
-                    oldValue: data[index],
-                    newValue: null,
-                };
-                data[index] = null;
-            } else {
-                deltaUpdateResult = {
-                    type: REMOVE_DELTA_TYPE,
-                    keyPath,
-                    deep,
-                    key: index,
-                    oldValue: data[index],
-                };
-                data.splice(index, 1);
-            }
-            this.setState({
-                data,
+            // Before Remove Action
+            beforeRemoveAction(index, keyPath, deep).then(() => {
+                const objType = getObjectType(data[index]);
+                let deltaUpdateResult = null;
+                if (objType === 'Object' || objType === 'Array') {
+                    deltaUpdateResult = {
+                        type: UPDATE_DELTA_TYPE,
+                        keyPath,
+                        deep,
+                        key: index,
+                        oldValue: data[index],
+                        newValue: null,
+                    };
+                    data[index] = null;
+                } else {
+                    deltaUpdateResult = {
+                        type: REMOVE_DELTA_TYPE,
+                        keyPath,
+                        deep,
+                        key: index,
+                        oldValue: data[index],
+                    };
+                    data.splice(index, 1);
+                }
+                this.setState({
+                    data,
+                });
+                // Spread new update
+                const { onUpdate, onDeltaUpdate } = this.props;
+                onUpdate(keyPath[keyPath.length - 1], data);
+                // Spread delta update
+                onDeltaUpdate(deltaUpdateResult);
+            }).catch(() => {
             });
-            // Spread new update
-            const { onUpdate, onDeltaUpdate } = this.props;
-            onUpdate(keyPath[keyPath.length - 1], data);
-            // Spread delta update
-            onDeltaUpdate(deltaUpdateResult);
         };
     }
 
-    handleAddValueAdd({ value }) {
+    handleAddValueAdd({ newValue }) {
         const { data, keyPath, deep } = this.state;
         // Update data
         const newData = [
             ...data,
-            value,
+            newValue,
         ];
         this.setState({
             data: newData,
@@ -165,7 +171,7 @@ class JsonArray extends Component {
             keyPath,
             deep,
             key: newData.length - 1,
-            newValue: value,
+            newValue,
         });
     }
 
@@ -242,6 +248,7 @@ class JsonArray extends Component {
             textareaElement,
             minusMenuElement,
             plusMenuElement,
+            beforeRemoveAction,
             } = this.props;
         const { minus, plus, delimiter, ul, addForm } = getStyle(name, data, keyPath, deep, dataType);
 
@@ -277,6 +284,7 @@ class JsonArray extends Component {
                 textareaElement={textareaElement}
                 minusMenuElement={minusMenuElement}
                 plusMenuElement={plusMenuElement}
+                beforeRemoveAction={beforeRemoveAction}
             />);
 
         const onlyValue = true;

@@ -27,7 +27,7 @@ npm install --save react-editable-json-tree
 ### Example Usage
 ```jsx
 // Import
-import { JsonTree, deltaTypes } from 'react-editable-json-tree'
+import { JsonTree, ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from 'react-editable-json-tree'
 
 // Data
 const data = {
@@ -209,6 +209,21 @@ The library will add a `onClick`, `className` and `style` props on element.
 | plusMenuElement | Plus Menu Element to replace library one |   Element   |   False  | `<span> + </span>`  |
 
 The library will add a `onClick`, `className` and `style` props on element.
+
+### beforeRemoveAction
+|         Key        |                      Description                             |   Type   |  Required |                            Default                          |
+|:------------------:|:------------------------------------------------------------:|:--------:|:---------:|:-----------------------------------------------------------:|
+| beforeRemoveAction | Function called before each remove action (with minus menu)  | Function |   False   | `(key, keyPath, deep) => new Promise(resolve => resolve())` |
+
+This function must return a `Promise`. In case of resolve of this one, the remove will be done. Otherwise, in reject, nothing will be done.
+
+Function parameters :
+
+|     Key     |           Description           |   Type  |                            Example                              |
+|:-----------:|:-------------------------------:|:-------:|:---------------------------------------------------------------:|
+|     key     |    Key of current node/value    | String  |        'object' for data: { object: { string: 'test' } }        |
+|   keyPath   |   key path                      |  Array  |       ['object'] for data: { object: { string: 'test' } }       |
+|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node   |
 
 ## Design
 The library provide CSS class on elements. All are prefixed by "rejt" to avoid conflict. 
