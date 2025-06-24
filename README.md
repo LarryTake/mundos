@@ -17,6 +17,7 @@ Demo is available here : [Demo](https://oxyno-zeta.github.io/react-editable-json
 - Read only possibility
 - Call for global update and delta update
 - Possibility to give buttons, inputs, ... in parameters
+- Possibility to authorize remove action
 
 ## How to use
 ### Install
