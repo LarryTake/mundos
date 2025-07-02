@@ -1,4 +1,16 @@
 
+# 1.4.0
+## Fix
+- Fix variable name in add part
+- Ignore circle.yml in npmignore
+
+## Code
+- Update scripts for npm
+- Downgrade eslint plugin version (not working)
+
+## Feature
+- Before Remove Action function to perform remove action
+
 # 1.3.1
 ## Fix
 - Fix README for Github
