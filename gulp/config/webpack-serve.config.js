@@ -19,6 +19,7 @@ configDev.module.loaders[0].query.presets.push('react-hmre');
 configDev.module.loaders[0].query.babelrc = false;
 configDev.entry.app.push('webpack-dev-server/client?http://localhost:8080');
 configDev.entry.app.push('webpack/hot/only-dev-server');
+configDev.entry.app.push('webpack-hot-middleware/client');
 
 /* ************************************* */
 /* ********       EXPORTS       ******** */

@@ -19,6 +19,8 @@ const del = require('del');
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
+gulp.task('clean:web:dev', () => del('dev_build'));
+
 gulp.task('clean:release:dist', () => del('dist'));
 
 gulp.task('clean:release:docs', () => del('docs'));

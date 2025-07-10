@@ -27,24 +27,34 @@ gulp.task('web:build:dev', () => {
         .pipe(gulp.dest('dev_build/'));
 });
 
-gulp.task('web:build:docs', () => {
+gulp.task('web:build:prod', () => {
     gulp.src('src/dev/index.jsx')
         .pipe(webpackStream(require('./config/webpack-prod.config')))
         .pipe(gulp.dest('docs/'));
 });
 
 gulp.task('web:serve', (done) => {
-    const server = new WebpackDevServer(webpack(require('./config/webpack-serve.config')), {
+    const webpackDev = require('./config/webpack-serve.config');
+    const compiler = webpack(webpackDev);
+
+    const server = new WebpackDevServer(compiler, {
         hot: true,
         quiet: true,
         noInfo: false,
         debug: true,
         devTool: true,
         contentBase: 'dev/',
+        publicPath: webpackDev.output.publicPath,
         historyApiFallback: true,
         stats: {
             colors: true,
         },
     });
-    server.listen(8080, done);
+    server.listen(8080, (err) => {
+        if (err) {
+            done(err);
+            return;
+        }
+        console.log('==> Listening on http://localhost:8080');
+    });
 });
