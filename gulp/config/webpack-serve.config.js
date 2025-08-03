@@ -7,11 +7,11 @@
 /* ************************************* */
 /* ********       REQUIRE       ******** */
 /* ************************************* */
-var fs = require('fs');
-var path = require('path');
-var configDev = require('./webpack-dev.config');
-var babelrcString = fs.readFileSync(path.resolve(__dirname, '../../.babelrc'));
-var babelrc = JSON.parse(babelrcString.toString());
+const fs = require('fs');
+const path = require('path');
+const configDev = require('./webpack-dev.config');
+const babelrcString = fs.readFileSync(path.resolve(__dirname, '../../.babelrc'));
+const babelrc = JSON.parse(babelrcString.toString());
 
 // Update
 configDev.module.loaders[0].query = babelrc;
