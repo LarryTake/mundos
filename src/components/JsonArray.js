@@ -36,6 +36,8 @@ const propTypes = {
     minusMenuElement: PropTypes.element,
     plusMenuElement: PropTypes.element,
     beforeRemoveAction: PropTypes.func,
+    beforeAddAction: PropTypes.func,
+    beforeUpdateAction: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -113,28 +115,24 @@ class JsonArray extends Component {
         return () => {
             const { beforeRemoveAction } = this.props;
             const { data, keyPath, deep } = this.state;
+            const oldValue = data[index];
+
             // Before Remove Action
-            beforeRemoveAction(index, keyPath, deep).then(() => {
+            beforeRemoveAction(index, keyPath, deep, oldValue).then(() => {
                 const objType = getObjectType(data[index]);
-                let deltaUpdateResult = null;
+                const deltaUpdateResult = {
+                    keyPath,
+                    deep,
+                    key: index,
+                    oldValue,
+                };
+
                 if (objType === 'Object' || objType === 'Array') {
-                    deltaUpdateResult = {
-                        type: UPDATE_DELTA_TYPE,
-                        keyPath,
-                        deep,
-                        key: index,
-                        oldValue: data[index],
-                        newValue: null,
-                    };
+                    deltaUpdateResult.type = UPDATE_DELTA_TYPE;
+                    deltaUpdateResult.newValue = null;
                     data[index] = null;
                 } else {
-                    deltaUpdateResult = {
-                        type: REMOVE_DELTA_TYPE,
-                        keyPath,
-                        deep,
-                        key: index,
-                        oldValue: data[index],
-                    };
+                    deltaUpdateResult.type = REMOVE_DELTA_TYPE;
                     data.splice(index, 1);
                 }
                 this.setState({
@@ -152,26 +150,31 @@ class JsonArray extends Component {
 
     handleAddValueAdd({ newValue }) {
         const { data, keyPath, deep } = this.state;
-        // Update data
-        const newData = [
-            ...data,
-            newValue,
-        ];
-        this.setState({
-            data: newData,
-        });
-        // Cancel add to close
-        this.handleAddValueCancel();
-        // Spread new update
-        const { onUpdate, onDeltaUpdate } = this.props;
-        onUpdate(keyPath[keyPath.length - 1], newData);
-        // Spread delta update
-        onDeltaUpdate({
-            type: ADD_DELTA_TYPE,
-            keyPath,
-            deep,
-            key: newData.length - 1,
-            newValue,
+        const { beforeAddAction } = this.props;
+
+        beforeAddAction(data.length, keyPath, deep, newValue).then(() => {
+            // Update data
+            const newData = [
+                ...data,
+                newValue,
+            ];
+            this.setState({
+                data: newData,
+            });
+            // Cancel add to close
+            this.handleAddValueCancel();
+            // Spread new update
+            const { onUpdate, onDeltaUpdate } = this.props;
+            onUpdate(keyPath[keyPath.length - 1], newData);
+            // Spread delta update
+            onDeltaUpdate({
+                type: ADD_DELTA_TYPE,
+                keyPath,
+                deep,
+                key: newData.length - 1,
+                newValue,
+            });
+        }).catch(() => {
         });
     }
 
@@ -249,6 +252,8 @@ class JsonArray extends Component {
             minusMenuElement,
             plusMenuElement,
             beforeRemoveAction,
+            beforeAddAction,
+            beforeUpdateAction,
             } = this.props;
         const { minus, plus, delimiter, ul, addForm } = getStyle(name, data, keyPath, deep, dataType);
 
@@ -285,6 +290,8 @@ class JsonArray extends Component {
                 minusMenuElement={minusMenuElement}
                 plusMenuElement={plusMenuElement}
                 beforeRemoveAction={beforeRemoveAction}
+                beforeAddAction={beforeAddAction}
+                beforeUpdateAction={beforeUpdateAction}
             />);
 
         const onlyValue = true;

@@ -96,12 +96,13 @@ class JsonValue extends Component {
         };
 
         // Run update
-        handleUpdateValue(result);
-
-        // Cancel edit mode if necessary
-        if (!isComponentWillChange(originalValue, newValue)) {
-            this.handleCancelEdit();
-        }
+        handleUpdateValue(result).then(() => {
+            // Cancel edit mode if necessary
+            if (!isComponentWillChange(originalValue, newValue)) {
+                this.handleCancelEdit();
+            }
+        }).catch(() => {
+        });
     }
 
     handleEditMode() {

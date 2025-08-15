@@ -32,6 +32,8 @@ const propTypes = {
     minusMenuElement: PropTypes.element,
     plusMenuElement: PropTypes.element,
     beforeRemoveAction: PropTypes.func,
+    beforeAddAction: PropTypes.func,
+    beforeUpdateAction: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -53,7 +55,9 @@ const defaultProps = {
                 return value;
         }
     },
-    beforeRemoveAction: (key, keyPath, deep) => new Promise(resolve => resolve()),
+    beforeRemoveAction: (key, keyPath, deep, oldValue) => new Promise(resolve => resolve()),
+    beforeAddAction: (key, keyPath, deep, newValue) => new Promise(resolve => resolve()),
+    beforeUpdateAction: (key, keyPath, deep, oldValue, newValue) => new Promise(resolve => resolve()),
 };
 
 /* ************************************* */
@@ -101,6 +105,8 @@ class JsonTree extends Component {
             minusMenuElement,
             plusMenuElement,
             beforeRemoveAction,
+            beforeAddAction,
+            beforeUpdateAction,
             } = this.props;
 
         // Node type
@@ -125,6 +131,8 @@ class JsonTree extends Component {
                 minusMenuElement={minusMenuElement}
                 plusMenuElement={plusMenuElement}
                 beforeRemoveAction={beforeRemoveAction}
+                beforeAddAction={beforeAddAction}
+                beforeUpdateAction={beforeUpdateAction}
             />);
         } else {
             node = 'Data must be an Array or Object';
