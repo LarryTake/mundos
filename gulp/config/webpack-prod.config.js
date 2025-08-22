@@ -17,6 +17,8 @@ const autoprefixer = require('autoprefixer');
 // Constants
 const BUILD_DIR = path.resolve(__dirname, '../../docs/');
 const APP_DIR = path.resolve(__dirname, '../../dev/');
+const SRC_DIR = path.resolve(__dirname, '../../src');
+const ROOT_DIR = path.resolve(__dirname, '../..');
 
 /* ************************************* */
 /* ********       EXPORTS       ******** */
@@ -38,6 +40,15 @@ module.exports = {
         filename: '[name]-[hash:5].js',
     },
     module: {
+        preLoaders: [
+            {
+                test: /\.js$/,
+                loader: 'eslint',
+                include: [
+                    SRC_DIR,
+                ],
+            },
+        ],
         loaders: [
             {
                 test: /\.js?/,
@@ -70,10 +81,9 @@ module.exports = {
                     {
                         loader: 'css',
                         query: {
-                            modules: 'true',
-                            camelCase: 'true',
+                            modules: true,
+                            camelCase: true,
                             localIdentName: '[local]',
-                            importLoaders: 1,
                         },
                     },
                     {
@@ -96,6 +106,9 @@ module.exports = {
                 },
             },
         ],
+    },
+    eslint: {
+        configFile: path.join(ROOT_DIR, '.eslintrc.json'),
     },
     postcss: [
         autoprefixer({

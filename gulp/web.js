@@ -38,8 +38,9 @@ gulp.task('web:serve', (done) => {
     const compiler = webpack(webpackDev);
 
     const server = new WebpackDevServer(compiler, {
+        inline: true,
         hot: true,
-        quiet: true,
+        quiet: false,
         noInfo: false,
         debug: true,
         devTool: true,

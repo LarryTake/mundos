@@ -17,6 +17,8 @@ const autoprefixer = require('autoprefixer');
 // Constants
 const BUILD_DIR = path.resolve(__dirname, '../../dev_build/');
 const APP_DIR = path.resolve(__dirname, '../../dev/');
+const SRC_DIR = path.resolve(__dirname, '../../src');
+const ROOT_DIR = path.resolve(__dirname, '../..');
 
 /* ************************************* */
 /* ********       EXPORTS       ******** */
@@ -39,6 +41,15 @@ module.exports = {
         publicPath: '/',
     },
     module: {
+        preLoaders: [
+            {
+                test: /\.js$/,
+                loader: 'eslint',
+                include: [
+                    SRC_DIR,
+                ],
+            },
+        ],
         loaders: [
             {
                 test: /\.js?/,
@@ -74,8 +85,8 @@ module.exports = {
                     {
                         loader: 'css',
                         query: {
-                            modules: 'true',
-                            camelCase: 'true',
+                            modules: true,
+                            camelCase: true,
                             localIdentName: '[path][name]---[local]---[hash:base64:5]',
                         },
                     },
@@ -100,6 +111,9 @@ module.exports = {
             },
         ],
     },
+    eslint: {
+        configFile: path.join(ROOT_DIR, '.eslintrc.json'),
+    },
     postcss: [
         autoprefixer({
             browsers: ['last 3 versions', 'ie > 8'],
@@ -117,7 +131,7 @@ module.exports = {
             filename: 'index.html',
             template: path.join(APP_DIR, 'index.html'),
         }),
-        new ProgressBarPlugin(),
+        //new ProgressBarPlugin(),
         new webpack.optimize.DedupePlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
