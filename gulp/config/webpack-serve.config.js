@@ -10,10 +10,12 @@
 const fs = require('fs');
 const path = require('path');
 const configDev = require('./webpack-dev.config');
+
 const babelrcString = fs.readFileSync(path.resolve(__dirname, '../../.babelrc'));
 const babelrc = JSON.parse(babelrcString.toString());
 
 // Update
+configDev.module.preLoaders = [];
 configDev.module.loaders[0].query = babelrc;
 configDev.module.loaders[0].query.presets.push('react-hmre');
 configDev.module.loaders[0].query.babelrc = false;
