@@ -55,9 +55,11 @@ const defaultProps = {
                 return value;
         }
     },
+    /* eslint-disable no-unused-vars */
     beforeRemoveAction: (key, keyPath, deep, oldValue) => new Promise(resolve => resolve()),
     beforeAddAction: (key, keyPath, deep, newValue) => new Promise(resolve => resolve()),
     beforeUpdateAction: (key, keyPath, deep, oldValue, newValue) => new Promise(resolve => resolve()),
+    /* esling-enable */
 };
 
 /* ************************************* */

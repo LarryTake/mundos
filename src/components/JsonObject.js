@@ -234,12 +234,14 @@ class JsonObject extends Component {
             minusElement = (deep !== 0) ? minusMenuLayout : null;
         }
 
+        /* eslint-disable jsx-a11y/no-static-element-interactions */
         return (<span className="rejt-collapsed">
             <span className="rejt-collapsed-text" style={collapsed} onClick={this.handleCollapseMode}>
                 {collapseValue} {numberOfItems} {itemName}
             </span>
             {minusElement}
         </span>);
+        /* eslint-enable */
     }
 
     renderNotCollapsed() {
@@ -342,6 +344,7 @@ class JsonObject extends Component {
         const value = collapsed ? this.renderCollapsed() : this.renderNotCollapsed();
         const style = getStyle(name, data, keyPath, deep, dataType);
 
+        /* eslint-disable jsx-a11y/no-static-element-interactions */
         return (
             <div className="rejt-object-node">
                 <span onClick={this.handleCollapseMode}>
@@ -350,6 +353,7 @@ class JsonObject extends Component {
                 {value}
             </div>
         );
+        /* eslint-enable */
     }
 }
 

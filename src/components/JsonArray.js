@@ -227,12 +227,14 @@ class JsonArray extends Component {
 
         const itemName = (numberOfItems > 1) ? 'items' : 'item';
 
+        /* eslint-disable jsx-a11y/no-static-element-interactions */
         return (<span className="rejt-collapsed">
             <span className="rejt-collapsed-text" style={collapsed} onClick={this.handleCollapseMode}>
                 {collapseValue} {numberOfItems} {itemName}
             </span>
             {minusElement}
         </span>);
+        /* eslint-enable */
     }
 
     renderNotCollapsed() {
@@ -335,14 +337,16 @@ class JsonArray extends Component {
         const value = collapsed ? this.renderCollapsed() : this.renderNotCollapsed();
         const style = getStyle(name, data, keyPath, deep, dataType);
 
+        /* eslint-disable jsx-a11y/no-static-element-interactions */
         return (
             <div className="rejt-array-node">
-                <label onClick={this.handleCollapseMode}>
+                <span onClick={this.handleCollapseMode}>
                     <span className="rejt-name" style={style.name}>{name} : </span>
-                </label>
+                </span>
                 {value}
             </div>
         );
+        /* eslint-enable */
     }
 }
 
