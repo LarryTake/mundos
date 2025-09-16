@@ -9,7 +9,6 @@
 /* ************************************* */
 const path = require('path');
 const webpack = require('webpack');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackCombineLoaders = require('webpack-combine-loaders');
 const autoprefixer = require('autoprefixer');
@@ -25,15 +24,17 @@ const ROOT_DIR = path.resolve(__dirname, '../..');
 /* ************************************* */
 
 module.exports = {
+    bail: true,
+    devtool: 'source-map',
     entry: {
         app: [
             path.join(APP_DIR, 'index.jsx'),
             path.join(APP_DIR, 'index.html'),
         ],
-        vendor: ['react', 'react-hotkeys'],
+        vendor: ['react', 'react-hotkeys', 'react-dom', 'lodash'],
     },
     resolve: {
-        extensions: ['', '.scss', '.css', '.js', '.json'],
+        extensions: ['', '.scss', '.sass', '.css', '.js', '.jsx', '.json'],
     },
     output: {
         path: BUILD_DIR,
@@ -43,7 +44,7 @@ module.exports = {
     module: {
         preLoaders: [
             {
-                test: /\.js$/,
+                test: /\.js(x|)$/,
                 loader: 'eslint',
                 include: [
                     SRC_DIR,
@@ -52,7 +53,7 @@ module.exports = {
         ],
         loaders: [
             {
-                test: /\.js?/,
+                test: /\.js(x|)?/,
                 exclude: /node_modules/,
                 loader: 'babel',
             },
@@ -113,6 +114,8 @@ module.exports = {
     },
     eslint: {
         configFile: path.join(ROOT_DIR, '.eslintrc.json'),
+        failOnWarning: true,
+        failOnError: true,
     },
     postcss: [
         autoprefixer({
@@ -131,9 +134,5 @@ module.exports = {
             filename: 'index.html',
             template: path.join(APP_DIR, 'index.html'),
         }),
-        //new ProgressBarPlugin(),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
     ],
 };

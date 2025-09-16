@@ -8,7 +8,6 @@
 /* ********       REQUIRE       ******** */
 /* ************************************* */
 const gulp = require('gulp');
-const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 
@@ -21,16 +20,19 @@ const WebpackDevServer = require('webpack-dev-server');
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-gulp.task('web:build:dev', () => {
-    gulp.src('src/dev/index.jsx')
-        .pipe(webpackStream(require('./config/webpack-dev.config')))
-        .pipe(gulp.dest('dev_build/'));
+gulp.task('web:build:dev', (done) => {
+    webpack(require('./config/webpack-dev.config'), done);
 });
 
-gulp.task('web:build:prod', () => {
-    gulp.src('src/dev/index.jsx')
-        .pipe(webpackStream(require('./config/webpack-prod.config')))
-        .pipe(gulp.dest('docs/'));
+gulp.task('web:build:prod', (done) => {
+    webpack(require('./config/webpack-prod.config'), (err, stats) => {
+        if (err) {
+            return done(err);
+        }
+
+        console.log(stats.toString());
+        done();
+    });
 });
 
 gulp.task('web:serve', (done) => {

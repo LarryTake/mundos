@@ -25,15 +25,17 @@ const ROOT_DIR = path.resolve(__dirname, '../..');
 /* ************************************* */
 
 module.exports = {
+    bail: true,
+    devtool: 'cheap-module-source-map',
     entry: {
         app: [
             path.join(APP_DIR, 'index.jsx'),
             path.join(APP_DIR, 'index.html'),
         ],
-        vendor: ['react', 'react-hotkeys'],
+        vendor: ['react', 'react-hotkeys', 'react-dom', 'lodash'],
     },
     resolve: {
-        extensions: ['', '.scss', '.css', '.js', '.json'],
+        extensions: ['', '.scss', '.sass', '.css', '.js', '.jsx', '.json'],
     },
     output: {
         path: BUILD_DIR,
@@ -42,7 +44,7 @@ module.exports = {
     module: {
         preLoaders: [
             {
-                test: /\.js$/,
+                test: /\.js(x|)$/,
                 loader: 'eslint',
                 include: [
                     SRC_DIR,
@@ -51,7 +53,7 @@ module.exports = {
         ],
         loaders: [
             {
-                test: /\.js?/,
+                test: /\.js(x|)$/,
                 exclude: /node_modules/,
                 loader: 'babel',
             },
@@ -109,6 +111,8 @@ module.exports = {
     },
     eslint: {
         configFile: path.join(ROOT_DIR, '.eslintrc.json'),
+        failOnWarning: true,
+        failOnError: true,
     },
     postcss: [
         autoprefixer({
@@ -130,6 +134,13 @@ module.exports = {
         new ExtractTextPlugin('[name]-[hash:5].css'),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({}),
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+                warnings: false,
+                dead_code: true,
+                unused: true,
+            },
+            minimize: true,
+        }),
     ],
 };
