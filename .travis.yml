@@ -10,6 +10,6 @@ before_script:
   - npm install -g gulp
 
 script:
-  - gulp web:build:dev
+  - gulp build:dev
   - gulp release
 
