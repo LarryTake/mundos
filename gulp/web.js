@@ -21,7 +21,14 @@ const WebpackDevServer = require('webpack-dev-server');
 /* ************************************* */
 
 gulp.task('web:build:dev', (done) => {
-    webpack(require('./config/webpack-dev.config'), done);
+    webpack(require('./config/webpack-dev.config'), (err, stats) => {
+        if (err) {
+            return done(err);
+        }
+
+        console.log(stats.toString());
+        done();
+    });
 });
 
 gulp.task('web:build:prod', (done) => {
