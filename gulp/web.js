@@ -11,6 +11,23 @@ const gulp = require('gulp');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 
+const webpackToStringOptions = {
+    colors: {
+        level: 1,
+        hasBasic: true,
+        has256: false,
+        has16m: false,
+    },
+    cached: false,
+    cachedAssets: false,
+    modules: true,
+    chunks: false,
+    reasons: false,
+    errorDetails: false,
+    chunkOrigins: false,
+    exclude: ['node_modules'],
+};
+
 /* ************************************* */
 /* ********  PRIVATE FUNCTIONS  ******** */
 /* ************************************* */
@@ -26,7 +43,7 @@ gulp.task('web:build:dev', (done) => {
             return done(err);
         }
 
-        console.log(stats.toString());
+        console.log(stats.toString(webpackToStringOptions));
         done();
     });
 });
@@ -37,7 +54,7 @@ gulp.task('web:build:prod', (done) => {
             return done(err);
         }
 
-        console.log(stats.toString());
+        console.log(stats.toString(webpackToStringOptions));
         done();
     });
 });
@@ -65,6 +82,6 @@ gulp.task('web:serve', (done) => {
             done(err);
             return;
         }
-        console.log('==> Listening on http://localhost:8080');
+        console.log('\n==> Webpack Listening on http://localhost:8080\n');
     });
 });
