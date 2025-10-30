@@ -32,7 +32,7 @@ function parse(string) {
 
     // Check if string contains 'function' and start with it to eval it
     if (result.indexOf('function') === 0) {
-        return eval(`(${result})`);
+        return eval(`(${result})`); // eslint-disable-line no-eval
     }
 
     try {

@@ -36,6 +36,8 @@ const propTypes = {
     minusMenuElement: PropTypes.element,
     plusMenuElement: PropTypes.element,
     beforeRemoveAction: PropTypes.func,
+    beforeAddAction: PropTypes.func,
+    beforeUpdateAction: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -111,23 +113,28 @@ class JsonObject extends Component {
 
     handleAddValueAdd({ key, newValue }) {
         const { data, keyPath, deep } = this.state;
-        // Update data
-        data[key] = newValue;
-        this.setState({
-            data,
-        });
-        // Cancel add to close
-        this.handleAddValueCancel();
-        // Spread new update
-        const { onUpdate, onDeltaUpdate } = this.props;
-        onUpdate(keyPath[keyPath.length - 1], data);
-        // Spread delta update
-        onDeltaUpdate({
-            type: ADD_DELTA_TYPE,
-            keyPath,
-            deep,
-            key,
-            newValue,
+        const { beforeAddAction } = this.props;
+
+        beforeAddAction(key, keyPath, deep, newValue).then(() => {
+            // Update data
+            data[key] = newValue;
+            this.setState({
+                data,
+            });
+            // Cancel add to close
+            this.handleAddValueCancel();
+            // Spread new update
+            const { onUpdate, onDeltaUpdate } = this.props;
+            onUpdate(keyPath[keyPath.length - 1], data);
+            // Spread delta update
+            onDeltaUpdate({
+                type: ADD_DELTA_TYPE,
+                keyPath,
+                deep,
+                key,
+                newValue,
+            });
+        }).catch(() => {
         });
     }
 
@@ -135,28 +142,23 @@ class JsonObject extends Component {
         return () => {
             const { beforeRemoveAction } = this.props;
             const { data, keyPath, deep } = this.state;
+            const oldValue = data[key];
             // Before Remove Action
-            beforeRemoveAction(key, keyPath, deep).then(() => {
-                const objType = getObjectType(data[key]);
-                let deltaUpdateResult = null;
+            beforeRemoveAction(key, keyPath, deep, oldValue).then(() => {
+                const objType = getObjectType(oldValue);
+                const deltaUpdateResult = {
+                    keyPath,
+                    deep,
+                    key,
+                    oldValue,
+                };
+
                 if (objType === 'Object' || objType === 'Array') {
-                    deltaUpdateResult = {
-                        type: UPDATE_DELTA_TYPE,
-                        keyPath,
-                        deep,
-                        key,
-                        oldValue: data[key],
-                        newValue: null,
-                    };
+                    deltaUpdateResult.type = UPDATE_DELTA_TYPE;
+                    deltaUpdateResult.newValue = null;
                     data[key] = null;
                 } else {
-                    deltaUpdateResult = {
-                        type: REMOVE_DELTA_TYPE,
-                        keyPath,
-                        deep,
-                        key,
-                        oldValue: data[key],
-                    };
+                    deltaUpdateResult.type = REMOVE_DELTA_TYPE;
                     delete data[key];
                 }
                 this.setState({
@@ -179,25 +181,36 @@ class JsonObject extends Component {
     }
 
     handleEditValue({ key, value }) {
-        const { data, keyPath, deep } = this.state;
-        // Update value
-        const oldValue = data[key];
-        data[key] = value;
-        // Set state
-        this.setState({
-            data,
-        });
-        // Spread new update
-        const { onUpdate, onDeltaUpdate } = this.props;
-        onUpdate(keyPath[keyPath.length - 1], data);
-        // Spread delta update
-        onDeltaUpdate({
-            type: UPDATE_DELTA_TYPE,
-            keyPath,
-            deep,
-            key,
-            newValue: value,
-            oldValue,
+        return new Promise((resolve, reject) => {
+            const { beforeUpdateAction } = this.props;
+            const { data, keyPath, deep } = this.state;
+
+            // Old value
+            const oldValue = data[key];
+
+            // Before update action
+            beforeUpdateAction(key, keyPath, deep, oldValue, value).then(() => {
+                // Update value
+                data[key] = value;
+                // Set state
+                this.setState({
+                    data,
+                });
+                // Spread new update
+                const { onUpdate, onDeltaUpdate } = this.props;
+                onUpdate(keyPath[keyPath.length - 1], data);
+                // Spread delta update
+                onDeltaUpdate({
+                    type: UPDATE_DELTA_TYPE,
+                    keyPath,
+                    deep,
+                    key,
+                    newValue: value,
+                    oldValue,
+                });
+                // Resolve
+                resolve();
+            }).catch(reject);
         });
     }
 
@@ -221,12 +234,14 @@ class JsonObject extends Component {
             minusElement = (deep !== 0) ? minusMenuLayout : null;
         }
 
+        /* eslint-disable jsx-a11y/no-static-element-interactions */
         return (<span className="rejt-collapsed">
             <span className="rejt-collapsed-text" style={collapsed} onClick={this.handleCollapseMode}>
                 {collapseValue} {numberOfItems} {itemName}
             </span>
             {minusElement}
         </span>);
+        /* eslint-enable */
     }
 
     renderNotCollapsed() {
@@ -246,6 +261,8 @@ class JsonObject extends Component {
             minusMenuElement,
             plusMenuElement,
             beforeRemoveAction,
+            beforeAddAction,
+            beforeUpdateAction,
             } = this.props;
 
         const { minus, plus, addForm, ul, delimiter } = getStyle(name, data, keyPath, deep, dataType);
@@ -283,6 +300,8 @@ class JsonObject extends Component {
                 minusMenuElement={minusMenuElement}
                 plusMenuElement={plusMenuElement}
                 beforeRemoveAction={beforeRemoveAction}
+                beforeAddAction={beforeAddAction}
+                beforeUpdateAction={beforeUpdateAction}
             />);
 
         const startObject = '{';
@@ -325,6 +344,7 @@ class JsonObject extends Component {
         const value = collapsed ? this.renderCollapsed() : this.renderNotCollapsed();
         const style = getStyle(name, data, keyPath, deep, dataType);
 
+        /* eslint-disable jsx-a11y/no-static-element-interactions */
         return (
             <div className="rejt-object-node">
                 <span onClick={this.handleCollapseMode}>
@@ -333,6 +353,7 @@ class JsonObject extends Component {
                 {value}
             </div>
         );
+        /* eslint-enable */
     }
 }
 

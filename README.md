@@ -212,19 +212,53 @@ The library will add a `onClick`, `className` and `style` props on element.
 The library will add a `onClick`, `className` and `style` props on element.
 
 ### beforeRemoveAction
-|         Key        |                      Description                             |   Type   |  Required |                            Default                          |
-|:------------------:|:------------------------------------------------------------:|:--------:|:---------:|:-----------------------------------------------------------:|
-| beforeRemoveAction | Function called before each remove action (with minus menu)  | Function |   False   | `(key, keyPath, deep) => new Promise(resolve => resolve())` |
+|         Key        |                      Description                             |   Type   |  Required |                                 Default                               |
+|:------------------:|:------------------------------------------------------------:|:--------:|:---------:|:---------------------------------------------------------------------:|
+| beforeRemoveAction | Function called before each remove action (with minus menu)  | Function |   False   | `(key, keyPath, deep, oldValue) => new Promise(resolve => resolve())` |
 
 This function must return a `Promise`. In case of resolve of this one, the remove will be done. Otherwise, in reject, nothing will be done.
 
 Function parameters :
 
-|     Key     |           Description           |   Type  |                            Example                              |
-|:-----------:|:-------------------------------:|:-------:|:---------------------------------------------------------------:|
-|     key     |    Key of current node/value    | String  |        'object' for data: { object: { string: 'test' } }        |
-|   keyPath   |   key path                      |  Array  |       ['object'] for data: { object: { string: 'test' } }       |
-|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node   |
+|     Key     |           Description           |   Type  |                            Example                                           |
+|:-----------:|:-------------------------------:|:-------:|:----------------------------------------------------------------------------:|
+|     key     |    Key of current node/value    | String  |        'object' for data: { object: { string: 'test' } }                     |
+|   keyPath   |   key path                      |  Array  |              [] for data: { object: { string: 'test' } }                     |
+|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
+|   oldValue  |   Old value of the key          |   Any   | { string: 'test' } for data: { object: { string: 'test' } } on 'object' node |
+
+### beforeAddAction
+|       Key       |                    Description                           |   Type   |  Required |                                Default                                |
+|:---------------:|:--------------------------------------------------------:|:--------:|:---------:|:---------------------------------------------------------------------:|
+| beforeAddAction | Function called before each add action (with plus menu)  | Function |   False   | `(key, keyPath, deep, newValue) => new Promise(resolve => resolve())` |
+
+This function must return a `Promise`. In case of resolve of this one, the remove will be done. Otherwise, in reject, nothing will be done.
+
+Function parameters :
+
+|     Key     |           Description           |   Type  |                            Example                                           |
+|:-----------:|:-------------------------------:|:-------:|:----------------------------------------------------------------------------:|
+|     key     |    Key of current node/value    | String  |        'string' for data: { object: { string: 'test' } }                     |
+|   keyPath   |   key path                      |  Array  |           ['object'] for data: { object: { string: 'test' } }                |
+|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
+|   newValue  |   New value of the key          |   Any   |       'test' for data: { object: { string: 'test' } } on 'string' node       |
+
+### beforeUpdateAction
+|         Key        |            Description                    |   Type   |  Required |                                     Default                                     |
+|:------------------:|:-----------------------------------------:|:--------:|:---------:|:-------------------------------------------------------------------------------:|
+| beforeUpdateAction | Function called before each update action | Function |   False   | `(key, keyPath, deep, oldValue, newValue) => new Promise(resolve => resolve())` |
+
+This function must return a `Promise`. In case of resolve of this one, the remove will be done. Otherwise, in reject, nothing will be done.
+
+Function parameters :
+
+|     Key     |           Description           |   Type  |                            Example                                           |
+|:-----------:|:-------------------------------:|:-------:|:----------------------------------------------------------------------------:|
+|     key     |    Key of current node/value    | String  |        'string' for data: { object: { string: 'test' } }                     |
+|   keyPath   |   key path                      |  Array  |           ['object'] for data: { object: { string: 'test' } }                |
+|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
+|   oldValue  |   Old value of the key          |   Any   |       'test' for data: { object: { string: 'test' } } on 'string' node       |
+|   newValue  |   New value of the key          |   Any   |     'update' for data: { object: { string: 'update' } } on 'string' node     |
 
 ## Design
 The library provide CSS class on elements. All are prefixed by "rejt" to avoid conflict. 

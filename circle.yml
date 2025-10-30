@@ -5,5 +5,6 @@ machine:
 
 test:
   override:
+    - gulp build:dev
     - gulp release
 

@@ -19,5 +19,7 @@ const runSequence = require('run-sequence');
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-gulp.task('build:dev', done => runSequence('env:dev', 'web:build:dev', done));
+gulp.task('build:prod', done => runSequence('env:prod', 'clean:release:docs', 'web:build:prod', done));
+
+gulp.task('build:dev', done => runSequence('env:dev', 'clean:web:dev', 'web:build:dev', done));
 

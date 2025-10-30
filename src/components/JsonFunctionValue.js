@@ -96,12 +96,13 @@ class JsonValue extends Component {
         };
 
         // Run update
-        handleUpdateValue(result);
-
-        // Cancel edit mode if necessary
-        if (!isComponentWillChange(originalValue, newValue)) {
-            this.handleCancelEdit();
-        }
+        handleUpdateValue(result).then(() => {
+            // Cancel edit mode if necessary
+            if (!isComponentWillChange(originalValue, newValue)) {
+                this.handleCancelEdit();
+            }
+        }).catch(() => {
+        });
     }
 
     handleEditMode() {
@@ -155,9 +156,11 @@ class JsonValue extends Component {
             </span>);
             minusElement = null;
         } else {
+            /* eslint-disable jsx-a11y/no-static-element-interactions */
             result = (<span className="rejt-value" style={style.value} onClick={readOnly ? null : this.handleEditMode}>
                 {value}
             </span>);
+            /* eslint-enable */
             const minusMenuLayout = React.cloneElement(minusMenuElement, {
                 onClick: handleRemove,
                 className: 'rejt-minus-menu',
