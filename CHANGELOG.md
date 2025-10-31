@@ -1,4 +1,16 @@
 
+# 1.5.0
+## Fix
+- Fix ESLint errors and warning
+- Demo works with IE
+
+## Code
+- Update webpack configurations
+- Update Travis CI and Circle CI configuration
+
+## Feature
+- Add "before action" on Remove, Update and Add action
+
 # 1.4.0
 ## Fix
 - Fix variable name in add part
