@@ -54,7 +54,12 @@ class Body extends Component {
             deltaUpdateString: '{}',
             globalUpdateString: '{}',
             textareaRef: null,
+            readOnlyBooleanRef: null,
+            readOnlyFunctionRef: null,
             readOnlyRef: null,
+            readOnlyEnable: false,
+            readOnlyFunctionEnable: false,
+            readOnlyBooleanEnable: false,
             readOnly: false,
             customInputRef: null,
             customInput: false,
@@ -66,8 +71,12 @@ class Body extends Component {
         this.onDeltaUpdate = this.onDeltaUpdate.bind(this);
         this.refTextarea = this.refTextarea.bind(this);
         this.refReadOnlyCheckbox = this.refReadOnlyCheckbox.bind(this);
+        this.refReadOnlyFunctionCheckbox = this.refReadOnlyFunctionCheckbox.bind(this);
+        this.refReadOnlyBooleanCheckbox = this.refReadOnlyBooleanCheckbox.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleResetToDefault = this.handleResetToDefault.bind(this);
+        this.handleChangeReadOnlyBoolean = this.handleChangeReadOnlyBoolean.bind(this);
+        this.handleChangeReadOnlyFunction = this.handleChangeReadOnlyFunction.bind(this);
         this.handleChangeReadOnly = this.handleChangeReadOnly.bind(this);
         this.handleClearGlobalUpdateString = this.handleClearGlobalUpdateString.bind(this);
         this.handleClearDeltaUpdateString = this.handleClearDeltaUpdateString.bind(this);
@@ -91,6 +100,16 @@ class Body extends Component {
 
     refTextarea(node) {
         this.state.textareaRef = node;
+    }
+
+    refReadOnlyFunctionCheckbox(node) {
+        this.state.readOnlyFunctionRef = node;
+        this.state.readOnlyFunctionRef.disabled = true;
+    }
+
+    refReadOnlyBooleanCheckbox(node) {
+        this.state.readOnlyBooleanRef = node;
+        this.state.readOnlyBooleanRef.disabled = true;
     }
 
     refReadOnlyCheckbox(node) {
@@ -146,10 +165,53 @@ class Body extends Component {
     }
 
     handleChangeReadOnly() {
-        const { readOnlyRef } = this.state;
+        const { readOnlyRef, readOnlyBooleanRef, readOnlyFunctionRef } = this.state;
 
         this.setState({
-            readOnly: readOnlyRef.checked,
+            readOnlyEnable: readOnlyRef.checked,
+        });
+
+        if (readOnlyRef.checked) {
+            readOnlyBooleanRef.disabled = false;
+            readOnlyFunctionRef.disabled = false;
+            if (readOnlyBooleanRef.checked) {
+                this.handleChangeReadOnlyBoolean();
+            } else if (readOnlyFunctionRef.checked) {
+                this.handleChangeReadOnlyFunction();
+            }
+        } else {
+            readOnlyBooleanRef.disabled = true;
+            readOnlyFunctionRef.disabled = true;
+            this.setState({
+                readOnly: false,
+            });
+        }
+    }
+
+    handleChangeReadOnlyBoolean() {
+        const { readOnlyBooleanRef, readOnlyFunctionRef } = this.state;
+
+        readOnlyFunctionRef.disabled = readOnlyBooleanRef.checked;
+
+        this.setState({
+            readOnly: readOnlyBooleanRef.checked,
+        });
+    }
+
+    handleChangeReadOnlyFunction() {
+        const { readOnlyFunctionRef, readOnlyBooleanRef } = this.state;
+
+        readOnlyBooleanRef.disabled = readOnlyFunctionRef.checked;
+
+        let result = null;
+        if (readOnlyFunctionRef.checked) {
+            result = (name, value, keyPath) => (keyPath[keyPath.length - 1] === 'text');
+        } else {
+            result = () => false;
+        }
+
+        this.setState({
+            readOnly: result,
         });
     }
 
@@ -199,6 +261,20 @@ class Body extends Component {
                             ref={this.refReadOnlyCheckbox}
                             onChange={this.handleChangeReadOnly}
                         />Read Only
+                    </span>
+                    <span>
+                        <input
+                            type="checkbox"
+                            ref={this.refReadOnlyBooleanCheckbox}
+                            onChange={this.handleChangeReadOnlyBoolean}
+                        />Read Only Boolean
+                    </span>
+                    <span>
+                        <input
+                            type="checkbox"
+                            ref={this.refReadOnlyFunctionCheckbox}
+                            onChange={this.handleChangeReadOnlyFunction}
+                        />Read Only Function (read only for all 'text' key)
                     </span>
                     <span>
                         <input
