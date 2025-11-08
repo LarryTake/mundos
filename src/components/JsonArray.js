@@ -25,7 +25,7 @@ const propTypes = {
     handleRemove: PropTypes.func,
     onUpdate: PropTypes.func.isRequired,
     onDeltaUpdate: PropTypes.func.isRequired,
-    readOnly: PropTypes.bool.isRequired,
+    readOnly: PropTypes.func.isRequired,
     dataType: PropTypes.string,
     getStyle: PropTypes.func.isRequired,
     addButtonElement: PropTypes.element,
@@ -216,7 +216,7 @@ class JsonArray extends Component {
         const numberOfItems = data.length;
         let minusElement = null;
         // Check if readOnly is activated
-        if (!readOnly) {
+        if (!readOnly(name, data, keyPath, deep, dataType)) {
             const minusMenuLayout = React.cloneElement(minusMenuElement, {
                 onClick: handleRemove,
                 className: 'rejt-minus-menu',
@@ -260,8 +260,9 @@ class JsonArray extends Component {
         const { minus, plus, delimiter, ul, addForm } = getStyle(name, data, keyPath, deep, dataType);
 
         let minusElement = null;
+        const readOnlyResult = readOnly(name, data, keyPath, deep, dataType);
         // Check if readOnly is activated
-        if (!readOnly) {
+        if (!readOnlyResult) {
             const minusMenuLayout = React.cloneElement(minusMenuElement, {
                 onClick: handleRemove,
                 className: 'rejt-minus-menu',
@@ -299,7 +300,7 @@ class JsonArray extends Component {
         const onlyValue = true;
         let menu = null;
         // Check if readOnly is activated
-        if (!readOnly) {
+        if (!readOnlyResult) {
             const plusMenuLayout = React.cloneElement(plusMenuElement, {
                 onClick: this.handleAddMode,
                 className: 'rejt-plus-menu',

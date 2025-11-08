@@ -22,7 +22,10 @@ const propTypes = {
     isCollapsed: PropTypes.func,
     onFullyUpdate: PropTypes.func,
     onDeltaUpdate: PropTypes.func,
-    readOnly: PropTypes.bool,
+    readOnly: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.func,
+    ]),
     getStyle: PropTypes.func,
     addButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
@@ -39,11 +42,6 @@ const propTypes = {
 const defaultProps = {
     rootName: 'root',
     isCollapsed: (keyPath, deep) => (deep !== 0),
-    onFullyUpdate: () => {
-    },
-    onDeltaUpdate: () => {
-    },
-    readOnly: false,
     getStyle: (keyName, data, keyPath, deep, dataType) => {
         switch (dataType) {
             case 'Object':
@@ -56,10 +54,15 @@ const defaultProps = {
         }
     },
     /* eslint-disable no-unused-vars */
+    readOnly: (keyName, data, keyPath, deep, dataType) => false,
+    onFullyUpdate: (data) => {
+    },
+    onDeltaUpdate: (type, keyPath, deep, key, newValue, oldValue) => {
+    },
     beforeRemoveAction: (key, keyPath, deep, oldValue) => new Promise(resolve => resolve()),
     beforeAddAction: (key, keyPath, deep, newValue) => new Promise(resolve => resolve()),
     beforeUpdateAction: (key, keyPath, deep, oldValue, newValue) => new Promise(resolve => resolve()),
-    /* esling-enable */
+    /* eslint-enable */
 };
 
 /* ************************************* */
@@ -114,6 +117,11 @@ class JsonTree extends Component {
         // Node type
         const dataType = getObjectType(data);
         let node = null;
+        let readOnlyFunction = readOnly;
+        if (getObjectType(readOnly) === 'Boolean') {
+            readOnlyFunction = () => (readOnly);
+        }
+
         if (dataType === 'Object' || dataType === 'Array') {
             node = (<JsonNode
                 data={data}
@@ -123,7 +131,7 @@ class JsonTree extends Component {
                 isCollapsed={isCollapsed}
                 onUpdate={this.onUpdate}
                 onDeltaUpdate={onDeltaUpdate}
-                readOnly={readOnly}
+                readOnly={readOnlyFunction}
                 getStyle={getStyle}
                 addButtonElement={addButtonElement}
                 cancelButtonElement={cancelButtonElement}

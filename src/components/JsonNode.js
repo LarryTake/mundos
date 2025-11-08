@@ -27,7 +27,7 @@ const propTypes = {
     handleUpdateValue: PropTypes.func,
     onUpdate: PropTypes.func.isRequired,
     onDeltaUpdate: PropTypes.func.isRequired,
-    readOnly: PropTypes.bool.isRequired,
+    readOnly: PropTypes.func.isRequired,
     getStyle: PropTypes.func.isRequired,
     addButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
@@ -87,7 +87,7 @@ class JsonNode extends Component {
             beforeAddAction,
             beforeUpdateAction,
             } = this.props;
-        const readOnlyTrue = true;
+        const readOnlyTrue = () => (true);
 
         const dataType = getObjectType(data);
         switch (dataType) {

@@ -117,7 +117,21 @@ Delta data structure :
 ### readOnly
 |   Key    |            Description           |   Type  |  Required |  Default  |
 |:--------:|:--------------------------------:|:-------:|:---------:|:---------:|
-| readOnly | Read only boolean for all object | Boolean |   False   |   false   |
+| readOnly | Read only boolean for all object when a boolean is provided, 
+read only for specific keys when function is provided | Boolean | Function |   False   |   `(keyName, data, keyPath, deep, dataType) => false`   |
+
+This function must return a boolean.
+
+Function parameters :
+
+|     Key     |           Description           |   Type  |                            Example                              |
+|:-----------:|:-------------------------------:|:-------:|:---------------------------------------------------------------:|
+|   keyName   | Key name of current node/value  | String  |        'object' for data: { object: { string: 'test' } }        |
+|    data     |    data of current node/value   |   Any   |   { string: 'test' } for data: { object: { string: 'test' } }   |
+|   keyPath   |   key path                      |  Array  |       ['object'] for data: { object: { string: 'test' } }       |
+|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node   |
+|  dataType   | data type of current node/value |  String |  'Object', 'Array', 'Null', 'Undefined', 'Error', 'Number', ... |
+
 
 ### getStyle
 |     Key     |     Description      |   Type   |  Required |                       Default                       |

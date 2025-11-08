@@ -23,7 +23,7 @@ const propTypes = {
     deep: PropTypes.number,
     handleRemove: PropTypes.func,
     handleUpdateValue: PropTypes.func,
-    readOnly: PropTypes.bool.isRequired,
+    readOnly: PropTypes.func.isRequired,
     dataType: PropTypes.string,
     getStyle: PropTypes.func.isRequired,
     editButtonElement: PropTypes.element,
@@ -46,7 +46,7 @@ const defaultProps = {
 /* ************************************* */
 /* ********      COMPONENT      ******** */
 /* ************************************* */
-class JsonValue extends Component {
+class JsonFunctionValue extends Component {
     constructor(props) {
         super(props);
         const keyPath = [
@@ -76,10 +76,11 @@ class JsonValue extends Component {
     }
 
     componentDidUpdate() {
-        const { editEnabled, inputRef } = this.state;
-        const { readOnly } = this.props;
+        const { editEnabled, inputRef, name, value, keyPath, deep } = this.state;
+        const { readOnly, dataType } = this.props;
+        const readOnlyResult = readOnly(name, value, keyPath, deep, dataType);
 
-        if (editEnabled && !readOnly && (typeof inputRef.focus === 'function')) {
+        if (editEnabled && !readOnlyResult && (typeof inputRef.focus === 'function')) {
             inputRef.focus();
         }
     }
@@ -138,8 +139,9 @@ class JsonValue extends Component {
         const style = getStyle(name, value, keyPath, deep, dataType);
         let result = null;
         let minusElement = null;
+        const resultOnlyResult = readOnly(name, value, keyPath, deep, dataType);
 
-        if (editEnabled && !readOnly) {
+        if (editEnabled && !resultOnlyResult) {
             const editButtonElementLayout = React.cloneElement(editButtonElement, {
                 onClick: this.handleEdit,
             });
@@ -157,16 +159,20 @@ class JsonValue extends Component {
             minusElement = null;
         } else {
             /* eslint-disable jsx-a11y/no-static-element-interactions */
-            result = (<span className="rejt-value" style={style.value} onClick={readOnly ? null : this.handleEditMode}>
-                {value}
-            </span>);
+            result = (
+                <span
+                    className="rejt-value" style={style.value} onClick={resultOnlyResult ? null : this.handleEditMode}
+                >
+                    {value}
+                </span>
+            );
             /* eslint-enable */
             const minusMenuLayout = React.cloneElement(minusMenuElement, {
                 onClick: handleRemove,
                 className: 'rejt-minus-menu',
                 style: style.minus,
             });
-            minusElement = (readOnly) ? null : minusMenuLayout;
+            minusElement = (resultOnlyResult) ? null : minusMenuLayout;
         }
 
         const handlers = {
@@ -184,11 +190,11 @@ class JsonValue extends Component {
 }
 
 // Add prop types
-JsonValue.propTypes = propTypes;
+JsonFunctionValue.propTypes = propTypes;
 // Add default props
-JsonValue.defaultProps = defaultProps;
+JsonFunctionValue.defaultProps = defaultProps;
 
 /* ************************************* */
 /* ********       EXPORTS       ******** */
 /* ************************************* */
-export default JsonValue;
+export default JsonFunctionValue;
