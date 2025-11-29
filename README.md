@@ -117,8 +117,7 @@ Delta data structure :
 ### readOnly
 |   Key    |            Description           |   Type  |  Required |  Default  |
 |:--------:|:--------------------------------:|:-------:|:---------:|:---------:|
-| readOnly | Read only boolean for all object when a boolean is provided, 
-read only for specific keys when function is provided | Boolean | Function |   False   |   `(keyName, data, keyPath, deep, dataType) => false`   |
+| readOnly | Read only boolean for all object when a boolean is provided, read only for specific keys when function is provided | Boolean | Function |   False   |   `(keyName, data, keyPath, deep, dataType) => false`   |
 
 This function must return a boolean.
 
