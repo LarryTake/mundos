@@ -1,4 +1,8 @@
 
+# 1.6.0
+## Code
+- Read only with function now
+
 # 1.5.0
 ## Fix
 - Fix ESLint errors and warning
