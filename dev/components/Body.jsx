@@ -6,9 +6,9 @@
 /* ************************************* */
 /* ********       IMPORTS       ******** */
 /* ************************************* */
-import React, { Component } from 'react';
-import _ from 'lodash';
-import { JsonTree } from '../../src/JsonTree.js';
+import React, {Component} from 'react'
+import _ from 'lodash'
+import {JsonTree} from '../../src/JsonTree.js'
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -103,13 +103,17 @@ class Body extends Component {
     }
 
     refReadOnlyFunctionCheckbox(node) {
-        this.state.readOnlyFunctionRef = node;
-        this.state.readOnlyFunctionRef.disabled = true;
+        if (node) {
+            this.state.readOnlyFunctionRef = node;
+            this.state.readOnlyFunctionRef.disabled = true;
+        }
     }
 
     refReadOnlyBooleanCheckbox(node) {
-        this.state.readOnlyBooleanRef = node;
-        this.state.readOnlyBooleanRef.disabled = true;
+        if (node) {
+            this.state.readOnlyBooleanRef = node;
+            this.state.readOnlyBooleanRef.disabled = true;
+        }
     }
 
     refReadOnlyCheckbox(node) {
@@ -121,7 +125,7 @@ class Body extends Component {
     }
 
     handleChangeMinusMenu() {
-        const { minusMenuRef } = this.state;
+        const {minusMenuRef} = this.state;
 
         this.setState({
             minusMenu: minusMenuRef.checked,
@@ -133,7 +137,7 @@ class Body extends Component {
     }
 
     handleChangeCustomInput() {
-        const { customInputRef } = this.state;
+        const {customInputRef} = this.state;
 
         this.setState({
             customInput: customInputRef.checked,
@@ -141,7 +145,7 @@ class Body extends Component {
     }
 
     handleSubmit() {
-        const { textareaRef } = this.state;
+        const {textareaRef} = this.state;
         // Get data
         const jsonString = textareaRef.value;
 
@@ -165,7 +169,7 @@ class Body extends Component {
     }
 
     handleChangeReadOnly() {
-        const { readOnlyRef, readOnlyBooleanRef, readOnlyFunctionRef } = this.state;
+        const {readOnlyRef, readOnlyBooleanRef, readOnlyFunctionRef} = this.state;
 
         this.setState({
             readOnlyEnable: readOnlyRef.checked,
@@ -189,7 +193,7 @@ class Body extends Component {
     }
 
     handleChangeReadOnlyBoolean() {
-        const { readOnlyBooleanRef, readOnlyFunctionRef } = this.state;
+        const {readOnlyBooleanRef, readOnlyFunctionRef} = this.state;
 
         readOnlyFunctionRef.disabled = readOnlyBooleanRef.checked;
 
@@ -199,7 +203,7 @@ class Body extends Component {
     }
 
     handleChangeReadOnlyFunction() {
-        const { readOnlyFunctionRef, readOnlyBooleanRef } = this.state;
+        const {readOnlyFunctionRef, readOnlyBooleanRef} = this.state;
 
         readOnlyBooleanRef.disabled = readOnlyFunctionRef.checked;
 
@@ -228,7 +232,7 @@ class Body extends Component {
     }
 
     render() {
-        const { json, deltaUpdateString, globalUpdateString, readOnly, customInput, minusMenu } = this.state;
+        const {json, deltaUpdateString, globalUpdateString, readOnly, customInput, minusMenu} = this.state;
 
         const style1 = {
             width: '100%',

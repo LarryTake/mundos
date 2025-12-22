@@ -235,4 +235,3 @@ tramp
 # Project
 dist/
 dev_build/
-yarn.lock

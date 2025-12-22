@@ -18,10 +18,21 @@ const babelrc = JSON.parse(babelrcString.toString());
 
 // Update
 configDev.bail = false;
-configDev.module.preLoaders = [];
-configDev.module.loaders[0].query = babelrc;
-configDev.module.loaders[0].query.presets.push('react-hmre');
-configDev.module.loaders[0].query.babelrc = false;
+configDev.module.rules = configDev.module.rules
+// Remove eslint
+    .filter(rule => (rule.loader !== 'eslint-loader'))
+    // Change babel-loader configuration
+    .map((rule) => {
+        if (rule.loader !== 'babel-loader') {
+            // Continue
+            return rule;
+        }
+
+        rule.query = babelrc; // eslint-disable-line no-param-reassign
+        rule.query.presets.push('react-hmre'); // eslint-disable-line no-param-reassign
+        rule.query.babelrc = false; // eslint-disable-line no-param-reassign
+        return rule;
+    });
 configDev.entry.app.push('webpack-dev-server/client?http://localhost:8080');
 configDev.entry.app.push('webpack/hot/only-dev-server');
 configDev.plugins.push(new webpack.NoErrorsPlugin());
