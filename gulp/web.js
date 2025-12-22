@@ -40,7 +40,8 @@ const webpackToStringOptions = {
 gulp.task('web:build:dev', (done) => {
     webpack(require('./config/webpack-dev.config'), (err, stats) => {
         if (err) {
-            return done(err);
+            done(err);
+            return;
         }
 
         console.log(stats.toString(webpackToStringOptions));
@@ -51,7 +52,8 @@ gulp.task('web:build:dev', (done) => {
 gulp.task('web:build:prod', (done) => {
     webpack(require('./config/webpack-prod.config'), (err, stats) => {
         if (err) {
-            return done(err);
+            done(err);
+            return;
         }
 
         console.log(stats.toString(webpackToStringOptions));
@@ -68,8 +70,6 @@ gulp.task('web:serve', (done) => {
         hot: true,
         quiet: false,
         noInfo: false,
-        debug: true,
-        devTool: true,
         contentBase: 'dev/',
         publicPath: webpackDev.output.publicPath,
         historyApiFallback: true,

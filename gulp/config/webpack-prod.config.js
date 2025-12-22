@@ -11,7 +11,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const webpackCombineLoaders = require('webpack-combine-loaders');
 const autoprefixer = require('autoprefixer');
 
 // Constants
@@ -35,73 +34,97 @@ module.exports = {
         vendor: ['react', 'react-hotkeys', 'react-dom', 'lodash'],
     },
     resolve: {
-        extensions: ['', '.scss', '.sass', '.css', '.js', '.jsx', '.json'],
+        extensions: ['.scss', '.sass', '.css', '.js', '.jsx', '.json'],
     },
     output: {
         path: BUILD_DIR,
         filename: '[name]-[hash:5].js',
     },
     module: {
-        preLoaders: [
+        rules: [
             {
                 test: /\.js(x|)$/,
-                loader: 'eslint',
+                loader: 'eslint-loader',
+                enforce: 'pre',
                 include: [
                     SRC_DIR,
                 ],
+                options: {
+                    configFile: path.join(ROOT_DIR, '.eslintrc.json'),
+                    failOnWarning: true,
+                    failOnError: true,
+                },
             },
-        ],
-        loaders: [
             {
                 test: /\.js(x|)$/,
                 exclude: /node_modules/,
-                loader: 'babel',
+                loader: 'babel-loader',
             },
             {
                 test: /\.html$/,
-                loader: 'html',
+                loader: 'html-loader',
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract(webpackCombineLoaders([
-                    {
-                        loader: 'css',
-                        query: {
-                            modules: true,
-                            camelCase: true,
-                            localIdentName: '[local]',
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            query: {
+                                modules: true,
+                                camelCase: true,
+                                localIdentName: '[local]',
+                            },
                         },
-                    },
-                    {
-                        loader: 'postcss',
-                    },
-                ])),
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: () => [
+                                    autoprefixer({
+                                        browsers: ['last 3 versions', 'ie > 8'],
+                                    }),
+                                ],
+                            },
+                        },
+                    ],
+                }),
             },
             {
                 test: /\.s[ac]ss$/,
-                loader: ExtractTextPlugin.extract(webpackCombineLoaders([
-                    {
-                        loader: 'css',
-                        query: {
-                            modules: true,
-                            camelCase: true,
-                            localIdentName: '[local]',
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            query: {
+                                modules: true,
+                                camelCase: true,
+                                localIdentName: '[local]',
+                            },
                         },
-                    },
-                    {
-                        loader: 'postcss',
-                    },
-                    {
-                        loader: 'sass',
-                        query: {
-                            sourceMaps: 'true',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: () => [
+                                    autoprefixer({
+                                        browsers: ['last 3 versions', 'ie > 8'],
+                                    }),
+                                ],
+                            },
                         },
-                    },
-                ])),
+                        {
+                            loader: 'sass-loader',
+                            query: {
+                                sourceMaps: 'true',
+                            },
+                        },
+                    ],
+                }),
             },
             {
                 test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf|wav)(\?.*)?$/,
-                loader: 'url',
+                loader: 'url-loader',
                 query: {
                     limit: 10,
                     name: '[name].[hash:7].[ext]',
@@ -109,18 +132,11 @@ module.exports = {
             },
         ],
     },
-    eslint: {
-        configFile: path.join(ROOT_DIR, '.eslintrc.json'),
-        failOnWarning: true,
-        failOnError: true,
-    },
-    postcss: [
-        autoprefixer({
-            browsers: ['last 3 versions', 'ie > 8'],
-        }),
-    ],
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.bundle.js',
+        }),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: process.env.NODE_ENV,
@@ -131,9 +147,9 @@ module.exports = {
             filename: 'index.html',
             template: path.join(APP_DIR, 'index.html'),
         }),
-        new ExtractTextPlugin('[name]-[hash:5].css'),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurrenceOrderPlugin(),
+        new ExtractTextPlugin({
+            filename: '[name]-[hash:5].css',
+        }),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 warnings: false,
@@ -141,6 +157,8 @@ module.exports = {
                 unused: true,
             },
             minimize: true,
+            sourceMap: true,
         }),
     ],
-};
+}
+;
