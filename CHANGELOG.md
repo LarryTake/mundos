@@ -1,4 +1,8 @@
 
+# 1.7.0
+## Code
+- Add data in isCollapsed function
+
 # 1.6.0
 ## Code
 - Read only with function now

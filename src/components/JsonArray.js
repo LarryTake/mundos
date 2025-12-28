@@ -59,11 +59,11 @@ class JsonArray extends Component {
         ];
         const deep = props.deep + 1;
         this.state = {
-            data: this.props.data,
-            name: this.props.name,
+            data: props.data,
+            name: props.name,
             keyPath,
             deep,
-            collapsed: props.isCollapsed(keyPath, deep),
+            collapsed: props.isCollapsed(keyPath, deep, props.data),
             addFormVisible: false,
         };
 

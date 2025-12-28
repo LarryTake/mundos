@@ -63,7 +63,7 @@ class JsonObject extends Component {
             data: props.data,
             keyPath,
             deep,
-            collapsed: props.isCollapsed(keyPath, deep),
+            collapsed: props.isCollapsed(keyPath, deep, props.data),
             addFormVisible: false,
         };
 

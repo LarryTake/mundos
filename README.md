@@ -80,6 +80,7 @@ Function parameters :
 |:-----------:|:------------------------:|:------:|:---------------------------------------------------------------:|
 |   keyPath   | Key path of current node | Array  |       ['object'] for data: { object: { string: 'test' } }       |
 |    deep     |   Deep of current node   | Number |   1 for data: { object: { string: 'test' } } on 'object' node   |
+|    data     |    data of current node/value   |   Any   |   { string: 'test' } for data: { object: { string: 'test' } }   |
 
 ### onFullyUpdate
 |      Key      |                          Description                                  |   Type   |  Required |   Default  |
