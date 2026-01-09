@@ -6,9 +6,9 @@
 /* ************************************* */
 /* ********       IMPORTS       ******** */
 /* ************************************* */
-import React, {Component} from 'react'
-import _ from 'lodash'
-import {JsonTree} from '../../src/JsonTree.js'
+import React, { Component } from 'react';
+import _ from 'lodash';
+import { JsonTree } from '../../src/JsonTree';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */

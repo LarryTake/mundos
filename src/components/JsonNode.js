@@ -6,7 +6,8 @@
 /* ************************************* */
 /* ********       IMPORTS       ******** */
 /* ************************************* */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import JsonValue from './JsonValue';
 import JsonObject from './JsonObject';
 import JsonArray from './JsonArray';

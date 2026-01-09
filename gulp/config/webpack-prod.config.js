@@ -149,6 +149,7 @@ module.exports = {
         }),
         new ExtractTextPlugin({
             filename: '[name]-[hash:5].css',
+            allChunks: true,
         }),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {

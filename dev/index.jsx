@@ -4,7 +4,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 // Components
-import App from './App.jsx';
+import App from './App';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */

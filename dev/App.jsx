@@ -6,10 +6,10 @@
 /* ************************************* */
 /* ********       IMPORTS       ******** */
 /* ************************************* */
-import React, {Component} from 'react'
-import Header from './components/Header.jsx'
-import Footer from './components/Footer.jsx'
-import Body from './components/Body.jsx'
+import React from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Body from './components/Body';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -22,18 +22,12 @@ const defaultProps = {};
 /* ************************************* */
 /* ********      COMPONENT      ******** */
 /* ************************************* */
-class App extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (<div>
-            <Header />
-            <Body />
-            <Footer />
-        </div>);
-    }
+function App() {
+    return (<div>
+        <Header />
+        <Body />
+        <Footer />
+    </div>);
 }
 
 // Add prop types

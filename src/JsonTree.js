@@ -6,7 +6,8 @@
 /* ************************************* */
 /* ********       IMPORTS       ******** */
 /* ************************************* */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import JsonNode from './components/JsonNode';
 import { value, object, array } from './utils/styles';
 import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from './utils/deltaTypes';
@@ -80,10 +81,10 @@ class JsonTree extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.state = {
+        this.setState({
             data: nextProps.data,
             rootName: nextProps.rootName,
-        };
+        });
     }
 
     onUpdate(key, data) {
