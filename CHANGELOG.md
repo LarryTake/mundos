@@ -1,4 +1,8 @@
 
+# 2.0.0
+## Code
+- Various change to support React V16
+
 # 1.7.0
 ## Code
 - Add data in isCollapsed function
