@@ -36,8 +36,7 @@ const propTypes = {
 const defaultProps = {
     keyPath: [],
     deep: 0,
-    handleUpdateValue: () => {
-    },
+    handleUpdateValue: () => Promise.resolve(),
     editButtonElement: <button>e</button>,
     cancelButtonElement: <button>c</button>,
     inputElement: <input />,

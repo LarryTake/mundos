@@ -186,25 +186,36 @@ class JsonArray extends Component {
     }
 
     handleEditValue({ key, value }) {
-        const { data, keyPath, deep } = this.state;
-        // Update value
-        const oldValue = data[key];
-        data[key] = value;
-        // Set state
-        this.setState({
-            data,
-        });
-        // Spread new update
-        const { onUpdate, onDeltaUpdate } = this.props;
-        onUpdate(keyPath[keyPath.length - 1], data);
-        // Spread delta update
-        onDeltaUpdate({
-            type: UPDATE_DELTA_TYPE,
-            keyPath,
-            deep,
-            key,
-            newValue: value,
-            oldValue,
+        return new Promise((resolve, reject) => {
+            const { beforeUpdateAction } = this.props;
+            const { data, keyPath, deep } = this.state;
+
+            // Old value
+            const oldValue = data[key];
+
+            // Before update action
+            beforeUpdateAction(key, keyPath, deep, oldValue, value).then(() => {
+                // Update value
+                data[key] = value;
+                // Set state
+                this.setState({
+                    data,
+                });
+                // Spread new update
+                const { onUpdate, onDeltaUpdate } = this.props;
+                onUpdate(keyPath[keyPath.length - 1], data);
+                // Spread delta update
+                onDeltaUpdate({
+                    type: UPDATE_DELTA_TYPE,
+                    keyPath,
+                    deep,
+                    key,
+                    newValue: value,
+                    oldValue,
+                });
+                // Resolve
+                resolve();
+            }).catch(reject);
         });
     }
 
