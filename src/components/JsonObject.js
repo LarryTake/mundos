@@ -39,6 +39,7 @@ const propTypes = {
     beforeRemoveAction: PropTypes.func,
     beforeAddAction: PropTypes.func,
     beforeUpdateAction: PropTypes.func,
+    logger: PropTypes.object.isRequired,
 };
 // Default props
 const defaultProps = {
@@ -114,7 +115,7 @@ class JsonObject extends Component {
 
     handleAddValueAdd({ key, newValue }) {
         const { data, keyPath, deep } = this.state;
-        const { beforeAddAction } = this.props;
+        const { beforeAddAction, logger } = this.props;
 
         beforeAddAction(key, keyPath, deep, newValue).then(() => {
             // Update data
@@ -135,13 +136,12 @@ class JsonObject extends Component {
                 key,
                 newValue,
             });
-        }).catch(() => {
-        });
+        }).catch(logger.error);
     }
 
     handleRemoveValue(key) {
         return () => {
-            const { beforeRemoveAction } = this.props;
+            const { beforeRemoveAction, logger } = this.props;
             const { data, keyPath, deep } = this.state;
             const oldValue = data[key];
             // Before Remove Action
@@ -170,8 +170,7 @@ class JsonObject extends Component {
                 onUpdate(keyPath[keyPath.length - 1], data);
                 // Spread delta update
                 onDeltaUpdate(deltaUpdateResult);
-            }).catch(() => {
-            });
+            }).catch(logger.error);
         };
     }
 
@@ -264,6 +263,7 @@ class JsonObject extends Component {
             beforeRemoveAction,
             beforeAddAction,
             beforeUpdateAction,
+            logger,
             } = this.props;
 
         const { minus, plus, addForm, ul, delimiter } = getStyle(name, data, keyPath, deep, dataType);
@@ -304,6 +304,7 @@ class JsonObject extends Component {
                 beforeRemoveAction={beforeRemoveAction}
                 beforeAddAction={beforeAddAction}
                 beforeUpdateAction={beforeUpdateAction}
+                logger={logger}
             />);
 
         const startObject = '{';

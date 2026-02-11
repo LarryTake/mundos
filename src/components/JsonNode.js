@@ -40,6 +40,7 @@ const propTypes = {
     beforeRemoveAction: PropTypes.func,
     beforeAddAction: PropTypes.func,
     beforeUpdateAction: PropTypes.func,
+    logger: PropTypes.object.isRequired,
 };
 // Default props
 const defaultProps = {
@@ -87,6 +88,7 @@ class JsonNode extends Component {
             beforeRemoveAction,
             beforeAddAction,
             beforeUpdateAction,
+            logger,
             } = this.props;
         const readOnlyTrue = () => (true);
 
@@ -115,6 +117,7 @@ class JsonNode extends Component {
                     beforeRemoveAction={beforeRemoveAction}
                     beforeAddAction={beforeAddAction}
                     beforeUpdateAction={beforeUpdateAction}
+                    logger={logger}
                 />);
             case 'Object':
                 return (<JsonObject
@@ -139,6 +142,7 @@ class JsonNode extends Component {
                     beforeRemoveAction={beforeRemoveAction}
                     beforeAddAction={beforeAddAction}
                     beforeUpdateAction={beforeUpdateAction}
+                    logger={logger}
                 />);
             case 'Array':
                 return (<JsonArray
@@ -163,6 +167,7 @@ class JsonNode extends Component {
                     beforeRemoveAction={beforeRemoveAction}
                     beforeAddAction={beforeAddAction}
                     beforeUpdateAction={beforeUpdateAction}
+                    logger={logger}
                 />);
             case 'String':
                 return (<JsonValue
@@ -180,6 +185,7 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
                     minusMenuElement={minusMenuElement}
+                    logger={logger}
                 />);
             case 'Number':
                 return (<JsonValue
@@ -197,6 +203,7 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
                     minusMenuElement={minusMenuElement}
+                    logger={logger}
                 />);
             case 'Boolean':
                 return (<JsonValue
@@ -214,6 +221,7 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
                     minusMenuElement={minusMenuElement}
+                    logger={logger}
                 />);
             case 'Date':
                 return (<JsonValue
@@ -231,6 +239,7 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
                     minusMenuElement={minusMenuElement}
+                    logger={logger}
                 />);
             case 'Null':
                 return (<JsonValue
@@ -248,6 +257,7 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
                     minusMenuElement={minusMenuElement}
+                    logger={logger}
                 />);
             case 'Undefined':
                 return (<JsonValue
@@ -265,6 +275,7 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
                     minusMenuElement={minusMenuElement}
+                    logger={logger}
                 />);
             case 'Function':
                 return (<JsonFunctionValue
@@ -282,6 +293,7 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     textareaElement={textareaElement}
                     minusMenuElement={minusMenuElement}
+                    logger={logger}
                 />);
             case 'Symbol':
                 return (<JsonValue
@@ -299,6 +311,7 @@ class JsonNode extends Component {
                     editButtonElement={editButtonElement}
                     inputElement={inputElement}
                     minusMenuElement={minusMenuElement}
+                    logger={logger}
                 />);
             default:
                 return null;

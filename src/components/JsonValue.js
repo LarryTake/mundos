@@ -31,6 +31,7 @@ const propTypes = {
     cancelButtonElement: PropTypes.element,
     inputElement: PropTypes.element,
     minusMenuElement: PropTypes.element,
+    logger: PropTypes.object.isRequired,
 };
 // Default props
 const defaultProps = {
@@ -86,7 +87,7 @@ class JsonValue extends Component {
     }
 
     handleEdit() {
-        const { handleUpdateValue, originalValue } = this.props;
+        const { handleUpdateValue, originalValue, logger } = this.props;
         const { inputRef, name } = this.state;
 
         const newValue = parse(inputRef.value);
@@ -102,8 +103,7 @@ class JsonValue extends Component {
             if (!isComponentWillChange(originalValue, newValue)) {
                 this.handleCancelEdit();
             }
-        }).catch(() => {
-        });
+        }).catch(logger.error);
     }
 
     handleEditMode() {

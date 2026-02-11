@@ -274,6 +274,11 @@ Function parameters :
 |   oldValue  |   Old value of the key          |   Any   |       'test' for data: { object: { string: 'test' } } on 'string' node       |
 |   newValue  |   New value of the key          |   Any   |     'update' for data: { object: { string: 'update' } } on 'string' node     |
 
+### logger
+|   Key  |            Description                                           |   Type   |  Required |        Default        |
+|:------:|:----------------------------------------------------------------:|:--------:|:---------:|:---------------------:|
+| logger | Object used to log 'catch' from promise (using only 'error' key) |  Object  |   False   | `{ error: () => {} }` |
+
 ## Design
 The library provide CSS class on elements. All are prefixed by "rejt" to avoid conflict. 
 To avoid being linked with a CSS file, the library will use the inline style.

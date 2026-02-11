@@ -39,6 +39,7 @@ const propTypes = {
     beforeRemoveAction: PropTypes.func,
     beforeAddAction: PropTypes.func,
     beforeUpdateAction: PropTypes.func,
+    logger: PropTypes.object.isRequired,
 };
 // Default props
 const defaultProps = {
@@ -114,7 +115,7 @@ class JsonArray extends Component {
 
     handleRemoveItem(index) {
         return () => {
-            const { beforeRemoveAction } = this.props;
+            const { beforeRemoveAction, logger } = this.props;
             const { data, keyPath, deep } = this.state;
             const oldValue = data[index];
 
@@ -144,14 +145,13 @@ class JsonArray extends Component {
                 onUpdate(keyPath[keyPath.length - 1], data);
                 // Spread delta update
                 onDeltaUpdate(deltaUpdateResult);
-            }).catch(() => {
-            });
+            }).catch(logger.error);
         };
     }
 
     handleAddValueAdd({ newValue }) {
         const { data, keyPath, deep } = this.state;
-        const { beforeAddAction } = this.props;
+        const { beforeAddAction, logger } = this.props;
 
         beforeAddAction(data.length, keyPath, deep, newValue).then(() => {
             // Update data
@@ -175,8 +175,7 @@ class JsonArray extends Component {
                 key: newData.length - 1,
                 newValue,
             });
-        }).catch(() => {
-        });
+        }).catch(logger.error);
     }
 
     handleAddValueCancel() {
@@ -268,6 +267,7 @@ class JsonArray extends Component {
             beforeRemoveAction,
             beforeAddAction,
             beforeUpdateAction,
+            logger,
             } = this.props;
         const { minus, plus, delimiter, ul, addForm } = getStyle(name, data, keyPath, deep, dataType);
 
@@ -307,6 +307,7 @@ class JsonArray extends Component {
                 beforeRemoveAction={beforeRemoveAction}
                 beforeAddAction={beforeAddAction}
                 beforeUpdateAction={beforeUpdateAction}
+                logger={logger}
             />);
 
         const onlyValue = true;

@@ -327,6 +327,7 @@ class Body extends Component {
                                         readOnly={readOnly}
                                         inputElement={customInputElement}
                                         minusMenuElement={minusMenuElement}
+                                        logger={console}
                                     />
                                 </div>
                             </td>

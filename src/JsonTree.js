@@ -38,6 +38,7 @@ const propTypes = {
     beforeRemoveAction: PropTypes.func,
     beforeAddAction: PropTypes.func,
     beforeUpdateAction: PropTypes.func,
+    logger: PropTypes.object,
 };
 // Default props
 const defaultProps = {
@@ -63,6 +64,7 @@ const defaultProps = {
     beforeRemoveAction: (key, keyPath, deep, oldValue) => new Promise(resolve => resolve()),
     beforeAddAction: (key, keyPath, deep, newValue) => new Promise(resolve => resolve()),
     beforeUpdateAction: (key, keyPath, deep, oldValue, newValue) => new Promise(resolve => resolve()),
+    logger: { error: () => {} },
     /* eslint-enable */
 };
 
@@ -113,6 +115,7 @@ class JsonTree extends Component {
             beforeRemoveAction,
             beforeAddAction,
             beforeUpdateAction,
+            logger,
             } = this.props;
 
         // Node type
@@ -144,6 +147,7 @@ class JsonTree extends Component {
                 beforeRemoveAction={beforeRemoveAction}
                 beforeAddAction={beforeAddAction}
                 beforeUpdateAction={beforeUpdateAction}
+                logger={logger}
             />);
         } else {
             node = 'Data must be an Array or Object';
