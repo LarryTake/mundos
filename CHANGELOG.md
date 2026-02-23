@@ -1,4 +1,11 @@
 
+# 2.1.0
+## Fix
+- Issue #6 : Forgot to change code in "update array" when switch to promise
+
+## Feature
+- Add a way to give logger to component to log "catch" promise error
+
 # 2.0.0
 ## Code
 - Various change to support React V16
