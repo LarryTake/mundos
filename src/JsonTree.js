@@ -10,8 +10,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import JsonNode from './components/JsonNode';
 import { value, object, array } from './utils/styles';
-import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from './utils/deltaTypes';
+import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from './types/deltaTypes';
 import { getObjectType } from './utils/objectTypes';
+import DATA_TYPES from './types/dataTypes';
+import INPUT_USAGE_TYPES from './types/inputUsageTypes';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -31,8 +33,14 @@ const propTypes = {
     addButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
     editButtonElement: PropTypes.element,
-    inputElement: PropTypes.element,
-    textareaElement: PropTypes.element,
+    inputElement: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func,
+    ]),
+    textareaElement: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.func,
+    ]),
     minusMenuElement: PropTypes.element,
     plusMenuElement: PropTypes.element,
     beforeRemoveAction: PropTypes.func,
@@ -65,6 +73,8 @@ const defaultProps = {
     beforeAddAction: (key, keyPath, deep, newValue) => new Promise(resolve => resolve()),
     beforeUpdateAction: (key, keyPath, deep, oldValue, newValue) => new Promise(resolve => resolve()),
     logger: { error: () => {} },
+    // inputElement : (usage, keyPath, deep, keyName, data, dataType)
+    // textareaElement : (usage, keyPath, deep, keyName, data, dataType)
     /* eslint-enable */
 };
 
@@ -125,6 +135,14 @@ class JsonTree extends Component {
         if (getObjectType(readOnly) === 'Boolean') {
             readOnlyFunction = () => (readOnly);
         }
+        let inputElementFunction = inputElement;
+        if (inputElement && getObjectType(inputElement) !== 'Function') {
+            inputElementFunction = () => inputElement;
+        }
+        let textareaElementFunction = textareaElement;
+        if (textareaElement && getObjectType(textareaElement) !== 'Function') {
+            textareaElementFunction = () => textareaElement;
+        }
 
         if (dataType === 'Object' || dataType === 'Array') {
             node = (<JsonNode
@@ -140,8 +158,8 @@ class JsonTree extends Component {
                 addButtonElement={addButtonElement}
                 cancelButtonElement={cancelButtonElement}
                 editButtonElement={editButtonElement}
-                inputElement={inputElement}
-                textareaElement={textareaElement}
+                inputElementGenerator={inputElementFunction}
+                textareaElementGenerator={textareaElementFunction}
                 minusMenuElement={minusMenuElement}
                 plusMenuElement={plusMenuElement}
                 beforeRemoveAction={beforeRemoveAction}
@@ -169,3 +187,5 @@ export { JsonTree };
 export { ADD_DELTA_TYPE };
 export { REMOVE_DELTA_TYPE };
 export { UPDATE_DELTA_TYPE };
+export { DATA_TYPES };
+export { INPUT_USAGE_TYPES };

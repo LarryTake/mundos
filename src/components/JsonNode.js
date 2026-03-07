@@ -13,6 +13,7 @@ import JsonObject from './JsonObject';
 import JsonArray from './JsonArray';
 import JsonFunctionValue from './JsonFunctionValue';
 import { getObjectType } from '../utils/objectTypes';
+import dataTypes from '../types/dataTypes';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -33,8 +34,8 @@ const propTypes = {
     addButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
     editButtonElement: PropTypes.element,
-    inputElement: PropTypes.element,
-    textareaElement: PropTypes.element,
+    inputElementGenerator: PropTypes.func,
+    textareaElementGenerator: PropTypes.func,
     minusMenuElement: PropTypes.element,
     plusMenuElement: PropTypes.element,
     beforeRemoveAction: PropTypes.func,
@@ -81,8 +82,8 @@ class JsonNode extends Component {
             addButtonElement,
             cancelButtonElement,
             editButtonElement,
-            inputElement,
-            textareaElement,
+            inputElementGenerator,
+            textareaElementGenerator,
             minusMenuElement,
             plusMenuElement,
             beforeRemoveAction,
@@ -94,7 +95,7 @@ class JsonNode extends Component {
 
         const dataType = getObjectType(data);
         switch (dataType) {
-            case 'Error':
+            case dataTypes.ERROR:
                 return (<JsonObject
                     data={data}
                     name={name}
@@ -110,8 +111,8 @@ class JsonNode extends Component {
                     addButtonElement={addButtonElement}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    inputElement={inputElement}
-                    textareaElement={textareaElement}
+                    inputElementGenerator={inputElementGenerator}
+                    textareaElementGenerator={textareaElementGenerator}
                     minusMenuElement={minusMenuElement}
                     plusMenuElement={plusMenuElement}
                     beforeRemoveAction={beforeRemoveAction}
@@ -119,7 +120,7 @@ class JsonNode extends Component {
                     beforeUpdateAction={beforeUpdateAction}
                     logger={logger}
                 />);
-            case 'Object':
+            case dataTypes.OBJECT:
                 return (<JsonObject
                     data={data}
                     name={name}
@@ -135,8 +136,8 @@ class JsonNode extends Component {
                     addButtonElement={addButtonElement}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    inputElement={inputElement}
-                    textareaElement={textareaElement}
+                    inputElementGenerator={inputElementGenerator}
+                    textareaElementGenerator={textareaElementGenerator}
                     minusMenuElement={minusMenuElement}
                     plusMenuElement={plusMenuElement}
                     beforeRemoveAction={beforeRemoveAction}
@@ -144,7 +145,7 @@ class JsonNode extends Component {
                     beforeUpdateAction={beforeUpdateAction}
                     logger={logger}
                 />);
-            case 'Array':
+            case dataTypes.ARRAY:
                 return (<JsonArray
                     data={data}
                     name={name}
@@ -160,8 +161,8 @@ class JsonNode extends Component {
                     addButtonElement={addButtonElement}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    inputElement={inputElement}
-                    textareaElement={textareaElement}
+                    inputElementGenerator={inputElementGenerator}
+                    textareaElementGenerator={textareaElementGenerator}
                     minusMenuElement={minusMenuElement}
                     plusMenuElement={plusMenuElement}
                     beforeRemoveAction={beforeRemoveAction}
@@ -169,7 +170,7 @@ class JsonNode extends Component {
                     beforeUpdateAction={beforeUpdateAction}
                     logger={logger}
                 />);
-            case 'String':
+            case dataTypes.STRING:
                 return (<JsonValue
                     name={name}
                     value={`"${data}"`}
@@ -183,11 +184,11 @@ class JsonNode extends Component {
                     getStyle={getStyle}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    inputElement={inputElement}
+                    inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
                 />);
-            case 'Number':
+            case dataTypes.NUMBER:
                 return (<JsonValue
                     name={name}
                     value={data}
@@ -201,11 +202,11 @@ class JsonNode extends Component {
                     getStyle={getStyle}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    inputElement={inputElement}
+                    inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
                 />);
-            case 'Boolean':
+            case dataTypes.BOOLEAN:
                 return (<JsonValue
                     name={name}
                     value={data ? 'true' : 'false'}
@@ -219,11 +220,11 @@ class JsonNode extends Component {
                     getStyle={getStyle}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    inputElement={inputElement}
+                    inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
                 />);
-            case 'Date':
+            case dataTypes.DATE:
                 return (<JsonValue
                     name={name}
                     value={data.toISOString()}
@@ -237,11 +238,11 @@ class JsonNode extends Component {
                     getStyle={getStyle}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    inputElement={inputElement}
+                    inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
                 />);
-            case 'Null':
+            case dataTypes.NULL:
                 return (<JsonValue
                     name={name}
                     value={'null'}
@@ -255,11 +256,11 @@ class JsonNode extends Component {
                     getStyle={getStyle}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    inputElement={inputElement}
+                    inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
                 />);
-            case 'Undefined':
+            case dataTypes.UNDEFINED:
                 return (<JsonValue
                     name={name}
                     value={'undefined'}
@@ -273,11 +274,11 @@ class JsonNode extends Component {
                     getStyle={getStyle}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    inputElement={inputElement}
+                    inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
                 />);
-            case 'Function':
+            case dataTypes.FUNCTION:
                 return (<JsonFunctionValue
                     name={name}
                     value={data.toString()}
@@ -291,11 +292,11 @@ class JsonNode extends Component {
                     getStyle={getStyle}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    textareaElement={textareaElement}
+                    textareaElementGenerator={textareaElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
                 />);
-            case 'Symbol':
+            case dataTypes.SYMBOL:
                 return (<JsonValue
                     name={name}
                     value={data.toString()}
@@ -309,7 +310,7 @@ class JsonNode extends Component {
                     getStyle={getStyle}
                     cancelButtonElement={cancelButtonElement}
                     editButtonElement={editButtonElement}
-                    inputElement={inputElement}
+                    inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
                 />);

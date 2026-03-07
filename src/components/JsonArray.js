@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import JsonNode from './JsonNode';
 import JsonAddValue from './JsonAddValue';
 import { getObjectType } from '../utils/objectTypes';
-import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from '../utils/deltaTypes';
+import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from '../types/deltaTypes';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -32,8 +32,8 @@ const propTypes = {
     addButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
     editButtonElement: PropTypes.element,
-    inputElement: PropTypes.element,
-    textareaElement: PropTypes.element,
+    inputElementGenerator: PropTypes.func,
+    textareaElementGenerator: PropTypes.func,
     minusMenuElement: PropTypes.element,
     plusMenuElement: PropTypes.element,
     beforeRemoveAction: PropTypes.func,
@@ -260,8 +260,8 @@ class JsonArray extends Component {
             addButtonElement,
             cancelButtonElement,
             editButtonElement,
-            inputElement,
-            textareaElement,
+            inputElementGenerator,
+            textareaElementGenerator,
             minusMenuElement,
             plusMenuElement,
             beforeRemoveAction,
@@ -300,8 +300,8 @@ class JsonArray extends Component {
                 addButtonElement={addButtonElement}
                 cancelButtonElement={cancelButtonElement}
                 editButtonElement={editButtonElement}
-                inputElement={inputElement}
-                textareaElement={textareaElement}
+                inputElementGenerator={inputElementGenerator}
+                textareaElementGenerator={textareaElementGenerator}
                 minusMenuElement={minusMenuElement}
                 plusMenuElement={plusMenuElement}
                 beforeRemoveAction={beforeRemoveAction}
@@ -326,7 +326,9 @@ class JsonArray extends Component {
                     onlyValue={onlyValue}
                     addButtonElement={addButtonElement}
                     cancelButtonElement={cancelButtonElement}
-                    inputElement={inputElement}
+                    inputElementGenerator={inputElementGenerator}
+                    keyPath={keyPath}
+                    deep={deep}
                 /></span>) :
                 (<span>
                     {plusMenuLayout} {minusElement}

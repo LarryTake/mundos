@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 import parse from '../utils/parse';
 import { isComponentWillChange } from '../utils/objectTypes';
+import inputUsageTypes from '../types/inputUsageTypes';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -29,7 +30,7 @@ const propTypes = {
     getStyle: PropTypes.func.isRequired,
     editButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
-    inputElement: PropTypes.element,
+    inputElementGenerator: PropTypes.func,
     minusMenuElement: PropTypes.element,
     logger: PropTypes.object.isRequired,
 };
@@ -40,7 +41,7 @@ const defaultProps = {
     handleUpdateValue: () => Promise.resolve(),
     editButtonElement: <button>e</button>,
     cancelButtonElement: <button>c</button>,
-    inputElement: <input />,
+    inputElementGenerator: () => <input />,
     minusMenuElement: <span> - </span>,
 };
 
@@ -132,7 +133,7 @@ class JsonValue extends Component {
             getStyle,
             editButtonElement,
             cancelButtonElement,
-            inputElement,
+            inputElementGenerator,
             minusMenuElement,
             } = this.props;
 
@@ -142,6 +143,8 @@ class JsonValue extends Component {
         const readOnlyResult = readOnly(name, value, keyPath, deep, dataType);
 
         if (editEnabled && !readOnlyResult) {
+            const inputElement = inputElementGenerator(inputUsageTypes.VALUE, keyPath, deep, name, value, dataType);
+
             const editButtonElementLayout = React.cloneElement(editButtonElement, {
                 onClick: this.handleEdit,
             });

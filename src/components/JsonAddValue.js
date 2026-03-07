@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 import parse from '../utils/parse';
+import inputUsageTypes from '../types/inputUsageTypes';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -21,14 +22,16 @@ const propTypes = {
     onlyValue: PropTypes.bool,
     addButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
-    inputElement: PropTypes.element,
+    inputElementGenerator: PropTypes.func,
+    keyPath: PropTypes.array,
+    deep: PropTypes.number,
 };
 // Default props
 const defaultProps = {
     onlyValue: false,
     addButtonElement: <button>+</button>,
     cancelButtonElement: <button>c</button>,
-    inputElement: <input />,
+    inputElementGenerator: () => <input />,
 };
 
 /* ************************************* */
@@ -88,15 +91,23 @@ class JsonAddValue extends Component {
     }
 
     render() {
-        const { handleCancel, onlyValue, addButtonElement, cancelButtonElement, inputElement } = this.props;
-
+        const {
+            handleCancel,
+            onlyValue,
+            addButtonElement,
+            cancelButtonElement,
+            inputElementGenerator,
+            keyPath,
+            deep,
+        } = this.props;
         const addButtonElementLayout = React.cloneElement(addButtonElement, {
             onClick: this.onSubmit,
         });
         const cancelButtonElementLayout = React.cloneElement(cancelButtonElement, {
             onClick: handleCancel,
         });
-        const inputElementValueLayout = React.cloneElement(inputElement, {
+        const inputElementValue = inputElementGenerator(inputUsageTypes.VALUE, keyPath, deep);
+        const inputElementValueLayout = React.cloneElement(inputElementValue, {
             placeholder: 'Value',
             ref: this.refInputValue,
         });
@@ -104,7 +115,8 @@ class JsonAddValue extends Component {
         let separatorElement = null;
 
         if (!onlyValue) {
-            inputElementKeyLayout = React.cloneElement(inputElement, {
+            const inputElementKey = inputElementGenerator(inputUsageTypes.KEY, keyPath, deep);
+            inputElementKeyLayout = React.cloneElement(inputElementKey, {
                 placeholder: 'Key',
                 ref: this.refInputKey,
             });
