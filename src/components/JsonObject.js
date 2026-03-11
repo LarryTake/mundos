@@ -40,6 +40,7 @@ const propTypes = {
     beforeAddAction: PropTypes.func,
     beforeUpdateAction: PropTypes.func,
     logger: PropTypes.object.isRequired,
+    onSubmitValueParser: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -264,6 +265,7 @@ class JsonObject extends Component {
             beforeAddAction,
             beforeUpdateAction,
             logger,
+            onSubmitValueParser,
             } = this.props;
 
         const { minus, plus, addForm, ul, delimiter } = getStyle(name, data, keyPath, deep, dataType);
@@ -305,6 +307,7 @@ class JsonObject extends Component {
                 beforeAddAction={beforeAddAction}
                 beforeUpdateAction={beforeUpdateAction}
                 logger={logger}
+                onSubmitValueParser={onSubmitValueParser}
             />);
 
         const startObject = '{';
@@ -327,6 +330,7 @@ class JsonObject extends Component {
                     inputElementGenerator={inputElementGenerator}
                     keyPath={keyPath}
                     deep={deep}
+                    onSubmitValueParser={onSubmitValueParser}
                 /></span>) :
                 (<span>
                     {plusMenuLayout} {minusElement}

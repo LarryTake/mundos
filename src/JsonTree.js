@@ -47,6 +47,7 @@ const propTypes = {
     beforeAddAction: PropTypes.func,
     beforeUpdateAction: PropTypes.func,
     logger: PropTypes.object,
+    onSubmitValueParser: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -126,6 +127,7 @@ class JsonTree extends Component {
             beforeAddAction,
             beforeUpdateAction,
             logger,
+            onSubmitValueParser,
             } = this.props;
 
         // Node type
@@ -166,6 +168,7 @@ class JsonTree extends Component {
                 beforeAddAction={beforeAddAction}
                 beforeUpdateAction={beforeUpdateAction}
                 logger={logger}
+                onSubmitValueParser={onSubmitValueParser}
             />);
         } else {
             node = 'Data must be an Array or Object';

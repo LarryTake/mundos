@@ -40,6 +40,7 @@ const propTypes = {
     beforeAddAction: PropTypes.func,
     beforeUpdateAction: PropTypes.func,
     logger: PropTypes.object.isRequired,
+    onSubmitValueParser: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -268,6 +269,7 @@ class JsonArray extends Component {
             beforeAddAction,
             beforeUpdateAction,
             logger,
+            onSubmitValueParser,
             } = this.props;
         const { minus, plus, delimiter, ul, addForm } = getStyle(name, data, keyPath, deep, dataType);
 
@@ -308,6 +310,7 @@ class JsonArray extends Component {
                 beforeAddAction={beforeAddAction}
                 beforeUpdateAction={beforeUpdateAction}
                 logger={logger}
+                onSubmitValueParser={onSubmitValueParser}
             />);
 
         const onlyValue = true;
@@ -329,6 +332,7 @@ class JsonArray extends Component {
                     inputElementGenerator={inputElementGenerator}
                     keyPath={keyPath}
                     deep={deep}
+                    onSubmitValueParser={onSubmitValueParser}
                 /></span>) :
                 (<span>
                     {plusMenuLayout} {minusElement}

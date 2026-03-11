@@ -42,6 +42,7 @@ const propTypes = {
     beforeAddAction: PropTypes.func,
     beforeUpdateAction: PropTypes.func,
     logger: PropTypes.object.isRequired,
+    onSubmitValueParser: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -90,6 +91,7 @@ class JsonNode extends Component {
             beforeAddAction,
             beforeUpdateAction,
             logger,
+            onSubmitValueParser,
             } = this.props;
         const readOnlyTrue = () => (true);
 
@@ -119,6 +121,7 @@ class JsonNode extends Component {
                     beforeAddAction={beforeAddAction}
                     beforeUpdateAction={beforeUpdateAction}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             case dataTypes.OBJECT:
                 return (<JsonObject
@@ -144,6 +147,7 @@ class JsonNode extends Component {
                     beforeAddAction={beforeAddAction}
                     beforeUpdateAction={beforeUpdateAction}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             case dataTypes.ARRAY:
                 return (<JsonArray
@@ -169,6 +173,7 @@ class JsonNode extends Component {
                     beforeAddAction={beforeAddAction}
                     beforeUpdateAction={beforeUpdateAction}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             case dataTypes.STRING:
                 return (<JsonValue
@@ -187,6 +192,7 @@ class JsonNode extends Component {
                     inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             case dataTypes.NUMBER:
                 return (<JsonValue
@@ -205,6 +211,7 @@ class JsonNode extends Component {
                     inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             case dataTypes.BOOLEAN:
                 return (<JsonValue
@@ -223,6 +230,7 @@ class JsonNode extends Component {
                     inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             case dataTypes.DATE:
                 return (<JsonValue
@@ -241,6 +249,7 @@ class JsonNode extends Component {
                     inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             case dataTypes.NULL:
                 return (<JsonValue
@@ -259,6 +268,7 @@ class JsonNode extends Component {
                     inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             case dataTypes.UNDEFINED:
                 return (<JsonValue
@@ -277,6 +287,7 @@ class JsonNode extends Component {
                     inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             case dataTypes.FUNCTION:
                 return (<JsonFunctionValue
@@ -295,6 +306,7 @@ class JsonNode extends Component {
                     textareaElementGenerator={textareaElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             case dataTypes.SYMBOL:
                 return (<JsonValue
@@ -313,6 +325,7 @@ class JsonNode extends Component {
                     inputElementGenerator={inputElementGenerator}
                     minusMenuElement={minusMenuElement}
                     logger={logger}
+                    onSubmitValueParser={onSubmitValueParser}
                 />);
             default:
                 return null;

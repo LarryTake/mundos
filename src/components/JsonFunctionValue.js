@@ -33,6 +33,7 @@ const propTypes = {
     textareaElementGenerator: PropTypes.func,
     minusMenuElement: PropTypes.element,
     logger: PropTypes.object.isRequired,
+    onSubmitValueParser: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -44,6 +45,7 @@ const defaultProps = {
     cancelButtonElement: <button>c</button>,
     textareaElementGenerator: () => <textarea />,
     minusMenuElement: <span> - </span>,
+    onSubmitValueParser: (isEditMode, keyPath, deep, name, value) => parse(value),
 };
 
 /* ************************************* */
@@ -89,10 +91,10 @@ class JsonFunctionValue extends Component {
     }
 
     handleEdit() {
-        const { handleUpdateValue, originalValue, logger } = this.props;
-        const { inputRef, name } = this.state;
+        const { handleUpdateValue, originalValue, logger, onSubmitValueParser, keyPath } = this.props;
+        const { inputRef, name, deep } = this.state;
 
-        const newValue = parse(inputRef.value);
+        const newValue = onSubmitValueParser(true, keyPath, deep, name, inputRef.value);
 
         const result = {
             value: newValue,
@@ -136,16 +138,17 @@ class JsonFunctionValue extends Component {
             cancelButtonElement,
             textareaElementGenerator,
             minusMenuElement,
+            keyPath: comeFromKeyPath,
             } = this.props;
 
-        const style = getStyle(name, value, keyPath, deep, dataType);
+        const style = getStyle(name, originalValue, keyPath, deep, dataType);
         let result = null;
         let minusElement = null;
-        const resultOnlyResult = readOnly(name, value, keyPath, deep, dataType);
+        const resultOnlyResult = readOnly(name, originalValue, keyPath, deep, dataType);
 
         if (editEnabled && !resultOnlyResult) {
             const textareaElement =
-                textareaElementGenerator(inputUsageTypes.VALUE, keyPath, deep, name, value, dataType);
+                textareaElementGenerator(inputUsageTypes.VALUE, comeFromKeyPath, deep, name, originalValue, dataType);
 
             const editButtonElementLayout = React.cloneElement(editButtonElement, {
                 onClick: this.handleEdit,

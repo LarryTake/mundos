@@ -25,6 +25,7 @@ const propTypes = {
     inputElementGenerator: PropTypes.func,
     keyPath: PropTypes.array,
     deep: PropTypes.number,
+    onSubmitValueParser: PropTypes.func,
 };
 // Default props
 const defaultProps = {
@@ -32,6 +33,7 @@ const defaultProps = {
     addButtonElement: <button>+</button>,
     cancelButtonElement: <button>c</button>,
     inputElementGenerator: () => <input />,
+    onSubmitValueParser: (isEditMode, keyPath, deep, name, value) => parse(value),
 };
 
 /* ************************************* */
@@ -64,11 +66,9 @@ class JsonAddValue extends Component {
     }
 
     onSubmit() {
-        const { handleAdd, onlyValue } = this.props;
+        const { handleAdd, onlyValue, onSubmitValueParser, keyPath, deep } = this.props;
         const { inputRefKey, inputRefValue } = this.state;
-        const result = {
-            newValue: parse(inputRefValue.value),
-        };
+        const result = {};
         // Check if we have the key
         if (!onlyValue) {
             // Check that there is a key
@@ -79,6 +79,7 @@ class JsonAddValue extends Component {
 
             result.key = inputRefKey.value;
         }
+        result.newValue = onSubmitValueParser(false, keyPath, deep, result.key, inputRefValue.value);
         handleAdd(result);
     }
 
