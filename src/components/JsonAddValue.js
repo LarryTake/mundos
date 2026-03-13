@@ -9,7 +9,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
-import parse from '../utils/parse';
 import inputUsageTypes from '../types/inputUsageTypes';
 
 /* ************************************* */
@@ -25,7 +24,7 @@ const propTypes = {
     inputElementGenerator: PropTypes.func,
     keyPath: PropTypes.array,
     deep: PropTypes.number,
-    onSubmitValueParser: PropTypes.func,
+    onSubmitValueParser: PropTypes.func.isRequired,
 };
 // Default props
 const defaultProps = {
@@ -33,7 +32,6 @@ const defaultProps = {
     addButtonElement: <button>+</button>,
     cancelButtonElement: <button>c</button>,
     inputElementGenerator: () => <input />,
-    onSubmitValueParser: (isEditMode, keyPath, deep, name, value) => parse(value),
 };
 
 /* ************************************* */

@@ -40,7 +40,7 @@ const propTypes = {
     beforeAddAction: PropTypes.func,
     beforeUpdateAction: PropTypes.func,
     logger: PropTypes.object.isRequired,
-    onSubmitValueParser: PropTypes.func,
+    onSubmitValueParser: PropTypes.func.isRequired,
 };
 // Default props
 const defaultProps = {

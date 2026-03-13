@@ -9,7 +9,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
-import parse from '../utils/parse';
 import { isComponentWillChange } from '../utils/objectTypes';
 import inputUsageTypes from '../types/inputUsageTypes';
 
@@ -33,7 +32,7 @@ const propTypes = {
     textareaElementGenerator: PropTypes.func,
     minusMenuElement: PropTypes.element,
     logger: PropTypes.object.isRequired,
-    onSubmitValueParser: PropTypes.func,
+    onSubmitValueParser: PropTypes.func.isRequired,
 };
 // Default props
 const defaultProps = {
@@ -45,7 +44,6 @@ const defaultProps = {
     cancelButtonElement: <button>c</button>,
     textareaElementGenerator: () => <textarea />,
     minusMenuElement: <span> - </span>,
-    onSubmitValueParser: (isEditMode, keyPath, deep, name, value) => parse(value),
 };
 
 /* ************************************* */

@@ -14,6 +14,7 @@ import { ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from './types/de
 import { getObjectType } from './utils/objectTypes';
 import DATA_TYPES from './types/dataTypes';
 import INPUT_USAGE_TYPES from './types/inputUsageTypes';
+import parse from './utils/parse';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -74,6 +75,7 @@ const defaultProps = {
     beforeAddAction: (key, keyPath, deep, newValue) => new Promise(resolve => resolve()),
     beforeUpdateAction: (key, keyPath, deep, oldValue, newValue) => new Promise(resolve => resolve()),
     logger: { error: () => {} },
+    onSubmitValueParser: (isEditMode, keyPath, deep, name, rawValue) => parse(rawValue),
     // inputElement : (usage, keyPath, deep, keyName, data, dataType)
     // textareaElement : (usage, keyPath, deep, keyName, data, dataType)
     /* eslint-enable */
