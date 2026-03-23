@@ -21,7 +21,7 @@ const propTypes = {
     onlyValue: PropTypes.bool,
     addButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
-    inputElementGenerator: PropTypes.func,
+    inputElementGenerator: PropTypes.func.isRequired,
     keyPath: PropTypes.array,
     deep: PropTypes.number,
     onSubmitValueParser: PropTypes.func.isRequired,
@@ -31,7 +31,6 @@ const defaultProps = {
     onlyValue: false,
     addButtonElement: <button>+</button>,
     cancelButtonElement: <button>c</button>,
-    inputElementGenerator: () => <input />,
 };
 
 /* ************************************* */

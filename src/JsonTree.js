@@ -76,8 +76,8 @@ const defaultProps = {
     beforeUpdateAction: (key, keyPath, deep, oldValue, newValue) => new Promise(resolve => resolve()),
     logger: { error: () => {} },
     onSubmitValueParser: (isEditMode, keyPath, deep, name, rawValue) => parse(rawValue),
-    // inputElement : (usage, keyPath, deep, keyName, data, dataType)
-    // textareaElement : (usage, keyPath, deep, keyName, data, dataType)
+    inputElement: (usage, keyPath, deep, keyName, data, dataType) => <input />,
+    textareaElement: (usage, keyPath, deep, keyName, data, dataType) => <textarea />,
     /* eslint-enable */
 };
 

@@ -29,7 +29,7 @@ const propTypes = {
     getStyle: PropTypes.func.isRequired,
     editButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
-    inputElementGenerator: PropTypes.func,
+    inputElementGenerator: PropTypes.func.isRequired,
     minusMenuElement: PropTypes.element,
     logger: PropTypes.object.isRequired,
     onSubmitValueParser: PropTypes.func.isRequired,
@@ -41,7 +41,6 @@ const defaultProps = {
     handleUpdateValue: () => Promise.resolve(),
     editButtonElement: <button>e</button>,
     cancelButtonElement: <button>c</button>,
-    inputElementGenerator: () => <input />,
     minusMenuElement: <span> - </span>,
 };
 

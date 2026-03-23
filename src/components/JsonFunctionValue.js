@@ -29,7 +29,7 @@ const propTypes = {
     getStyle: PropTypes.func.isRequired,
     editButtonElement: PropTypes.element,
     cancelButtonElement: PropTypes.element,
-    textareaElementGenerator: PropTypes.func,
+    textareaElementGenerator: PropTypes.func.isRequired,
     minusMenuElement: PropTypes.element,
     logger: PropTypes.object.isRequired,
     onSubmitValueParser: PropTypes.func.isRequired,
@@ -42,7 +42,6 @@ const defaultProps = {
     },
     editButtonElement: <button>e</button>,
     cancelButtonElement: <button>c</button>,
-    textareaElementGenerator: () => <textarea />,
     minusMenuElement: <span> - </span>,
 };
 
