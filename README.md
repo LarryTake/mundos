@@ -28,7 +28,14 @@ npm install --save react-editable-json-tree
 ### Example Usage
 ```jsx
 // Import
-import { JsonTree, ADD_DELTA_TYPE, REMOVE_DELTA_TYPE, UPDATE_DELTA_TYPE } from 'react-editable-json-tree'
+import {
+    JsonTree,
+    ADD_DELTA_TYPE,
+    REMOVE_DELTA_TYPE,
+    UPDATE_DELTA_TYPE,
+    DATA_TYPES,
+    INPUT_USAGE_TYPES,
+} from 'react-editable-json-tree'
 
 // Data
 const data = {
@@ -118,7 +125,7 @@ Delta data structure :
 ### readOnly
 |   Key    |            Description           |   Type  |  Required |  Default  |
 |:--------:|:--------------------------------:|:-------:|:---------:|:---------:|
-| readOnly | Read only boolean for all object when a boolean is provided, read only for specific keys when function is provided | Boolean | Function |   False   |   `(keyName, data, keyPath, deep, dataType) => false`   |
+| readOnly | Read only boolean for all object when a boolean is provided, read only for specific keys when function is provided | Boolean / Function |   False   |   `(keyName, data, keyPath, deep, dataType) => false`   |
 
 This function must return a boolean.
 
@@ -198,18 +205,40 @@ The library will add a `onClick` props on element.
 ### inputElement
 |      Key     |                Description                |     Type    | Required |   Default    |
 |:------------:|:-----------------------------------------:|:-----------:|:--------:|:------------:|
-| inputElement | Input Text Element to replace library one |   Element   |   False  | `<input />`  |
+| inputElement | Input Text Element to replace library one |   Element / Function   |   False  | `(usage, keyPath, deep, keyName, data, dataType) => <input />`  |
 
 The library will add a `placeholder`, `ref`, `defaultValue` props on element.
 This item will be focus when possible.
 
+Function parameters:
+
+|     Key     |           Description           |   Type  |                            Example                                           |
+|:-----------:|:-------------------------------:|:-------:|:----------------------------------------------------------------------------:|
+|    usage    |    Usage of the generated input    | String  |        All values are listed in INPUT_USAGE_TYPES                    |
+|   keyPath   |   key path                      |  Array  |              [] for data: { object: { string: 'test' } }                     |
+|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
+|     key     |    Key of current node/value    | String  |        'object' for data: { object: { string: 'test' } }                     |
+|    value    |       Value of the key          |   Any   | { string: 'test' } for data: { object: { string: 'test' } } on 'object' node |
+|    dataType    |       Data type of the value          |   String   | All values are listed in DATA_TYPES |
+
 ### textareaElement
 |        Key      |                Description                |     Type    | Required |    Default     |
 |:---------------:|:-----------------------------------------:|:-----------:|:--------:|:--------------:|
-| textareaElement |  Textarea Element to replace library one  |   Element   |   False  | `<textarea />` |
+| textareaElement |  Textarea Element to replace library one  |   Element / Function   |   False  | `(usage, keyPath, deep, keyName, data, dataType) => <textarea />` |
 
 The library will add a `ref`, `defaultValue` props on element.
 This item will be focus when possible.
+
+Function parameters:
+
+|     Key     |           Description           |   Type  |                            Example                                           |
+|:-----------:|:-------------------------------:|:-------:|:----------------------------------------------------------------------------:|
+|    usage    |    Usage of the generated input    | String  |        All values are listed in INPUT_USAGE_TYPES                    |
+|   keyPath   |   key path                      |  Array  |              [] for data: { object: { string: 'test' } }                     |
+|     deep    |   Deep of current node          | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
+|     key     |    Key of current node/value    | String  |        'object' for data: { object: { string: 'test' } }                     |
+|    value    |       Value of the key          |   Any   | { string: 'test' } for data: { object: { string: 'test' } } on 'object' node |
+|    dataType    |       Data type of the value          |   String   | All values are listed in DATA_TYPES |
 
 ### minusMenuElement
 |        Key       |                 Description               |     Type    | Required |       Default       |
@@ -278,6 +307,21 @@ Function parameters :
 |   Key  |            Description                                           |   Type   |  Required |        Default        |
 |:------:|:----------------------------------------------------------------:|:--------:|:---------:|:---------------------:|
 | logger | Object used to log 'catch' from promise (using only 'error' key) |  Object  |   False   | `{ error: () => {} }` |
+
+### onSubmitValueParser
+|          Key        |                                                   Description                                                 |   Type   |  Required |                               Default                                  |
+|:-------------------:|:-------------------------------------------------------------------------------------------------------------:|:--------:|:---------:|:----------------------------------------------------------------------:|
+| onSubmitValueParser | Function called after each edit/update phase to parse raw data from inputElement or textareaElement component | Function |   False   | `(isEditMode, keyPath, deep, key, rawValue) => nativeParser(rawValue)` |
+
+Function parameters :
+
+|     Key     |           Description                                    |   Type  |                            Example                                           |
+|:-----------:|:--------------------------------------------------------:|:-------:|:----------------------------------------------------------------------------:|
+|  isEditMode | Is in edit mode or in add mode ?                         | String  |        'string' for data: { object: { string: 'test' } }                     |
+|   keyPath   |   key path                                               |  Array  |           ['object'] for data: { object: { string: 'test' } }                |
+|     deep    |   Deep of current node                                   | Number  |   1 for data: { object: { string: 'test' } } on 'object' node                |
+|     key     |    Key of current node/value                             | String  |        'string' for data: { object: { string: 'test' } }                     |
+|   rawValue  | Raw value from inputElement or textareaElement component | String  |        'string' for data: { object: { string: 'test' } }                     |
 
 ## Design
 The library provide CSS class on elements. All are prefixed by "rejt" to avoid conflict. 
