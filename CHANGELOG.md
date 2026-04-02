@@ -1,4 +1,9 @@
 
+# 2.2.0
+## Feature
+- Issue #7 (Thanks to Hawkpath for the idea) : inputElement and textareaElement can be a function that return dynamically element.
+- Raw value from input and textarea element can be now parsed by an external function
+
 # 2.1.0
 ## Fix
 - Issue #6 : Forgot to change code in "update array" when switch to promise
