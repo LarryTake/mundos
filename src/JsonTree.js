@@ -53,7 +53,7 @@ const propTypes = {
 // Default props
 const defaultProps = {
     rootName: 'root',
-    isCollapsed: (keyPath, deep) => (deep !== 0),
+    isCollapsed: (keyPath, deep) => (deep !== -1),
     getStyle: (keyName, data, keyPath, deep, dataType) => {
         switch (dataType) {
             case 'Object':

@@ -60,13 +60,12 @@ class JsonArray extends Component {
             ...props.keyPath,
             props.name,
         ];
-        const deep = props.deep + 1;
         this.state = {
             data: props.data,
             name: props.name,
             keyPath,
-            deep,
-            collapsed: props.isCollapsed(keyPath, deep, props.data),
+            deep: props.deep,
+            collapsed: props.isCollapsed(keyPath, props.deep, props.data),
             addFormVisible: false,
         };
 
@@ -234,7 +233,7 @@ class JsonArray extends Component {
                 className: 'rejt-minus-menu',
                 style: minus,
             });
-            minusElement = (deep !== 0) ? minusMenuLayout : null;
+            minusElement = (deep !== -1) ? minusMenuLayout : null;
         }
 
         const itemName = (numberOfItems > 1) ? 'items' : 'item';
@@ -282,7 +281,7 @@ class JsonArray extends Component {
                 className: 'rejt-minus-menu',
                 style: minus,
             });
-            minusElement = (deep !== 0) ? minusMenuLayout : null;
+            minusElement = (deep !== -1) ? minusMenuLayout : null;
         }
 
         const list = data
@@ -291,7 +290,7 @@ class JsonArray extends Component {
                 name={`${index}`}
                 data={item}
                 keyPath={keyPath}
-                deep={deep}
+                deep={deep + 1}
                 isCollapsed={isCollapsed}
                 handleRemove={this.handleRemoveItem(index)}
                 handleUpdateValue={this.handleEditValue}

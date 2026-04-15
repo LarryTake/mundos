@@ -56,8 +56,7 @@ const defaultProps = {
 class JsonObject extends Component {
     constructor(props) {
         super(props);
-        const deep = props.deep + 1;
-        const keyPath = (deep === 0) ? [] : [
+        const keyPath = (props.deep === -1) ? [] : [
             ...props.keyPath,
             props.name,
         ];
@@ -65,8 +64,8 @@ class JsonObject extends Component {
             name: props.name,
             data: props.data,
             keyPath,
-            deep,
-            collapsed: props.isCollapsed(keyPath, deep, props.data),
+            deep: props.deep,
+            collapsed: props.isCollapsed(keyPath, props.deep, props.data),
             addFormVisible: false,
         };
 
@@ -232,7 +231,7 @@ class JsonObject extends Component {
                 className: 'rejt-minus-menu',
                 style: minus,
             });
-            minusElement = (deep !== 0) ? minusMenuLayout : null;
+            minusElement = (deep !== -1) ? minusMenuLayout : null;
         }
 
         /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -279,7 +278,7 @@ class JsonObject extends Component {
                 className: 'rejt-minus-menu',
                 style: minus,
             });
-            minusElement = (deep !== 0) ? minusMenuLayout : null;
+            minusElement = (deep !== -1) ? minusMenuLayout : null;
         }
 
         const list = keyList
@@ -288,7 +287,7 @@ class JsonObject extends Component {
                 name={key}
                 data={data[key]}
                 keyPath={keyPath}
-                deep={deep}
+                deep={deep + 1}
                 isCollapsed={isCollapsed}
                 handleRemove={this.handleRemoveValue(key)}
                 handleUpdateValue={this.handleEditValue}
