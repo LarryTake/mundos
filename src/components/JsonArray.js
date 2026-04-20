@@ -65,6 +65,7 @@ class JsonArray extends Component {
             name: props.name,
             keyPath,
             deep: props.deep,
+            nextDeep: props.deep + 1,
             collapsed: props.isCollapsed(keyPath, props.deep, props.data),
             addFormVisible: false,
         };
@@ -116,7 +117,7 @@ class JsonArray extends Component {
     handleRemoveItem(index) {
         return () => {
             const { beforeRemoveAction, logger } = this.props;
-            const { data, keyPath, deep } = this.state;
+            const { data, keyPath, nextDeep: deep } = this.state;
             const oldValue = data[index];
 
             // Before Remove Action
@@ -150,7 +151,7 @@ class JsonArray extends Component {
     }
 
     handleAddValueAdd({ newValue }) {
-        const { data, keyPath, deep } = this.state;
+        const { data, keyPath, nextDeep: deep } = this.state;
         const { beforeAddAction, logger } = this.props;
 
         beforeAddAction(data.length, keyPath, deep, newValue).then(() => {
@@ -187,7 +188,7 @@ class JsonArray extends Component {
     handleEditValue({ key, value }) {
         return new Promise((resolve, reject) => {
             const { beforeUpdateAction } = this.props;
-            const { data, keyPath, deep } = this.state;
+            const { data, keyPath, nextDeep: deep } = this.state;
 
             // Old value
             const oldValue = data[key];
@@ -249,7 +250,7 @@ class JsonArray extends Component {
     }
 
     renderNotCollapsed() {
-        const { name, data, keyPath, deep, addFormVisible } = this.state;
+        const { name, data, keyPath, deep, addFormVisible, nextDeep } = this.state;
         const {
             isCollapsed,
             handleRemove,
@@ -290,7 +291,7 @@ class JsonArray extends Component {
                 name={`${index}`}
                 data={item}
                 keyPath={keyPath}
-                deep={deep + 1}
+                deep={nextDeep}
                 isCollapsed={isCollapsed}
                 handleRemove={this.handleRemoveItem(index)}
                 handleUpdateValue={this.handleEditValue}

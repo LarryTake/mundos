@@ -65,6 +65,7 @@ class JsonObject extends Component {
             data: props.data,
             keyPath,
             deep: props.deep,
+            nextDeep: props.deep + 1,
             collapsed: props.isCollapsed(keyPath, props.deep, props.data),
             addFormVisible: false,
         };
@@ -114,7 +115,7 @@ class JsonObject extends Component {
     }
 
     handleAddValueAdd({ key, newValue }) {
-        const { data, keyPath, deep } = this.state;
+        const { data, keyPath, nextDeep: deep } = this.state;
         const { beforeAddAction, logger } = this.props;
 
         beforeAddAction(key, keyPath, deep, newValue).then(() => {
@@ -142,7 +143,7 @@ class JsonObject extends Component {
     handleRemoveValue(key) {
         return () => {
             const { beforeRemoveAction, logger } = this.props;
-            const { data, keyPath, deep } = this.state;
+            const { data, keyPath, nextDeep: deep } = this.state;
             const oldValue = data[key];
             // Before Remove Action
             beforeRemoveAction(key, keyPath, deep, oldValue).then(() => {
@@ -183,7 +184,7 @@ class JsonObject extends Component {
     handleEditValue({ key, value }) {
         return new Promise((resolve, reject) => {
             const { beforeUpdateAction } = this.props;
-            const { data, keyPath, deep } = this.state;
+            const { data, keyPath, nextDeep: deep } = this.state;
 
             // Old value
             const oldValue = data[key];
@@ -245,7 +246,7 @@ class JsonObject extends Component {
     }
 
     renderNotCollapsed() {
-        const { name, data, keyPath, deep, addFormVisible } = this.state;
+        const { name, data, keyPath, deep, nextDeep, addFormVisible } = this.state;
         const {
             isCollapsed,
             handleRemove,
@@ -287,7 +288,7 @@ class JsonObject extends Component {
                 name={key}
                 data={data[key]}
                 keyPath={keyPath}
-                deep={deep + 1}
+                deep={nextDeep}
                 isCollapsed={isCollapsed}
                 handleRemove={this.handleRemoveValue(key)}
                 handleUpdateValue={this.handleEditValue}

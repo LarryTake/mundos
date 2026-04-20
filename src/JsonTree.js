@@ -69,7 +69,7 @@ const defaultProps = {
     readOnly: (keyName, data, keyPath, deep, dataType) => false,
     onFullyUpdate: (data) => {
     },
-    onDeltaUpdate: (type, keyPath, deep, key, newValue, oldValue) => {
+    onDeltaUpdate: ({ type, keyPath, deep, key, newValue, oldValue }) => {
     },
     beforeRemoveAction: (key, keyPath, deep, oldValue) => new Promise(resolve => resolve()),
     beforeAddAction: (key, keyPath, deep, newValue) => new Promise(resolve => resolve()),
