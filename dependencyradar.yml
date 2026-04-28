@@ -1,0 +1,6 @@
+version: '1'
+manifests:
+- path:
+    manifest: package.json
+    lock: yarn.lock
+  type: js
