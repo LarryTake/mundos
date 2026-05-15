@@ -7,16 +7,16 @@
 /* ************************************* */
 /* ********       REQUIRE       ******** */
 /* ************************************* */
-const gulp = require('gulp');
-const runSequence = require('run-sequence');
+const { series } = require('gulp');
+const env = require('./env');
+const web = require('./web');
 
 /* ************************************* */
 /* ********  PRIVATE FUNCTIONS  ******** */
 /* ************************************* */
 
-
 /* ************************************* */
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-gulp.task('serve', done => runSequence('env:dev', 'web:serve', done));
+exports.default = series(env.dev, web.serve);

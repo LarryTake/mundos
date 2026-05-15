@@ -1,3 +1,5 @@
+/* eslint-disable no-console,global-require */
+
 /*
  * Author: Alexandre Havrileck (Oxyno-zeta)
  * Date: 20/08/16
@@ -7,7 +9,6 @@
 /* ************************************* */
 /* ********       REQUIRE       ******** */
 /* ************************************* */
-const gulp = require('gulp');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 
@@ -32,36 +33,36 @@ const webpackToStringOptions = {
 /* ********  PRIVATE FUNCTIONS  ******** */
 /* ************************************* */
 
-
 /* ************************************* */
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-gulp.task('web:build:dev', (done) => {
+const buildDev = (cb) => {
     webpack(require('./config/webpack-dev.config'), (err, stats) => {
         if (err) {
-            done(err);
+            cb(err);
             return;
         }
 
         console.log(stats.toString(webpackToStringOptions));
-        done();
+        cb();
     });
-});
+};
 
-gulp.task('web:build:prod', (done) => {
+const buildProd = (cb) => {
     webpack(require('./config/webpack-prod.config'), (err, stats) => {
         if (err) {
-            done(err);
+            cb(err);
             return;
         }
 
         console.log(stats.toString(webpackToStringOptions));
-        done();
+        cb();
     });
-});
+};
 
-gulp.task('web:serve', (done) => {
+const serve = (cb) => {
+    // eslint-disable-next-line global-require
     const webpackDev = require('./config/webpack-serve.config');
     const compiler = webpack(webpackDev);
 
@@ -79,9 +80,15 @@ gulp.task('web:serve', (done) => {
     });
     server.listen(8080, (err) => {
         if (err) {
-            done(err);
+            cb(err);
             return;
         }
         console.log('\n==> Webpack Listening on http://localhost:8080\n');
     });
-});
+};
+
+exports.build = {
+    dev: buildDev,
+    prod: buildProd,
+};
+exports.serve = serve;

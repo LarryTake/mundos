@@ -7,19 +7,18 @@
 /* ************************************* */
 /* ********       REQUIRE       ******** */
 /* ************************************* */
-const gulp = require('gulp');
-const runSequence = require('run-sequence');
+const { series } = require('gulp');
+const clean = require('./clean');
+const env = require('./env');
+const web = require('./web');
 
 /* ************************************* */
 /* ********  PRIVATE FUNCTIONS  ******** */
 /* ************************************* */
 
-
 /* ************************************* */
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-gulp.task('build:prod', done => runSequence('env:prod', 'clean:release:docs', 'web:build:prod', done));
-
-gulp.task('build:dev', done => runSequence('env:dev', 'clean:web:dev', 'web:build:dev', done));
-
+exports.prod = series(env.prod, clean.release.docs, web.build.prod);
+exports.dev = series(env.dev, clean.web.dev, web.build.dev);

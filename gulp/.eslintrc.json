@@ -32,6 +32,10 @@
     ],
     "import/extensions": [
       2
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}
     ]
   }
 }
