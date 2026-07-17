@@ -1,3 +1,5 @@
+/* eslint-disable guard-for-in,no-restricted-syntax,no-continue */
+
 /*
  * Author: Alexandre Havrileck (Oxyno-zeta)
  * Date: 03/07/16
@@ -7,24 +9,29 @@
 /* ************************************* */
 /* ********       REQUIRE       ******** */
 /* ************************************* */
-const fs = require('fs');
-const gulp = require('gulp');
-// Constants
-const path = './gulp/';
+const tasks = require('./gulp');
 
-try {
-    const items = fs.readdirSync(path);
-    if (items) {
-        items.forEach((file) => {
-            const filePath = path + file;
-            const fileStat = fs.lstatSync(filePath);
-            if (fileStat.isFile()) {
-                require(path + file);
-            }
-        });
+function handleTask(taskName, task) {
+    for (const subTaskName in task) {
+        const subTask = task[subTaskName];
+
+        if (typeof subTask === 'object') {
+            handleTask(`${taskName}:${subTaskName}`, subTask);
+            continue;
+        }
+        if (typeof subTask !== 'function') continue;
+
+        if (subTaskName === 'default') {
+            exports[taskName] = subTask;
+        } else {
+            exports[`${taskName}:${subTaskName}`] = subTask;
+        }
     }
-
-    gulp.task('default', ['serve']);
-} catch (e) {
-    console.error(e);
 }
+
+for (const taskName in tasks) {
+    const task = tasks[taskName];
+    handleTask(taskName, task);
+}
+
+exports.default = tasks.serve.default;
