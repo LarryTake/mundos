@@ -8,7 +8,7 @@
 /* ********       REQUIRE       ******** */
 /* ************************************* */
 const { dest, src } = require('gulp');
-const babel = require('gulp-babel');
+const gulpBabel = require('gulp-babel');
 
 /* ************************************* */
 /* ********  PRIVATE FUNCTIONS  ******** */
@@ -18,8 +18,8 @@ const babel = require('gulp-babel');
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-exports.default = () => {
+exports.default = function babel() {
     src('src/**/*')
-        .pipe(babel())
+        .pipe(gulpBabel())
         .pipe(dest('dist'));
 };

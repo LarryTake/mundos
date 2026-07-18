@@ -16,12 +16,12 @@
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-exports.prod = (cb) => {
+exports.prod = function envProd(cb) {
     process.env.NODE_ENV = '"production"';
     cb();
 };
 
-exports.dev = (cb) => {
+exports.dev = function envDev(cb) {
     process.env.NODE_ENV = '"development"';
     cb();
 };
