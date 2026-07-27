@@ -7,9 +7,11 @@
 /* ************************************* */
 /* ********       REQUIRE       ******** */
 /* ************************************* */
-const gulp = require('gulp');
+const { series } = require('gulp');
 const babel = require('gulp-babel');
-const runSequence = require('run-sequence');
+const build = require('./build');
+const clean = require('./clean');
+const env = require('./env');
 
 /* ************************************* */
 /* ********  PRIVATE FUNCTIONS  ******** */
@@ -19,10 +21,4 @@ const runSequence = require('run-sequence');
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-gulp.task('release', done => runSequence('env:prod', 'clean:release:dist', 'build:prod', 'babel', done));
-
-gulp.task('babel', () => {
-    gulp.src('src/**/*')
-        .pipe(babel())
-        .pipe(gulp.dest('dist'));
-});
+exports.default = series(env.prod, clean.release.dist, build.prod, babel);

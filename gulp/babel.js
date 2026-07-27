@@ -1,13 +1,14 @@
 /*
- * Author: Alexandre Havrileck (Oxyno-zeta)
- * Date: 21/08/16
+ * Author: Phanabani
+ * Date: 24/05/22
  * Licence: See Readme
  */
 
 /* ************************************* */
 /* ********       REQUIRE       ******** */
 /* ************************************* */
-const del = require('del');
+const { dest, src } = require('gulp');
+const gulpBabel = require('gulp-babel');
 
 /* ************************************* */
 /* ********  PRIVATE FUNCTIONS  ******** */
@@ -17,11 +18,8 @@ const del = require('del');
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-exports.web = {
-    dev: () => del('dev_build'),
-};
-
-exports.release = {
-    dist: () => del('dist'),
-    docs: () => del('docs'),
+exports.default = function babel() {
+    src('src/**/*')
+        .pipe(gulpBabel())
+        .pipe(dest('dist'));
 };

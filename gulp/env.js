@@ -7,23 +7,21 @@
 /* ************************************* */
 /* ********       REQUIRE       ******** */
 /* ************************************* */
-const gulp = require('gulp');
 
 /* ************************************* */
 /* ********  PRIVATE FUNCTIONS  ******** */
 /* ************************************* */
 
-
 /* ************************************* */
 /* ********   PUBLIC FUNCTIONS  ******** */
 /* ************************************* */
 
-gulp.task('env:prod', (cb) => {
+exports.prod = function envProd(cb) {
     process.env.NODE_ENV = '"production"';
     cb();
-});
+};
 
-gulp.task('env:dev', (cb) => {
+exports.dev = function envDev(cb) {
     process.env.NODE_ENV = '"development"';
     cb();
-});
+};
