@@ -161,5 +161,4 @@ module.exports = {
             sourceMap: true,
         }),
     ],
-}
-;
+};
