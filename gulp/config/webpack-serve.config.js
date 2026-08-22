@@ -19,13 +19,14 @@ const babelrc = JSON.parse(babelrcString.toString());
 // Update
 configDev.bail = false;
 configDev.module.rules = configDev.module.rules
-// Remove eslint
-    .filter(rule => (rule.loader !== 'eslint-loader'))
+    // Remove eslint
+    .filter((rule) => rule.loader !== 'eslint-loader')
     // Change babel-loader configuration
-    .map((rule) => {
-        if (rule.loader !== 'babel-loader') {
-            // Continue
-            return rule;
+    .forEach((rule) => {
+        if (rule.loader === 'babel-loader') {
+            rule.options = babelrc; // eslint-disable-line no-param-reassign
+            rule.options.presets.push('react-hmre'); // eslint-disable-line no-param-reassign
+            rule.options.babelrc = false; // eslint-disable-line no-param-reassign
         }
 
         rule.query = babelrc; // eslint-disable-line no-param-reassign
@@ -44,4 +45,3 @@ configDev.plugins.push(new WebpackBrowserPlugin());
 /* ************************************* */
 
 module.exports = configDev;
-
