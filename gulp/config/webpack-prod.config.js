@@ -71,7 +71,7 @@ module.exports = {
                     use: [
                         {
                             loader: 'css-loader',
-                            query: {
+                            options: {
                                 modules: true,
                                 camelCase: true,
                                 localIdentName: '[local]',
@@ -97,7 +97,7 @@ module.exports = {
                     use: [
                         {
                             loader: 'css-loader',
-                            query: {
+                            options: {
                                 modules: true,
                                 camelCase: true,
                                 localIdentName: '[local]',
@@ -115,7 +115,7 @@ module.exports = {
                         },
                         {
                             loader: 'sass-loader',
-                            query: {
+                            options: {
                                 sourceMaps: 'true',
                             },
                         },
@@ -125,7 +125,7 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf|wav)(\?.*)?$/,
                 loader: 'url-loader',
-                query: {
+                options: {
                     limit: 10,
                     name: '[name].[hash:7].[ext]',
                 },
@@ -133,10 +133,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'vendor.bundle.js',
-        }),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: process.env.NODE_ENV,
@@ -161,5 +157,4 @@ module.exports = {
             sourceMap: true,
         }),
     ],
-}
-;
+};
