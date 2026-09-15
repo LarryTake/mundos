@@ -196,7 +196,7 @@ dev/
 dev_build/
 docs/
 .github/
-gulpfile.js
+gulpfile.ts
 .travis.yml
 .gitignore
 .babelrc
