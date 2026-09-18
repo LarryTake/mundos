@@ -13,36 +13,13 @@
     "jsx": true
   },
   "rules": {
-    "indent": [
-      2,
-      4,
-      {
-        "SwitchCase": 1
-      }
-    ],
-    "react/jsx-indent-props": [
-      2,
-      4
-    ],
-    "react/jsx-filename-extension": [
-      0
-    ],
-    "react/jsx-indent": [
-      2,
-      4
-    ],
-    "jsx-a11y/no-static-element-interactions": [
-      1
-    ],
-    "no-use-before-define": [
-      0
-    ],
-    "max-len": [
-      2,
-      120
-    ],
-    "import/extensions": [
-      2
-    ]
+    "indent": [2, 4, {"SwitchCase": 1}],
+    "react/jsx-indent-props": [2, 4],
+    "react/jsx-filename-extension": [0],
+    "react/jsx-indent": [2, 4],
+    "jsx-a11y/no-static-element-interactions": [1],
+    "no-use-before-define": [0],
+    "max-len": [2, 120],
+    "import/extensions": [2]
   }
 }
