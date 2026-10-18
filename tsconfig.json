@@ -1,0 +1,23 @@
+{
+    "esModuleInterop": true,
+    "compilerOptions": {
+        // Type checking
+        "alwaysStrict": true,
+        "strictNullChecks": true,
+        // Emit
+        "outDir": "dist",
+        "sourceMap": true,
+        // Language and environment
+        "target": "es2021",
+        // JavaScript support
+        "allowJs": true,
+        // Modules
+        "module": "ES2020",
+        "moduleResolution": "node"
+    },
+    "ts-node": {
+        "compilerOptions": {
+            "module": "commonjs"
+        }
+    }
+}
